@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 API_KEY    = os.getenv("KITE_API_KEY")
 API_SECRET = os.getenv("KITE_API_SECRET")
-ENV_FILE   = Path("/home/ubuntu/trading-agent/.env")
+ENV_FILE = Path("/home/taruntk1310/trading-agent/.env")
 
 HTML = """
 <!DOCTYPE html>
