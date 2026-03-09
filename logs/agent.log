@@ -425,3 +425,799 @@
 2026-03-08 11:32:03,047 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-08 17:03:03 IST)" (scheduled at 2026-03-08 17:02:03.046722+05:30)
 2026-03-08 11:32:03,048 [WARNING] main: No watchlist yet — skipping scan
 2026-03-08 11:32:03,048 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-08 17:03:03 IST)" executed successfully
+2026-03-09 08:49:13,610 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 08:49:14,669 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:49:14,672 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:49:14,672 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:49:14,672 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:49:14,675 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 08:49:14,675 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 08:49:14,675 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 08:49:14,676 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 08:49:14,676 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 08:49:14,678 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 08:50:14,672 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:50:14 IST)" (scheduled at 2026-03-09 08:50:14.671969+05:30)
+2026-03-09 08:50:14,673 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:51:14 IST)" executed successfully
+2026-03-09 08:51:14,672 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:52:14 IST)" (scheduled at 2026-03-09 08:51:14.671969+05:30)
+2026-03-09 08:51:14,674 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:52:14 IST)" executed successfully
+2026-03-09 08:52:14,672 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:53:14 IST)" (scheduled at 2026-03-09 08:52:14.671969+05:30)
+2026-03-09 08:52:14,673 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:53:14 IST)" executed successfully
+2026-03-09 08:52:29,619 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 08:52:30,204 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:52:30,205 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:52:30,205 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:52:30,205 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 08:52:30,206 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 08:52:30,206 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 08:52:30,206 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 08:52:30,206 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 08:52:30,207 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 08:52:30,207 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 08:53:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:53:30 IST)" (scheduled at 2026-03-09 08:53:30.205048+05:30)
+2026-03-09 08:53:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:54:30 IST)" executed successfully
+2026-03-09 08:54:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:55:30 IST)" (scheduled at 2026-03-09 08:54:30.205048+05:30)
+2026-03-09 08:54:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:55:30 IST)" executed successfully
+2026-03-09 08:55:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:56:30 IST)" (scheduled at 2026-03-09 08:55:30.205048+05:30)
+2026-03-09 08:55:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:56:30 IST)" executed successfully
+2026-03-09 08:56:30,212 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:57:30 IST)" (scheduled at 2026-03-09 08:56:30.205048+05:30)
+2026-03-09 08:56:30,216 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:57:30 IST)" executed successfully
+2026-03-09 08:57:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:58:30 IST)" (scheduled at 2026-03-09 08:57:30.205048+05:30)
+2026-03-09 08:57:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:58:30 IST)" executed successfully
+2026-03-09 08:58:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:59:30 IST)" (scheduled at 2026-03-09 08:58:30.205048+05:30)
+2026-03-09 08:58:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 08:59:30 IST)" executed successfully
+2026-03-09 08:59:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:00:30 IST)" (scheduled at 2026-03-09 08:59:30.205048+05:30)
+2026-03-09 08:59:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:00:30 IST)" executed successfully
+2026-03-09 09:00:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:01:30 IST)" (scheduled at 2026-03-09 09:00:30.205048+05:30)
+2026-03-09 09:00:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:01:30 IST)" executed successfully
+2026-03-09 09:01:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:02:30 IST)" (scheduled at 2026-03-09 09:01:30.205048+05:30)
+2026-03-09 09:01:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:02:30 IST)" executed successfully
+2026-03-09 09:02:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:03:30 IST)" (scheduled at 2026-03-09 09:02:30.205048+05:30)
+2026-03-09 09:02:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:03:30 IST)" executed successfully
+2026-03-09 09:03:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:04:30 IST)" (scheduled at 2026-03-09 09:03:30.205048+05:30)
+2026-03-09 09:03:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:04:30 IST)" executed successfully
+2026-03-09 09:04:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:05:30 IST)" (scheduled at 2026-03-09 09:04:30.205048+05:30)
+2026-03-09 09:04:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:05:30 IST)" executed successfully
+2026-03-09 09:05:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:06:30 IST)" (scheduled at 2026-03-09 09:05:30.205048+05:30)
+2026-03-09 09:05:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:06:30 IST)" executed successfully
+2026-03-09 09:06:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:07:30 IST)" (scheduled at 2026-03-09 09:06:30.205048+05:30)
+2026-03-09 09:06:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:07:30 IST)" executed successfully
+2026-03-09 09:07:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:08:30 IST)" (scheduled at 2026-03-09 09:07:30.205048+05:30)
+2026-03-09 09:07:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:08:30 IST)" executed successfully
+2026-03-09 09:08:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:09:30 IST)" (scheduled at 2026-03-09 09:08:30.205048+05:30)
+2026-03-09 09:08:30,207 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:09:30 IST)" executed successfully
+2026-03-09 09:09:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:10:30 IST)" (scheduled at 2026-03-09 09:09:30.205048+05:30)
+2026-03-09 09:09:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:10:30 IST)" executed successfully
+2026-03-09 09:10:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:11:30 IST)" (scheduled at 2026-03-09 09:10:30.205048+05:30)
+2026-03-09 09:10:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:11:30 IST)" executed successfully
+2026-03-09 09:11:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:12:30 IST)" (scheduled at 2026-03-09 09:11:30.205048+05:30)
+2026-03-09 09:11:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:12:30 IST)" executed successfully
+2026-03-09 09:12:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:13:30 IST)" (scheduled at 2026-03-09 09:12:30.205048+05:30)
+2026-03-09 09:12:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:13:30 IST)" executed successfully
+2026-03-09 09:13:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:14:30 IST)" (scheduled at 2026-03-09 09:13:30.205048+05:30)
+2026-03-09 09:13:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:14:30 IST)" executed successfully
+2026-03-09 09:14:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:15:30 IST)" (scheduled at 2026-03-09 09:14:30.205048+05:30)
+2026-03-09 09:14:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:15:30 IST)" executed successfully
+2026-03-09 09:15:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:16:30 IST)" (scheduled at 2026-03-09 09:15:30.205048+05:30)
+2026-03-09 09:15:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:16:30 IST)" executed successfully
+2026-03-09 09:16:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:17:30 IST)" (scheduled at 2026-03-09 09:16:30.205048+05:30)
+2026-03-09 09:16:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:17:30 IST)" executed successfully
+2026-03-09 09:17:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:18:30 IST)" (scheduled at 2026-03-09 09:17:30.205048+05:30)
+2026-03-09 09:17:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:18:30 IST)" executed successfully
+2026-03-09 09:18:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:19:30 IST)" (scheduled at 2026-03-09 09:18:30.205048+05:30)
+2026-03-09 09:18:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:19:30 IST)" executed successfully
+2026-03-09 09:19:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:20:30 IST)" (scheduled at 2026-03-09 09:19:30.205048+05:30)
+2026-03-09 09:19:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:20:30 IST)" executed successfully
+2026-03-09 09:20:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:21:30 IST)" (scheduled at 2026-03-09 09:20:30.205048+05:30)
+2026-03-09 09:20:30,206 [INFO] main: Market open — scanning started
+2026-03-09 09:20:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:20:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:21:30 IST)" executed successfully
+2026-03-09 09:21:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:22:30 IST)" (scheduled at 2026-03-09 09:21:30.205048+05:30)
+2026-03-09 09:21:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:21:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:22:30 IST)" executed successfully
+2026-03-09 09:22:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:23:30 IST)" (scheduled at 2026-03-09 09:22:30.205048+05:30)
+2026-03-09 09:22:30,206 [INFO] apscheduler.executors.default: Running job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-09 09:52:30 IST)" (scheduled at 2026-03-09 09:22:30.205256+05:30)
+2026-03-09 09:22:30,209 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:22:30,209 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:23:30 IST)" executed successfully
+2026-03-09 09:22:30,786 [INFO] apscheduler.executors.default: Job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-09 09:52:30 IST)" executed successfully
+2026-03-09 09:23:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:24:30 IST)" (scheduled at 2026-03-09 09:23:30.205048+05:30)
+2026-03-09 09:23:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:23:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:24:30 IST)" executed successfully
+2026-03-09 09:24:30,206 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:25:30 IST)" (scheduled at 2026-03-09 09:24:30.205048+05:30)
+2026-03-09 09:24:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:24:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:25:30 IST)" executed successfully
+2026-03-09 09:25:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:26:30 IST)" (scheduled at 2026-03-09 09:25:30.205048+05:30)
+2026-03-09 09:25:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:25:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:26:30 IST)" executed successfully
+2026-03-09 09:26:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:27:30 IST)" (scheduled at 2026-03-09 09:26:30.205048+05:30)
+2026-03-09 09:26:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:26:30,207 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:27:30 IST)" executed successfully
+2026-03-09 09:27:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:28:30 IST)" (scheduled at 2026-03-09 09:27:30.205048+05:30)
+2026-03-09 09:27:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:27:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:28:30 IST)" executed successfully
+2026-03-09 09:28:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:29:30 IST)" (scheduled at 2026-03-09 09:28:30.205048+05:30)
+2026-03-09 09:28:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:28:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:29:30 IST)" executed successfully
+2026-03-09 09:29:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:30:30 IST)" (scheduled at 2026-03-09 09:29:30.205048+05:30)
+2026-03-09 09:29:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:29:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:30:30 IST)" executed successfully
+2026-03-09 09:30:30,205 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:31:30 IST)" (scheduled at 2026-03-09 09:30:30.205048+05:30)
+2026-03-09 09:30:30,206 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:30:30,206 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:31:30 IST)" executed successfully
+2026-03-09 09:31:35,749 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 09:31:36,370 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:31:36,373 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:31:36,373 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:31:36,373 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:31:36,374 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 09:31:36,375 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 09:31:36,375 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 09:31:36,375 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 09:31:36,375 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 09:31:36,376 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 09:32:36,373 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:32:36 IST)" (scheduled at 2026-03-09 09:32:36.372851+05:30)
+2026-03-09 09:32:36,374 [INFO] main: Market open — scanning started
+2026-03-09 09:32:36,374 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:32:36,374 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:33:36 IST)" executed successfully
+2026-03-09 09:33:17,809 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 09:33:18,419 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:33:18,420 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:33:18,422 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:33:18,422 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:33:18,423 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 09:33:18,424 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 09:33:18,424 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 09:33:18,424 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 09:33:18,424 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 09:33:18,426 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 09:34:18,422 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:34:18 IST)" (scheduled at 2026-03-09 09:34:18.420582+05:30)
+2026-03-09 09:34:18,422 [INFO] main: Market open — scanning started
+2026-03-09 09:34:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:34:18,423 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:35:18 IST)" executed successfully
+2026-03-09 09:35:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:36:18 IST)" (scheduled at 2026-03-09 09:35:18.420582+05:30)
+2026-03-09 09:35:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:35:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:36:18 IST)" executed successfully
+2026-03-09 09:36:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:37:18 IST)" (scheduled at 2026-03-09 09:36:18.420582+05:30)
+2026-03-09 09:36:18,463 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:36:18,464 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:37:18 IST)" executed successfully
+2026-03-09 09:37:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:38:18 IST)" (scheduled at 2026-03-09 09:37:18.420582+05:30)
+2026-03-09 09:37:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:37:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:38:18 IST)" executed successfully
+2026-03-09 09:38:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:39:18 IST)" (scheduled at 2026-03-09 09:38:18.420582+05:30)
+2026-03-09 09:38:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:38:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:39:18 IST)" executed successfully
+2026-03-09 09:39:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:40:18 IST)" (scheduled at 2026-03-09 09:39:18.420582+05:30)
+2026-03-09 09:39:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:39:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:40:18 IST)" executed successfully
+2026-03-09 09:40:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:41:18 IST)" (scheduled at 2026-03-09 09:40:18.420582+05:30)
+2026-03-09 09:40:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:40:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:41:18 IST)" executed successfully
+2026-03-09 09:41:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:42:18 IST)" (scheduled at 2026-03-09 09:41:18.420582+05:30)
+2026-03-09 09:41:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:41:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:42:18 IST)" executed successfully
+2026-03-09 09:42:18,423 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:43:18 IST)" (scheduled at 2026-03-09 09:42:18.420582+05:30)
+2026-03-09 09:42:18,424 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:42:18,424 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:43:18 IST)" executed successfully
+2026-03-09 09:43:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:44:18 IST)" (scheduled at 2026-03-09 09:43:18.420582+05:30)
+2026-03-09 09:43:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:43:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:44:18 IST)" executed successfully
+2026-03-09 09:44:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:45:18 IST)" (scheduled at 2026-03-09 09:44:18.420582+05:30)
+2026-03-09 09:44:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:44:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:45:18 IST)" executed successfully
+2026-03-09 09:45:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:46:18 IST)" (scheduled at 2026-03-09 09:45:18.420582+05:30)
+2026-03-09 09:45:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:45:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:46:18 IST)" executed successfully
+2026-03-09 09:46:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:47:18 IST)" (scheduled at 2026-03-09 09:46:18.420582+05:30)
+2026-03-09 09:46:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:46:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:47:18 IST)" executed successfully
+2026-03-09 09:47:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:48:18 IST)" (scheduled at 2026-03-09 09:47:18.420582+05:30)
+2026-03-09 09:47:18,421 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:47:18,421 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:48:18 IST)" executed successfully
+2026-03-09 09:48:18,421 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:49:18 IST)" (scheduled at 2026-03-09 09:48:18.420582+05:30)
+2026-03-09 09:48:18,422 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:48:18,422 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:49:18 IST)" executed successfully
+2026-03-09 09:49:10,435 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 09:49:11,111 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:49:11,114 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:49:11,115 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:49:11,115 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 09:49:11,119 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 09:49:11,119 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 09:49:11,119 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 09:49:11,120 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 09:49:11,120 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 09:49:11,121 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 09:50:11,116 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:50:11 IST)" (scheduled at 2026-03-09 09:50:11.114571+05:30)
+2026-03-09 09:50:11,116 [INFO] main: Market open — scanning started
+2026-03-09 09:50:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:50:11,117 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:51:11 IST)" executed successfully
+2026-03-09 09:51:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:52:11 IST)" (scheduled at 2026-03-09 09:51:11.114571+05:30)
+2026-03-09 09:51:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:51:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:52:11 IST)" executed successfully
+2026-03-09 09:52:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:53:11 IST)" (scheduled at 2026-03-09 09:52:11.114571+05:30)
+2026-03-09 09:52:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:52:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:53:11 IST)" executed successfully
+2026-03-09 09:53:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:54:11 IST)" (scheduled at 2026-03-09 09:53:11.114571+05:30)
+2026-03-09 09:53:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:53:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:54:11 IST)" executed successfully
+2026-03-09 09:54:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:55:11 IST)" (scheduled at 2026-03-09 09:54:11.114571+05:30)
+2026-03-09 09:54:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:54:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:55:11 IST)" executed successfully
+2026-03-09 09:55:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:56:11 IST)" (scheduled at 2026-03-09 09:55:11.114571+05:30)
+2026-03-09 09:55:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:55:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:56:11 IST)" executed successfully
+2026-03-09 09:56:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:57:11 IST)" (scheduled at 2026-03-09 09:56:11.114571+05:30)
+2026-03-09 09:56:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:56:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:57:11 IST)" executed successfully
+2026-03-09 09:57:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:58:11 IST)" (scheduled at 2026-03-09 09:57:11.114571+05:30)
+2026-03-09 09:57:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:57:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:58:11 IST)" executed successfully
+2026-03-09 09:58:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:59:11 IST)" (scheduled at 2026-03-09 09:58:11.114571+05:30)
+2026-03-09 09:58:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:58:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 09:59:11 IST)" executed successfully
+2026-03-09 09:59:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:00:11 IST)" (scheduled at 2026-03-09 09:59:11.114571+05:30)
+2026-03-09 09:59:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 09:59:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:00:11 IST)" executed successfully
+2026-03-09 10:00:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:01:11 IST)" (scheduled at 2026-03-09 10:00:11.114571+05:30)
+2026-03-09 10:00:11,118 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:00:11,118 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:01:11 IST)" executed successfully
+2026-03-09 10:01:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:02:11 IST)" (scheduled at 2026-03-09 10:01:11.114571+05:30)
+2026-03-09 10:01:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:01:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:02:11 IST)" executed successfully
+2026-03-09 10:02:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:03:11 IST)" (scheduled at 2026-03-09 10:02:11.114571+05:30)
+2026-03-09 10:02:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:02:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:03:11 IST)" executed successfully
+2026-03-09 10:03:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:04:11 IST)" (scheduled at 2026-03-09 10:03:11.114571+05:30)
+2026-03-09 10:03:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:03:11,115 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:04:11 IST)" executed successfully
+2026-03-09 10:04:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:05:11 IST)" (scheduled at 2026-03-09 10:04:11.114571+05:30)
+2026-03-09 10:04:11,116 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:04:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:05:11 IST)" executed successfully
+2026-03-09 10:05:11,115 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:06:11 IST)" (scheduled at 2026-03-09 10:05:11.114571+05:30)
+2026-03-09 10:05:11,115 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:05:11,116 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:06:11 IST)" executed successfully
+2026-03-09 10:06:10,783 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:06:11,386 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:06:11,388 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:06:11,389 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:06:11,389 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:06:11,391 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:06:11,391 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:06:11,391 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:06:11,392 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:06:11,392 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:06:11,393 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:07:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:07:11 IST)" (scheduled at 2026-03-09 10:07:11.388611+05:30)
+2026-03-09 10:07:11,392 [INFO] main: Market open — scanning started
+2026-03-09 10:07:11,393 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:07:11,393 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:08:11 IST)" executed successfully
+2026-03-09 10:08:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:09:11 IST)" (scheduled at 2026-03-09 10:08:11.388611+05:30)
+2026-03-09 10:08:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:08:11,389 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:09:11 IST)" executed successfully
+2026-03-09 10:09:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:10:11 IST)" (scheduled at 2026-03-09 10:09:11.388611+05:30)
+2026-03-09 10:09:11,390 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:09:11,390 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:10:11 IST)" executed successfully
+2026-03-09 10:10:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:11:11 IST)" (scheduled at 2026-03-09 10:10:11.388611+05:30)
+2026-03-09 10:10:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:10:11,389 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:11:11 IST)" executed successfully
+2026-03-09 10:11:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:12:11 IST)" (scheduled at 2026-03-09 10:11:11.388611+05:30)
+2026-03-09 10:11:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:11:11,390 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:12:11 IST)" executed successfully
+2026-03-09 10:12:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:13:11 IST)" (scheduled at 2026-03-09 10:12:11.388611+05:30)
+2026-03-09 10:12:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:12:11,392 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:13:11 IST)" executed successfully
+2026-03-09 10:13:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:14:11 IST)" (scheduled at 2026-03-09 10:13:11.388611+05:30)
+2026-03-09 10:13:11,390 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:13:11,390 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:14:11 IST)" executed successfully
+2026-03-09 10:14:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:15:11 IST)" (scheduled at 2026-03-09 10:14:11.388611+05:30)
+2026-03-09 10:14:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:14:11,389 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:15:11 IST)" executed successfully
+2026-03-09 10:15:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:16:11 IST)" (scheduled at 2026-03-09 10:15:11.388611+05:30)
+2026-03-09 10:15:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:15:11,389 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:16:11 IST)" executed successfully
+2026-03-09 10:16:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:17:11 IST)" (scheduled at 2026-03-09 10:16:11.388611+05:30)
+2026-03-09 10:16:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:16:11,390 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:17:11 IST)" executed successfully
+2026-03-09 10:17:11,389 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:18:11 IST)" (scheduled at 2026-03-09 10:17:11.388611+05:30)
+2026-03-09 10:17:11,389 [WARNING] main: No watchlist yet — skipping scan
+2026-03-09 10:17:11,390 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:18:11 IST)" executed successfully
+2026-03-09 10:17:32,097 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:17:32,681 [INFO] main: Market is open but no watchlist — running pre-market now...
+2026-03-09 10:17:32,681 [INFO] main: Starting pre-market analysis...
+2026-03-09 10:17:41,043 [INFO] main: Watchlist saved to file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:17:41,044 [INFO] main: Watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:17:41,126 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:17:41,129 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:17:41,129 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:17:41,130 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:17:41,134 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:17:41,134 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:17:41,134 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:17:41,134 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:17:41,134 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:17:41,135 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:18:41,131 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:18:41 IST)" (scheduled at 2026-03-09 10:18:41.128945+05:30)
+2026-03-09 10:18:41,132 [INFO] main: Market open — scanning started
+2026-03-09 10:18:41,132 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:19:41 IST)" executed successfully
+2026-03-09 10:19:41,129 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:20:41 IST)" (scheduled at 2026-03-09 10:19:41.128945+05:30)
+2026-03-09 10:19:41,139 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:20:41 IST)" executed successfully
+2026-03-09 10:20:41,129 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:21:41 IST)" (scheduled at 2026-03-09 10:20:41.128945+05:30)
+2026-03-09 10:20:41,130 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:21:41 IST)" executed successfully
+2026-03-09 10:21:41,129 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:22:41 IST)" (scheduled at 2026-03-09 10:21:41.128945+05:30)
+2026-03-09 10:21:41,130 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:22:41 IST)" executed successfully
+2026-03-09 10:22:41,129 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:23:41 IST)" (scheduled at 2026-03-09 10:22:41.128945+05:30)
+2026-03-09 10:22:41,130 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:23:41 IST)" executed successfully
+2026-03-09 10:23:06,987 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:23:06,988 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:23:08,162 [ERROR] main: Stream restart error: list index out of range
+2026-03-09 10:23:08,271 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:23:08,274 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:23:08,275 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:23:08,275 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:23:08,278 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:23:08,279 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:23:08,279 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:23:08,279 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:23:08,279 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:23:08,280 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:24:08,275 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:24:08 IST)" (scheduled at 2026-03-09 10:24:08.274516+05:30)
+2026-03-09 10:24:08,276 [INFO] main: Market open — scanning started
+2026-03-09 10:24:08,278 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:25:08 IST)" executed successfully
+2026-03-09 10:25:08,275 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:26:08 IST)" (scheduled at 2026-03-09 10:25:08.274516+05:30)
+2026-03-09 10:25:08,276 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:26:08 IST)" executed successfully
+2026-03-09 10:26:08,278 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:27:08 IST)" (scheduled at 2026-03-09 10:26:08.274516+05:30)
+2026-03-09 10:26:08,296 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:27:08 IST)" executed successfully
+2026-03-09 10:27:07,527 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:27:07,527 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:27:08,822 [ERROR] main: Stream restart error: list index out of range
+2026-03-09 10:27:08,841 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:27:08,844 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:27:08,844 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:27:08,845 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:27:08,848 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:27:08,848 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:27:08,849 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:27:08,849 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:27:08,849 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:27:08,850 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:28:08,844 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:28:08 IST)" (scheduled at 2026-03-09 10:28:08.843937+05:30)
+2026-03-09 10:28:08,845 [INFO] main: Market open — scanning started
+2026-03-09 10:28:08,845 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:29:08 IST)" executed successfully
+2026-03-09 10:29:08,845 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:30:08 IST)" (scheduled at 2026-03-09 10:29:08.843937+05:30)
+2026-03-09 10:29:08,845 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:30:08 IST)" executed successfully
+2026-03-09 10:29:36,826 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:29:36,826 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:29:37,975 [ERROR] main: Stream restart error: list index out of range
+2026-03-09 10:29:37,989 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:29:37,989 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:29:37,989 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:29:37,990 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:29:37,991 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:29:37,991 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:29:37,991 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:29:37,991 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:29:37,991 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:29:37,992 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:30:37,993 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:30:37 IST)" (scheduled at 2026-03-09 10:30:37.989597+05:30)
+2026-03-09 10:30:37,997 [INFO] main: Market open — scanning started
+2026-03-09 10:30:37,997 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:31:37 IST)" executed successfully
+2026-03-09 10:31:37,990 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:32:37 IST)" (scheduled at 2026-03-09 10:31:37.989597+05:30)
+2026-03-09 10:31:37,991 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:32:37 IST)" executed successfully
+2026-03-09 10:32:37,990 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:33:37 IST)" (scheduled at 2026-03-09 10:32:37.989597+05:30)
+2026-03-09 10:32:37,991 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:33:37 IST)" executed successfully
+2026-03-09 10:32:57,189 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:32:57,189 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:32:58,468 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:32:58,469 [ERROR] main: Stream restart error: 'list' object has no attribute 'keys'
+2026-03-09 10:32:58,482 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:32:58,485 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:32:58,486 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:32:58,487 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:32:58,491 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:32:58,491 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:32:58,491 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:32:58,492 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:32:58,492 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:32:58,492 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:33:57,568 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:33:57,568 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:33:58,759 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:33:58,759 [ERROR] main: Stream restart error: 'list' object has no attribute 'keys'
+2026-03-09 10:33:58,763 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:33:58,763 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:33:58,763 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:33:58,764 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:33:58,765 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:33:58,765 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:33:58,765 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:33:58,765 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:33:58,765 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:33:58,766 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:34:58,764 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:34:58 IST)" (scheduled at 2026-03-09 10:34:58.763499+05:30)
+2026-03-09 10:34:58,765 [INFO] main: Market open — scanning started
+2026-03-09 10:34:58,767 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:35:58 IST)" executed successfully
+2026-03-09 10:35:23,849 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:35:23,850 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 10:35:25,151 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 10:35:25,154 [INFO] data.kite_stream: KiteStream started for 5 instruments
+2026-03-09 10:35:25,748 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:35:25,749 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:35:25,749 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:35:25,750 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 10:35:25,751 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 10:35:25,751 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 10:35:25,751 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 10:35:25,751 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 10:35:25,752 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 10:35:25,753 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 10:35:26,293 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217]
+2026-03-09 10:36:25,751 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:36:25 IST)" (scheduled at 2026-03-09 10:36:25.749027+05:30)
+2026-03-09 10:36:25,754 [INFO] main: Market open — scanning started
+2026-03-09 10:36:25,754 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:37:25 IST)" executed successfully
+2026-03-09 10:37:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:38:25 IST)" (scheduled at 2026-03-09 10:37:25.749027+05:30)
+2026-03-09 10:37:25,751 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:38:25 IST)" executed successfully
+2026-03-09 10:38:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:39:25 IST)" (scheduled at 2026-03-09 10:38:25.749027+05:30)
+2026-03-09 10:38:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:39:25 IST)" executed successfully
+2026-03-09 10:39:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:40:25 IST)" (scheduled at 2026-03-09 10:39:25.749027+05:30)
+2026-03-09 10:39:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:40:25 IST)" executed successfully
+2026-03-09 10:40:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:41:25 IST)" (scheduled at 2026-03-09 10:40:25.749027+05:30)
+2026-03-09 10:40:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:41:25 IST)" executed successfully
+2026-03-09 10:41:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:42:25 IST)" (scheduled at 2026-03-09 10:41:25.749027+05:30)
+2026-03-09 10:41:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:42:25 IST)" executed successfully
+2026-03-09 10:42:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:43:25 IST)" (scheduled at 2026-03-09 10:42:25.749027+05:30)
+2026-03-09 10:42:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:43:25 IST)" executed successfully
+2026-03-09 10:43:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:44:25 IST)" (scheduled at 2026-03-09 10:43:25.749027+05:30)
+2026-03-09 10:43:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:44:25 IST)" executed successfully
+2026-03-09 10:44:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:45:25 IST)" (scheduled at 2026-03-09 10:44:25.749027+05:30)
+2026-03-09 10:44:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:45:25 IST)" executed successfully
+2026-03-09 10:45:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:46:25 IST)" (scheduled at 2026-03-09 10:45:25.749027+05:30)
+2026-03-09 10:45:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:46:25 IST)" executed successfully
+2026-03-09 10:46:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:47:25 IST)" (scheduled at 2026-03-09 10:46:25.749027+05:30)
+2026-03-09 10:46:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:47:25 IST)" executed successfully
+2026-03-09 10:47:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:48:25 IST)" (scheduled at 2026-03-09 10:47:25.749027+05:30)
+2026-03-09 10:47:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:48:25 IST)" executed successfully
+2026-03-09 10:48:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:49:25 IST)" (scheduled at 2026-03-09 10:48:25.749027+05:30)
+2026-03-09 10:48:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:49:25 IST)" executed successfully
+2026-03-09 10:49:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:50:25 IST)" (scheduled at 2026-03-09 10:49:25.749027+05:30)
+2026-03-09 10:49:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:50:25 IST)" executed successfully
+2026-03-09 10:50:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:51:25 IST)" (scheduled at 2026-03-09 10:50:25.749027+05:30)
+2026-03-09 10:50:25,751 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:51:25 IST)" executed successfully
+2026-03-09 10:51:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:52:25 IST)" (scheduled at 2026-03-09 10:51:25.749027+05:30)
+2026-03-09 10:51:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:52:25 IST)" executed successfully
+2026-03-09 10:52:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:53:25 IST)" (scheduled at 2026-03-09 10:52:25.749027+05:30)
+2026-03-09 10:52:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:53:25 IST)" executed successfully
+2026-03-09 10:53:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:54:25 IST)" (scheduled at 2026-03-09 10:53:25.749027+05:30)
+2026-03-09 10:53:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:54:25 IST)" executed successfully
+2026-03-09 10:54:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:55:25 IST)" (scheduled at 2026-03-09 10:54:25.749027+05:30)
+2026-03-09 10:54:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:55:25 IST)" executed successfully
+2026-03-09 10:55:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:56:25 IST)" (scheduled at 2026-03-09 10:55:25.749027+05:30)
+2026-03-09 10:55:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:56:25 IST)" executed successfully
+2026-03-09 10:56:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:57:25 IST)" (scheduled at 2026-03-09 10:56:25.749027+05:30)
+2026-03-09 10:56:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:57:25 IST)" executed successfully
+2026-03-09 10:57:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:58:25 IST)" (scheduled at 2026-03-09 10:57:25.749027+05:30)
+2026-03-09 10:57:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:58:25 IST)" executed successfully
+2026-03-09 10:58:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:59:25 IST)" (scheduled at 2026-03-09 10:58:25.749027+05:30)
+2026-03-09 10:58:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 10:59:25 IST)" executed successfully
+2026-03-09 10:59:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:00:25 IST)" (scheduled at 2026-03-09 10:59:25.749027+05:30)
+2026-03-09 10:59:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:00:25 IST)" executed successfully
+2026-03-09 11:00:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:01:25 IST)" (scheduled at 2026-03-09 11:00:25.749027+05:30)
+2026-03-09 11:00:25,750 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:01:25 IST)" executed successfully
+2026-03-09 11:01:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:02:25 IST)" (scheduled at 2026-03-09 11:01:25.749027+05:30)
+2026-03-09 11:01:26,557 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:02:25 IST)" executed successfully
+2026-03-09 11:02:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:03:25 IST)" (scheduled at 2026-03-09 11:02:25.749027+05:30)
+2026-03-09 11:02:26,596 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:03:25 IST)" executed successfully
+2026-03-09 11:03:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:04:25 IST)" (scheduled at 2026-03-09 11:03:25.749027+05:30)
+2026-03-09 11:03:26,405 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:04:25 IST)" executed successfully
+2026-03-09 11:04:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:05:25 IST)" (scheduled at 2026-03-09 11:04:25.749027+05:30)
+2026-03-09 11:04:25,777 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:05:25 IST)" executed successfully
+2026-03-09 11:05:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:06:25 IST)" (scheduled at 2026-03-09 11:05:25.749027+05:30)
+2026-03-09 11:05:25,750 [INFO] apscheduler.executors.default: Running job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-09 11:35:25 IST)" (scheduled at 2026-03-09 11:05:25.749575+05:30)
+2026-03-09 11:05:25,783 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:06:25 IST)" executed successfully
+2026-03-09 11:05:26,363 [INFO] apscheduler.executors.default: Job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-09 11:35:25 IST)" executed successfully
+2026-03-09 11:06:25,750 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:07:25 IST)" (scheduled at 2026-03-09 11:06:25.749027+05:30)
+2026-03-09 11:06:26,353 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:07:25 IST)" executed successfully
+2026-03-09 11:07:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:08:25 IST)" (scheduled at 2026-03-09 11:07:25.749027+05:30)
+2026-03-09 11:07:26,967 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:08:25 IST)" executed successfully
+2026-03-09 11:08:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:09:25 IST)" (scheduled at 2026-03-09 11:08:25.749027+05:30)
+2026-03-09 11:08:25,782 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:09:25 IST)" executed successfully
+2026-03-09 11:09:25,749 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:10:25 IST)" (scheduled at 2026-03-09 11:09:25.749027+05:30)
+2026-03-09 11:09:25,773 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:10:25 IST)" executed successfully
+2026-03-09 11:10:22,387 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:10:22,387 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 11:10:23,564 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:10:23,567 [INFO] data.kite_stream: KiteStream started for 5 instruments
+2026-03-09 11:10:24,155 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:10:24,158 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:10:24,158 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:10:24,159 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:10:24,161 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 11:10:24,162 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 11:10:24,162 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 11:10:24,162 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 11:10:24,162 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 11:10:24,163 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 11:10:24,539 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217]
+2026-03-09 11:11:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:11:24 IST)" (scheduled at 2026-03-09 11:11:24.157773+05:30)
+2026-03-09 11:11:24,160 [INFO] main: Market open — scanning started
+2026-03-09 11:11:24,160 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:12:24 IST)" executed successfully
+2026-03-09 11:12:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:13:24 IST)" (scheduled at 2026-03-09 11:12:24.157773+05:30)
+2026-03-09 11:12:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:13:24 IST)" executed successfully
+2026-03-09 11:13:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:14:24 IST)" (scheduled at 2026-03-09 11:13:24.157773+05:30)
+2026-03-09 11:13:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:14:24 IST)" executed successfully
+2026-03-09 11:14:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:15:24 IST)" (scheduled at 2026-03-09 11:14:24.157773+05:30)
+2026-03-09 11:14:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:15:24 IST)" executed successfully
+2026-03-09 11:15:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:16:24 IST)" (scheduled at 2026-03-09 11:15:24.157773+05:30)
+2026-03-09 11:15:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:16:24 IST)" executed successfully
+2026-03-09 11:16:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:17:24 IST)" (scheduled at 2026-03-09 11:16:24.157773+05:30)
+2026-03-09 11:16:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:17:24 IST)" executed successfully
+2026-03-09 11:17:24,158 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:18:24 IST)" (scheduled at 2026-03-09 11:17:24.157773+05:30)
+2026-03-09 11:17:24,159 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:18:24 IST)" executed successfully
+2026-03-09 11:17:38,344 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:17:38,344 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 11:17:39,515 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:17:39,518 [INFO] data.kite_stream: KiteStream started for 5 instruments
+2026-03-09 11:17:40,130 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:17:40,132 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:17:40,132 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:17:40,132 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:17:40,134 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 11:17:40,134 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 11:17:40,135 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 11:17:40,135 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 11:17:40,135 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 11:17:40,135 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 11:17:40,629 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217]
+2026-03-09 11:18:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:18:40 IST)" (scheduled at 2026-03-09 11:18:40.132229+05:30)
+2026-03-09 11:18:40,134 [INFO] main: Market open — scanning started
+2026-03-09 11:18:40,134 [INFO] main: RELIANCE: 1 candles built
+2026-03-09 11:18:40,134 [INFO] main: HDFCBANK: 1 candles built
+2026-03-09 11:18:40,134 [INFO] main: ICICIBANK: 1 candles built
+2026-03-09 11:18:40,134 [INFO] main: INFY: 1 candles built
+2026-03-09 11:18:40,134 [INFO] main: TCS: 1 candles built
+2026-03-09 11:18:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:19:40 IST)" executed successfully
+2026-03-09 11:19:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:20:40 IST)" (scheduled at 2026-03-09 11:19:40.132229+05:30)
+2026-03-09 11:19:40,133 [INFO] main: RELIANCE: 2 candles built
+2026-03-09 11:19:40,133 [INFO] main: HDFCBANK: 2 candles built
+2026-03-09 11:19:40,133 [INFO] main: ICICIBANK: 2 candles built
+2026-03-09 11:19:40,133 [INFO] main: INFY: 2 candles built
+2026-03-09 11:19:40,133 [INFO] main: TCS: 2 candles built
+2026-03-09 11:19:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:20:40 IST)" executed successfully
+2026-03-09 11:20:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:21:40 IST)" (scheduled at 2026-03-09 11:20:40.132229+05:30)
+2026-03-09 11:20:40,134 [INFO] main: RELIANCE: 3 candles built
+2026-03-09 11:20:40,134 [INFO] main: HDFCBANK: 3 candles built
+2026-03-09 11:20:40,135 [INFO] main: ICICIBANK: 3 candles built
+2026-03-09 11:20:40,135 [INFO] main: INFY: 3 candles built
+2026-03-09 11:20:40,135 [INFO] main: TCS: 3 candles built
+2026-03-09 11:20:40,135 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:21:40 IST)" executed successfully
+2026-03-09 11:21:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:22:40 IST)" (scheduled at 2026-03-09 11:21:40.132229+05:30)
+2026-03-09 11:21:40,133 [INFO] main: RELIANCE: 4 candles built
+2026-03-09 11:21:40,133 [INFO] main: HDFCBANK: 4 candles built
+2026-03-09 11:21:40,133 [INFO] main: ICICIBANK: 4 candles built
+2026-03-09 11:21:40,133 [INFO] main: INFY: 4 candles built
+2026-03-09 11:21:40,133 [INFO] main: TCS: 4 candles built
+2026-03-09 11:21:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:22:40 IST)" executed successfully
+2026-03-09 11:22:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:23:40 IST)" (scheduled at 2026-03-09 11:22:40.132229+05:30)
+2026-03-09 11:22:40,133 [INFO] main: RELIANCE: 5 candles built
+2026-03-09 11:22:40,133 [INFO] main: HDFCBANK: 5 candles built
+2026-03-09 11:22:40,134 [INFO] main: ICICIBANK: 5 candles built
+2026-03-09 11:22:40,134 [INFO] main: INFY: 5 candles built
+2026-03-09 11:22:40,134 [INFO] main: TCS: 5 candles built
+2026-03-09 11:22:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:23:40 IST)" executed successfully
+2026-03-09 11:23:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:24:40 IST)" (scheduled at 2026-03-09 11:23:40.132229+05:30)
+2026-03-09 11:23:40,133 [INFO] main: RELIANCE: 6 candles built
+2026-03-09 11:23:40,133 [INFO] main: HDFCBANK: 6 candles built
+2026-03-09 11:23:40,133 [INFO] main: ICICIBANK: 6 candles built
+2026-03-09 11:23:40,133 [INFO] main: INFY: 6 candles built
+2026-03-09 11:23:40,133 [INFO] main: TCS: 6 candles built
+2026-03-09 11:23:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:24:40 IST)" executed successfully
+2026-03-09 11:24:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:25:40 IST)" (scheduled at 2026-03-09 11:24:40.132229+05:30)
+2026-03-09 11:24:40,133 [INFO] main: RELIANCE: 7 candles built
+2026-03-09 11:24:40,133 [INFO] main: HDFCBANK: 7 candles built
+2026-03-09 11:24:40,133 [INFO] main: ICICIBANK: 7 candles built
+2026-03-09 11:24:40,133 [INFO] main: INFY: 7 candles built
+2026-03-09 11:24:40,133 [INFO] main: TCS: 7 candles built
+2026-03-09 11:24:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:25:40 IST)" executed successfully
+2026-03-09 11:25:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:26:40 IST)" (scheduled at 2026-03-09 11:25:40.132229+05:30)
+2026-03-09 11:25:40,133 [INFO] main: RELIANCE: 8 candles built
+2026-03-09 11:25:40,133 [INFO] main: HDFCBANK: 8 candles built
+2026-03-09 11:25:40,133 [INFO] main: ICICIBANK: 8 candles built
+2026-03-09 11:25:40,133 [INFO] main: INFY: 8 candles built
+2026-03-09 11:25:40,133 [INFO] main: TCS: 8 candles built
+2026-03-09 11:25:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:26:40 IST)" executed successfully
+2026-03-09 11:26:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:27:40 IST)" (scheduled at 2026-03-09 11:26:40.132229+05:30)
+2026-03-09 11:26:40,133 [INFO] main: RELIANCE: 9 candles built
+2026-03-09 11:26:40,133 [INFO] main: HDFCBANK: 9 candles built
+2026-03-09 11:26:40,133 [INFO] main: ICICIBANK: 9 candles built
+2026-03-09 11:26:40,134 [INFO] main: INFY: 9 candles built
+2026-03-09 11:26:40,134 [INFO] main: TCS: 9 candles built
+2026-03-09 11:26:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:27:40 IST)" executed successfully
+2026-03-09 11:27:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:28:40 IST)" (scheduled at 2026-03-09 11:27:40.132229+05:30)
+2026-03-09 11:27:40,133 [INFO] main: RELIANCE: 10 candles built
+2026-03-09 11:27:40,133 [INFO] main: HDFCBANK: 10 candles built
+2026-03-09 11:27:40,133 [INFO] main: ICICIBANK: 10 candles built
+2026-03-09 11:27:40,133 [INFO] main: INFY: 10 candles built
+2026-03-09 11:27:40,133 [INFO] main: TCS: 10 candles built
+2026-03-09 11:27:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:28:40 IST)" executed successfully
+2026-03-09 11:28:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:29:40 IST)" (scheduled at 2026-03-09 11:28:40.132229+05:30)
+2026-03-09 11:28:40,133 [INFO] main: RELIANCE: 11 candles built
+2026-03-09 11:28:40,133 [INFO] main: HDFCBANK: 11 candles built
+2026-03-09 11:28:40,133 [INFO] main: ICICIBANK: 11 candles built
+2026-03-09 11:28:40,133 [INFO] main: INFY: 11 candles built
+2026-03-09 11:28:40,133 [INFO] main: TCS: 11 candles built
+2026-03-09 11:28:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:29:40 IST)" executed successfully
+2026-03-09 11:29:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:30:40 IST)" (scheduled at 2026-03-09 11:29:40.132229+05:30)
+2026-03-09 11:29:40,133 [INFO] main: RELIANCE: 12 candles built
+2026-03-09 11:29:40,133 [INFO] main: HDFCBANK: 12 candles built
+2026-03-09 11:29:40,133 [INFO] main: ICICIBANK: 12 candles built
+2026-03-09 11:29:40,133 [INFO] main: INFY: 12 candles built
+2026-03-09 11:29:40,133 [INFO] main: TCS: 12 candles built
+2026-03-09 11:29:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:30:40 IST)" executed successfully
+2026-03-09 11:30:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:31:40 IST)" (scheduled at 2026-03-09 11:30:40.132229+05:30)
+2026-03-09 11:30:40,133 [INFO] main: RELIANCE: 13 candles built
+2026-03-09 11:30:40,133 [INFO] main: HDFCBANK: 13 candles built
+2026-03-09 11:30:40,133 [INFO] main: ICICIBANK: 13 candles built
+2026-03-09 11:30:40,133 [INFO] main: INFY: 13 candles built
+2026-03-09 11:30:40,133 [INFO] main: TCS: 13 candles built
+2026-03-09 11:30:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:31:40 IST)" executed successfully
+2026-03-09 11:31:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:32:40 IST)" (scheduled at 2026-03-09 11:31:40.132229+05:30)
+2026-03-09 11:31:40,133 [INFO] main: RELIANCE: 14 candles built
+2026-03-09 11:31:40,133 [INFO] main: HDFCBANK: 14 candles built
+2026-03-09 11:31:40,133 [INFO] main: ICICIBANK: 14 candles built
+2026-03-09 11:31:40,133 [INFO] main: INFY: 14 candles built
+2026-03-09 11:31:40,133 [INFO] main: TCS: 14 candles built
+2026-03-09 11:31:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:32:40 IST)" executed successfully
+2026-03-09 11:32:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:33:40 IST)" (scheduled at 2026-03-09 11:32:40.132229+05:30)
+2026-03-09 11:32:40,133 [INFO] main: RELIANCE: 15 candles built
+2026-03-09 11:32:40,135 [INFO] main: HDFCBANK: 15 candles built
+2026-03-09 11:32:40,135 [INFO] main: ICICIBANK: 15 candles built
+2026-03-09 11:32:40,135 [INFO] main: INFY: 15 candles built
+2026-03-09 11:32:40,136 [INFO] main: TCS: 15 candles built
+2026-03-09 11:32:40,136 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:33:40 IST)" executed successfully
+2026-03-09 11:33:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:34:40 IST)" (scheduled at 2026-03-09 11:33:40.132229+05:30)
+2026-03-09 11:33:40,133 [INFO] main: RELIANCE: 16 candles built
+2026-03-09 11:33:40,133 [INFO] main: HDFCBANK: 16 candles built
+2026-03-09 11:33:40,133 [INFO] main: ICICIBANK: 16 candles built
+2026-03-09 11:33:40,133 [INFO] main: INFY: 16 candles built
+2026-03-09 11:33:40,133 [INFO] main: TCS: 16 candles built
+2026-03-09 11:33:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:34:40 IST)" executed successfully
+2026-03-09 11:34:40,133 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:35:40 IST)" (scheduled at 2026-03-09 11:34:40.132229+05:30)
+2026-03-09 11:34:40,133 [INFO] main: RELIANCE: 17 candles built
+2026-03-09 11:34:40,133 [INFO] main: HDFCBANK: 17 candles built
+2026-03-09 11:34:40,133 [INFO] main: ICICIBANK: 17 candles built
+2026-03-09 11:34:40,134 [INFO] main: INFY: 17 candles built
+2026-03-09 11:34:40,134 [INFO] main: TCS: 17 candles built
+2026-03-09 11:34:40,134 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:35:40 IST)" executed successfully
+2026-03-09 11:35:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:36:40 IST)" (scheduled at 2026-03-09 11:35:40.132229+05:30)
+2026-03-09 11:35:40,133 [INFO] main: RELIANCE: 18 candles built
+2026-03-09 11:35:40,133 [INFO] main: HDFCBANK: 18 candles built
+2026-03-09 11:35:40,133 [INFO] main: ICICIBANK: 18 candles built
+2026-03-09 11:35:40,133 [INFO] main: INFY: 18 candles built
+2026-03-09 11:35:40,133 [INFO] main: TCS: 18 candles built
+2026-03-09 11:35:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:36:40 IST)" executed successfully
+2026-03-09 11:36:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:37:40 IST)" (scheduled at 2026-03-09 11:36:40.132229+05:30)
+2026-03-09 11:36:40,133 [INFO] main: RELIANCE: 19 candles built
+2026-03-09 11:36:40,133 [INFO] main: HDFCBANK: 19 candles built
+2026-03-09 11:36:40,133 [INFO] main: ICICIBANK: 19 candles built
+2026-03-09 11:36:40,133 [INFO] main: INFY: 19 candles built
+2026-03-09 11:36:40,133 [INFO] main: TCS: 19 candles built
+2026-03-09 11:36:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:37:40 IST)" executed successfully
+2026-03-09 11:37:40,132 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:38:40 IST)" (scheduled at 2026-03-09 11:37:40.132229+05:30)
+2026-03-09 11:37:40,133 [INFO] main: RELIANCE: 20 candles built
+2026-03-09 11:37:40,133 [INFO] main: HDFCBANK: 20 candles built
+2026-03-09 11:37:40,133 [INFO] main: ICICIBANK: 20 candles built
+2026-03-09 11:37:40,133 [INFO] main: INFY: 20 candles built
+2026-03-09 11:37:40,133 [INFO] main: TCS: 20 candles built
+2026-03-09 11:37:40,133 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:38:40 IST)" executed successfully
+2026-03-09 11:38:19,039 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:38:19,039 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-09 11:38:20,147 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS']
+2026-03-09 11:38:20,150 [INFO] data.kite_stream: KiteStream started for 5 instruments
+2026-03-09 11:38:20,742 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:38:20,743 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:38:20,743 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:38:20,743 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-09 11:38:20,744 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-09 11:38:20,744 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-09 11:38:20,744 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-09 11:38:20,745 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-09 11:38:20,745 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-09 11:38:20,745 [INFO] main: Scheduler started. Agent is running.
+2026-03-09 11:38:21,134 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217]
+2026-03-09 11:39:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:39:20 IST)" (scheduled at 2026-03-09 11:39:20.743321+05:30)
+2026-03-09 11:39:20,744 [INFO] main: Market open — scanning started
+2026-03-09 11:39:20,744 [INFO] main: RELIANCE: 1 candles built
+2026-03-09 11:39:20,745 [INFO] main: HDFCBANK: 1 candles built
+2026-03-09 11:39:20,745 [INFO] main: ICICIBANK: 1 candles built
+2026-03-09 11:39:20,745 [INFO] main: INFY: 1 candles built
+2026-03-09 11:39:20,745 [INFO] main: TCS: 1 candles built
+2026-03-09 11:39:20,745 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:40:20 IST)" executed successfully
+2026-03-09 11:40:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:41:20 IST)" (scheduled at 2026-03-09 11:40:20.743321+05:30)
+2026-03-09 11:40:20,744 [INFO] main: RELIANCE: 2 candles built
+2026-03-09 11:40:20,744 [INFO] main: HDFCBANK: 2 candles built
+2026-03-09 11:40:20,744 [INFO] main: ICICIBANK: 2 candles built
+2026-03-09 11:40:20,744 [INFO] main: INFY: 2 candles built
+2026-03-09 11:40:20,744 [INFO] main: TCS: 2 candles built
+2026-03-09 11:40:20,745 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:41:20 IST)" executed successfully
+2026-03-09 11:41:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:42:20 IST)" (scheduled at 2026-03-09 11:41:20.743321+05:30)
+2026-03-09 11:41:20,746 [INFO] main: RELIANCE: 3 candles built
+2026-03-09 11:41:20,746 [INFO] main: HDFCBANK: 3 candles built
+2026-03-09 11:41:20,746 [INFO] main: ICICIBANK: 3 candles built
+2026-03-09 11:41:20,746 [INFO] main: INFY: 3 candles built
+2026-03-09 11:41:20,746 [INFO] main: TCS: 3 candles built
+2026-03-09 11:41:20,746 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:42:20 IST)" executed successfully
+2026-03-09 11:42:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:43:20 IST)" (scheduled at 2026-03-09 11:42:20.743321+05:30)
+2026-03-09 11:42:20,744 [INFO] main: RELIANCE: 4 candles built
+2026-03-09 11:42:20,744 [INFO] main: HDFCBANK: 4 candles built
+2026-03-09 11:42:20,744 [INFO] main: ICICIBANK: 4 candles built
+2026-03-09 11:42:20,744 [INFO] main: INFY: 4 candles built
+2026-03-09 11:42:20,744 [INFO] main: TCS: 4 candles built
+2026-03-09 11:42:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:43:20 IST)" executed successfully
+2026-03-09 11:43:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:44:20 IST)" (scheduled at 2026-03-09 11:43:20.743321+05:30)
+2026-03-09 11:43:20,744 [INFO] main: RELIANCE: 5 candles built
+2026-03-09 11:43:20,744 [INFO] main: HDFCBANK: 5 candles built
+2026-03-09 11:43:20,744 [INFO] main: ICICIBANK: 5 candles built
+2026-03-09 11:43:20,744 [INFO] main: INFY: 5 candles built
+2026-03-09 11:43:20,745 [INFO] main: TCS: 5 candles built
+2026-03-09 11:43:20,745 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:44:20 IST)" executed successfully
+2026-03-09 11:44:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:45:20 IST)" (scheduled at 2026-03-09 11:44:20.743321+05:30)
+2026-03-09 11:44:20,744 [INFO] main: RELIANCE: 6 candles built
+2026-03-09 11:44:20,744 [INFO] main: HDFCBANK: 6 candles built
+2026-03-09 11:44:20,744 [INFO] main: ICICIBANK: 6 candles built
+2026-03-09 11:44:20,744 [INFO] main: INFY: 6 candles built
+2026-03-09 11:44:20,744 [INFO] main: TCS: 6 candles built
+2026-03-09 11:44:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:45:20 IST)" executed successfully
+2026-03-09 11:45:20,743 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:46:20 IST)" (scheduled at 2026-03-09 11:45:20.743321+05:30)
+2026-03-09 11:45:20,744 [INFO] main: RELIANCE: 7 candles built
+2026-03-09 11:45:20,744 [INFO] main: HDFCBANK: 7 candles built
+2026-03-09 11:45:20,744 [INFO] main: ICICIBANK: 7 candles built
+2026-03-09 11:45:20,744 [INFO] main: INFY: 7 candles built
+2026-03-09 11:45:20,744 [INFO] main: TCS: 7 candles built
+2026-03-09 11:45:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:46:20 IST)" executed successfully
+2026-03-09 11:46:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:47:20 IST)" (scheduled at 2026-03-09 11:46:20.743321+05:30)
+2026-03-09 11:46:20,744 [INFO] main: RELIANCE: 8 candles built
+2026-03-09 11:46:20,744 [INFO] main: HDFCBANK: 8 candles built
+2026-03-09 11:46:20,744 [INFO] main: ICICIBANK: 8 candles built
+2026-03-09 11:46:20,744 [INFO] main: INFY: 8 candles built
+2026-03-09 11:46:20,744 [INFO] main: TCS: 8 candles built
+2026-03-09 11:46:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:47:20 IST)" executed successfully
+2026-03-09 11:47:20,743 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:48:20 IST)" (scheduled at 2026-03-09 11:47:20.743321+05:30)
+2026-03-09 11:47:20,744 [INFO] main: RELIANCE: 9 candles built
+2026-03-09 11:47:20,744 [INFO] main: HDFCBANK: 9 candles built
+2026-03-09 11:47:20,744 [INFO] main: ICICIBANK: 9 candles built
+2026-03-09 11:47:20,744 [INFO] main: INFY: 9 candles built
+2026-03-09 11:47:20,744 [INFO] main: TCS: 9 candles built
+2026-03-09 11:47:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:48:20 IST)" executed successfully
+2026-03-09 11:48:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:49:20 IST)" (scheduled at 2026-03-09 11:48:20.743321+05:30)
+2026-03-09 11:48:20,744 [INFO] main: RELIANCE: 10 candles built
+2026-03-09 11:48:20,745 [INFO] main: HDFCBANK: 10 candles built
+2026-03-09 11:48:20,745 [INFO] main: ICICIBANK: 10 candles built
+2026-03-09 11:48:20,745 [INFO] main: INFY: 10 candles built
+2026-03-09 11:48:20,745 [INFO] main: TCS: 10 candles built
+2026-03-09 11:48:20,745 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:49:20 IST)" executed successfully
+2026-03-09 11:49:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:50:20 IST)" (scheduled at 2026-03-09 11:49:20.743321+05:30)
+2026-03-09 11:49:20,744 [INFO] main: RELIANCE: 11 candles built
+2026-03-09 11:49:20,746 [INFO] main: HDFCBANK: 11 candles built
+2026-03-09 11:49:20,746 [INFO] main: ICICIBANK: 11 candles built
+2026-03-09 11:49:20,746 [INFO] main: INFY: 11 candles built
+2026-03-09 11:49:20,746 [INFO] main: TCS: 11 candles built
+2026-03-09 11:49:20,746 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:50:20 IST)" executed successfully
+2026-03-09 11:50:20,743 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:51:20 IST)" (scheduled at 2026-03-09 11:50:20.743321+05:30)
+2026-03-09 11:50:20,744 [INFO] main: RELIANCE: 12 candles built
+2026-03-09 11:50:20,744 [INFO] main: HDFCBANK: 12 candles built
+2026-03-09 11:50:20,744 [INFO] main: ICICIBANK: 12 candles built
+2026-03-09 11:50:20,744 [INFO] main: INFY: 12 candles built
+2026-03-09 11:50:20,744 [INFO] main: TCS: 12 candles built
+2026-03-09 11:50:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:51:20 IST)" executed successfully
+2026-03-09 11:51:20,744 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:52:20 IST)" (scheduled at 2026-03-09 11:51:20.743321+05:30)
+2026-03-09 11:51:20,755 [INFO] main: RELIANCE: 13 candles built
+2026-03-09 11:51:20,755 [INFO] main: HDFCBANK: 13 candles built
+2026-03-09 11:51:20,755 [INFO] main: ICICIBANK: 13 candles built
+2026-03-09 11:51:20,755 [INFO] main: INFY: 13 candles built
+2026-03-09 11:51:20,755 [INFO] main: TCS: 13 candles built
+2026-03-09 11:51:20,755 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:52:20 IST)" executed successfully
+2026-03-09 11:52:20,743 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:53:20 IST)" (scheduled at 2026-03-09 11:52:20.743321+05:30)
+2026-03-09 11:52:20,744 [INFO] main: RELIANCE: 14 candles built
+2026-03-09 11:52:20,744 [INFO] main: HDFCBANK: 14 candles built
+2026-03-09 11:52:20,744 [INFO] main: ICICIBANK: 14 candles built
+2026-03-09 11:52:20,744 [INFO] main: INFY: 14 candles built
+2026-03-09 11:52:20,744 [INFO] main: TCS: 14 candles built
+2026-03-09 11:52:20,744 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-09 11:53:20 IST)" executed successfully

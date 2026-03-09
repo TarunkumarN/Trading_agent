@@ -160,7 +160,8 @@ def candle_close_job():
         vwap    = candle_builder.vwap.get(stock, 0)
 
         if len(prices) < 26:
-            continue  # Not enough data yet
+            logger.info(f"{stock}: {len(prices)} candles built")
+            continue
 
         sig = calculate_signals(prices, volumes, vwap)
         allowed, reason = guard.can_trade(sig["score"])
