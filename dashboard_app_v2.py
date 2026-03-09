@@ -1209,18 +1209,19 @@ function loadPremarket(){
       return '<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>' +
         arr.map(m =>
           '<tr>' +
-            '<td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td>' +
-            '<td>₹'+m.price+'</td>' +
-            '<td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+
-              (m.gap_pct>=0?'+':'')+m.gap_pct+'%</td>' +
-            '<td class="c-muted">'+m.vol_score+'</td>' +
-            '<td><span class="tag '+
+            '<td style="font-weight:700;color:var(--amber);">' + m.symbol + '</td>' +
+            '<td>₹' + m.price + '</td>' +
+            '<td style="color:' + (m.gap_pct >= 0 ? 'var(--green)' : 'var(--red)') + ';">' +
+              (m.gap_pct >= 0 ? '+' : '') + m.gap_pct + '%' +
+            '</td>' +
+            '<td class="c-muted">' + m.vol_score + '</td>' +
+            '<td><span class="tag ' +
               (m.momentum.includes('Bullish')
                 ? 'tag-bullish'
                 : m.momentum.includes('Bearish')
                   ? 'tag-bearish'
                   : 'tag-neutral') +
-            '">'+m.momentum+'</span></td>' +
+            '">' + m.momentum + '</span></td>' +
           '</tr>'
         ).join('') +
       '</tbody></table>';
