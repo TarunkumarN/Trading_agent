@@ -17,29 +17,22 @@ def run_pre_market() -> dict:
     print("[PRE-MARKET] Starting analysis at 8:30 AM...")
     send_telegram("⏰ Pre-market analysis started...")
 
-    prompt = """
-    It is 8:30 AM IST. The Indian stock market (NSE/BSE) opens in 45 minutes.
-    Please search the web right now and provide a complete trading plan.
+    prompt = f"""
+    You are an Indian stock market expert. It is 8:30 AM IST.
+   Give me a trading plan for today based on general market knowledge.
 
-    Search for:
-    1. SGX Nifty current value (indicates Nifty 50 opening direction)
-    2. US markets last close: Dow Jones, S&P 500, NASDAQ (up or down %)
-    3. Crude oil current price and direction
-    4. Top India market news from last 12 hours (RBI, FII data, major earnings)
-    5. Top 5 high-liquidity NSE stocks expected to move today
-       (only from Nifty 50, Bank Nifty, or F&O segment)
+   Return ONLY valid JSON, no other text:
+    {{
+    "market_bias": "BULLISH",
+    "confidence": 65,
+    "sgx_nifty": "estimate based on US markets",
+    "us_markets": "brief summary",
+    "crude_oil": "current trend",
+    "watchlist": ["RELIANCE", "HDFCBANK", "ICICIBANK", "INFY", "TCS"],
+    "avoid_today": [],
+    "key_news": "brief market summary"
+    }}
 
-    Return ONLY this JSON (no other text):
-    {
-      "market_bias": "BULLISH or BEARISH or NEUTRAL",
-      "confidence": 0-100,
-      "sgx_nifty": "value and % change",
-      "us_markets": "brief summary of Dow and Nasdaq",
-      "crude_oil": "price and direction",
-      "watchlist": ["STOCK1","STOCK2","STOCK3","STOCK4","STOCK5"],
-      "avoid_today": ["any stocks to avoid and why"],
-      "key_news": "one sentence summary of most important market news"
-    }
     """
 
     raw    = ask_minimax(prompt, web_search=True)
