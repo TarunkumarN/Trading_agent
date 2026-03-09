@@ -53,8 +53,32 @@ logger = logging.getLogger("main")
 guard          = DailyGuard()
 candle_builder = CandleBuilder()
 trader         = PaperTrader(guard)
-watchlist      = []
 day_started    = False
+
+# ── Load Watchlist from File (Survives Restarts) ──────────────
+WATCHLIST_FILE = Path("logs/watchlist.json")
+
+def load_watchlist():
+    """Load watchlist from file if it exists."""
+    if WATCHLIST_FILE.exists():
+        try:
+            wl = json.loads(WATCHLIST_FILE.read_text())
+            if wl:
+                logger.info(f"Loaded watchlist from file: {wl}")
+                return wl
+        except Exception as e:
+            logger.warning(f"Could not load watchlist file: {e}")
+    return []
+
+def save_watchlist(wl):
+    """Save watchlist to file so it survives restarts."""
+    try:
+        WATCHLIST_FILE.write_text(json.dumps(wl))
+        logger.info(f"Watchlist saved to file: {wl}")
+    except Exception as e:
+        logger.warning(f"Could not save watchlist: {e}")
+
+watchlist = load_watchlist()
 
 
 def save_trade_log():
@@ -72,6 +96,7 @@ def pre_market_job():
     logger.info("Starting pre-market analysis...")
     result    = run_pre_market()
     watchlist = result.get("watchlist", [])
+    save_watchlist(watchlist)
     logger.info(f"Watchlist: {watchlist}")
 
 
@@ -172,11 +197,24 @@ def end_of_day_job():
     if review:
         send_telegram(f"🤖 <b>AI Review</b>\n{review}")
 
+    # Clear watchlist file at end of day so fresh one is built tomorrow
+    if WATCHLIST_FILE.exists():
+        WATCHLIST_FILE.unlink()
+        logger.info("Watchlist file cleared for tomorrow.")
+
 
 # ── Main ──────────────────────────────────────────────────────
 if __name__ == "__main__":
     logger.info(f"=== MiniMax Scalping Agent STARTING | Mode: {TRADING_MODE.upper()} ===")
     alert_startup(TRADING_MODE)
+
+    # If market is open and no watchlist — run pre-market immediately
+    now = datetime.now()
+    market_open  = now.replace(hour=MARKET_OPEN_HOUR,  minute=MARKET_OPEN_MINUTE,  second=0)
+    market_close = now.replace(hour=MARKET_CLOSE_HOUR, minute=MARKET_CLOSE_MINUTE, second=0)
+    if market_open <= now <= market_close and not watchlist:
+        logger.info("Market is open but no watchlist — running pre-market now...")
+        pre_market_job()
 
     scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
 
