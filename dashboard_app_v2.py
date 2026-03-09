@@ -1272,7 +1272,7 @@ function loadPremarket(){
         <td style="color:${m.change>=0?'var(--green)':'var(--red)'};">
           ${(m.change>=0?'+':'')}${m.change.toFixed(2)}
         </td>
-        <td style="color:${m.gap_pct>=0?'var(--green)':'var(--red)'};">
+       <td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">
           ${(m.gap_pct>=0?'+':'')}${m.gap_pct}%
         </td>
         <td class="c-muted">₹${m.high}</td>
