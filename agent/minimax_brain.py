@@ -6,7 +6,7 @@ import requests
 import json
 from config import MINIMAX_API_KEY, MINIMAX_GROUP_ID
 
-API_URL = "https://api.minimax.chat/v1/text/chatcompletion_v2"
+API_URL = f"https://api.minimax.io/v1/text/chatcompletion_v2?GroupId={MINIMAX_GROUP_ID}"
 
 SYSTEM_PROMPT = """
 You are an expert Indian stock market scalping agent trading NSE/BSE stocks.
