@@ -54,6 +54,7 @@ guard          = DailyGuard()
 candle_builder = CandleBuilder()
 trader         = PaperTrader(guard)
 day_started    = False
+stream         = None
 
 # ── Load Watchlist from File (Survives Restarts) ──────────────
 WATCHLIST_FILE = Path("logs/watchlist.json")
@@ -92,12 +93,26 @@ def save_trade_log():
 
 def pre_market_job():
     """Runs at 8:30 AM — collect market data and build watchlist."""
-    global watchlist
+    global watchlist, stream
     logger.info("Starting pre-market analysis...")
     result    = run_pre_market()
     watchlist = result.get("watchlist", [])
     save_watchlist(watchlist)
     logger.info(f"Watchlist: {watchlist}")
+
+    # Start Kite WebSocket stream for live tick data
+    try:
+        tokens = get_tokens(watchlist)
+        if tokens:
+            logger.info(f"Starting Kite stream for tokens: {tokens}")
+            stream = start_stream(candle_builder, tokens)
+            send_telegram(f"📡 Live stream started for {len(tokens)} stocks")
+        else:
+            logger.warning("No tokens found — stream not started")
+            send_telegram("⚠️ Could not get instrument tokens — using simulated prices")
+    except Exception as e:
+        logger.error(f"Stream start error: {e}")
+        send_telegram(f"⚠️ Stream error: {e} — using simulated prices")
 
 
 def candle_close_job():
@@ -215,6 +230,16 @@ if __name__ == "__main__":
     if market_open <= now <= market_close and not watchlist:
         logger.info("Market is open but no watchlist — running pre-market now...")
         pre_market_job()
+    elif market_open <= now <= market_close and watchlist:
+        # Market open, watchlist exists — just restart the stream
+        try:
+            tokens = get_tokens(watchlist)
+            if tokens:
+                logger.info(f"Restarting stream for existing watchlist: {watchlist}")
+                stream = start_stream(candle_builder, tokens)
+                send_telegram(f"📡 Stream restarted for {len(tokens)} stocks")
+        except Exception as e:
+            logger.error(f"Stream restart error: {e}")
 
     scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
 
