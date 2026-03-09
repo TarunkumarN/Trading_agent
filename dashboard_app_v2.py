@@ -1179,49 +1179,134 @@ function loadHealth(){
 // PREMARKET
 function loadPremarket(){
   document.getElementById('pm-movers').innerHTML='<div class="empty">Fetching live data...</div>';
-  fetch('/api/premarket').then(r=>r.json()).then(d=>{
-    const idx=d.indices||{};
-    function setIdx(id,chgId,data){
-      if(!data){return;}
-      document.getElementById(id).textContent=data.price?'₹'+data.price.toLocaleString('en-IN',{minimumFractionDigits:2}):'--';
-      const el=document.getElementById(chgId);
-      el.textContent=(data.change>=0?'▲ +':'▼ ')+data.change+'%  '+data.trend;
-      el.style.color=data.change>=0?'var(--green)':'var(--red)';
-    }
-    setIdx('pm-nifty','pm-nifty-chg',idx.nifty);
-    setIdx('pm-bank','pm-bank-chg',idx.banknifty);
-    setIdx('pm-vix','pm-vix-chg',idx.vix);
-    setIdx('pm-sensex','pm-sensex-chg',idx.sensex);
-   function moverTable(arr){
-     if(!arr || !arr.length) return '<div class="empty">No data</div>';
 
-        return '<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>' +
-          arr.map(m =>
-            '<tr>' +
-              '<td style="font-weight:700;color:var(--amber);">' + m.symbol + '</td>' +
-              '<td>₹' + m.price + '</td>' +
-              '<td style="color:' + (m.gap_pct>=0 ? 'var(--green)' : 'var(--red)') + ';">' +
-                (m.gap_pct>=0?'+':'') + m.gap_pct + '%' +
-              '</td>' +
-              '<td class="c-muted">' + m.vol_score + '</td>' +
-              '<td><span class="tag ' +
-                (m.momentum.includes('Bullish')
-                  ? 'tag-bullish'
-                  : m.momentum.includes('Bearish')
-                    ? 'tag-bearish'
-                    : 'tag-neutral') +
-              '">' + m.momentum + '</span></td>' +
-            '</tr>'
-          ).join('') +
-        '</tbody></table>';
+  fetch('/api/premarket')
+  .then(r=>r.json())
+  .then(d=>{
+
+    const idx=d.indices||{}
+
+    function setIdx(id,chgId,data){
+      if(!data)return
+
+      document.getElementById(id).textContent=
+        data.price ? '₹'+data.price.toLocaleString('en-IN',{minimumFractionDigits:2}) : '--'
+
+      const el=document.getElementById(chgId)
+
+      el.textContent=(data.change>=0?'▲ +':'▼ ')+data.change+'%  '+data.trend
+      el.style.color=data.change>=0?'var(--green)':'var(--red)'
     }
-    document.getElementById('pm-gapups').innerHTML=moverTable(d.gap_ups);
-    document.getElementById('pm-gapdowns').innerHTML=moverTable(d.gap_downs);
-    const movers=d.movers||[];
-    if(!movers.length){document.getElementById('pm-movers').innerHTML='<div class="empty">No data available — market may be closed</div>';return;}
-    document.getElementById('pm-movers').innerHTML='<table><thead><tr><th>Symbol</th><th>Price</th><th>Change</th><th>Gap%</th><th>High</th><th>Low</th><th>Volume</th><th>Momentum</th><th>Score</th></tr></thead><tbody>'+
-      movers.map(m=>'<tr><td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td><td>₹'+m.price+'</td><td style="color:'+(m.change>=0?'var(--green)':'var(--red)')+';">'+(m.change>=0?'+':'')+m.change.toFixed(2)+'</td><td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td><td class="c-muted">₹'+m.high+'</td><td class="c-muted">₹'+m.low+'</td><td class="c-muted">'+m.vol_score+'</td><td><span class="tag '+(m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral')+'">'+m.momentum+'</span></td><td><span class="tag '+(m.score>=5?'tag-ok':m.score<=-5?'tag-fail':'tag-warn')+'">'+m.score+'/10</span></td></tr>').join('')+'</tbody></table>';
-  }).catch(()=>{document.getElementById('pm-movers').innerHTML='<div class="empty">Failed to fetch — check internet connection</div>';});
+
+    setIdx('pm-nifty','pm-nifty-chg',idx.nifty)
+    setIdx('pm-bank','pm-bank-chg',idx.banknifty)
+    setIdx('pm-vix','pm-vix-chg',idx.vix)
+    setIdx('pm-sensex','pm-sensex-chg',idx.sensex)
+
+    function moverTable(arr){
+      if(!arr || !arr.length) return '<div class="empty">No data</div>'
+
+      let html = `
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Gap%</th>
+            <th>Volume</th>
+            <th>Momentum</th>
+          </tr>
+        </thead>
+        <tbody>
+      `
+
+      arr.forEach(m=>{
+
+        let tag='tag-neutral'
+        if(m.momentum.includes('Bullish')) tag='tag-bullish'
+        if(m.momentum.includes('Bearish')) tag='tag-bearish'
+
+        html+=`
+        <tr>
+          <td style="font-weight:700;color:var(--amber);">${m.symbol}</td>
+          <td>₹${m.price}</td>
+          <td style="color:${m.gap_pct>=0?'var(--green)':'var(--red)'};">
+            ${(m.gap_pct>=0?'+':'')}${m.gap_pct}%
+          </td>
+          <td class="c-muted">${m.vol_score}</td>
+          <td><span class="tag ${tag}">${m.momentum}</span></td>
+        </tr>
+        `
+      })
+
+      html+='</tbody></table>'
+      return html
+    }
+
+    document.getElementById('pm-gapups').innerHTML=moverTable(d.gap_ups)
+    document.getElementById('pm-gapdowns').innerHTML=moverTable(d.gap_downs)
+
+    const movers=d.movers||[]
+
+    if(!movers.length){
+      document.getElementById('pm-movers').innerHTML='<div class="empty">No data available — market may be closed</div>'
+      return
+    }
+
+    let html=`
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>Change</th>
+          <th>Gap%</th>
+          <th>High</th>
+          <th>Low</th>
+          <th>Volume</th>
+          <th>Momentum</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+    `
+
+    movers.forEach(m=>{
+
+      let tag='tag-neutral'
+      if(m.momentum.includes('Bullish')) tag='tag-bullish'
+      if(m.momentum.includes('Bearish')) tag='tag-bearish'
+
+      let scoreTag='tag-warn'
+      if(m.score>=5) scoreTag='tag-ok'
+      if(m.score<=-5) scoreTag='tag-fail'
+
+      html+=`
+      <tr>
+        <td style="font-weight:700;color:var(--amber);">${m.symbol}</td>
+        <td>₹${m.price}</td>
+        <td style="color:${m.change>=0?'var(--green)':'var(--red)'};">
+          ${(m.change>=0?'+':'')}${m.change.toFixed(2)}
+        </td>
+        <td style="color:${m.gap_pct>=0?'var(--green)':'var(--red)'};">
+          ${(m.gap_pct>=0?'+':'')}${m.gap_pct}%
+        </td>
+        <td class="c-muted">₹${m.high}</td>
+        <td class="c-muted">₹${m.low}</td>
+        <td class="c-muted">${m.vol_score}</td>
+        <td><span class="tag ${tag}">${m.momentum}</span></td>
+        <td><span class="tag ${scoreTag}">${m.score}/10</span></td>
+      </tr>
+      `
+    })
+
+    html+='</tbody></table>'
+    document.getElementById('pm-movers').innerHTML=html
+
+  })
+  .catch(()=>{
+    document.getElementById('pm-movers').innerHTML='<div class="empty">Failed to fetch — check internet connection</div>'
+  })
 }
 
 // STRATEGIES
