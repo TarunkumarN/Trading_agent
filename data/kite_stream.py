@@ -81,3 +81,10 @@ def get_instrument_tokens(kite, symbols: list) -> dict:
     except Exception as e:
         logger.error(f"Failed to fetch instrument tokens: {e}")
         return {}
+
+def start_stream(candle_builder, watchlist_tokens):
+    """Convenience function to start KiteStream."""
+    stream = KiteStream(candle_builder, watchlist_tokens)
+    stream.start()
+    return stream
+
