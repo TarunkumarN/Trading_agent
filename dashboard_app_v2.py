@@ -1192,28 +1192,29 @@ function loadPremarket(){
     setIdx('pm-bank','pm-bank-chg',idx.banknifty);
     setIdx('pm-vix','pm-vix-chg',idx.vix);
     setIdx('pm-sensex','pm-sensex-chg',idx.sensex);
-    function moverTable(arr){
-  if(!arr||!arr.length)return'<div class="empty">No data</div>';
-  return '<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>' +
-    arr.map(m =>
-      '<tr>' +
-        '<td style="font-weight:700;color:var(--amber);">' + m.symbol + '</td>' +
-        '<td>₹' + m.price + '</td>' +
-        '<td style="color:' + (m.gap_pct>=0 ? 'var(--green)' : 'var(--red)') + ';">' +
-          (m.gap_pct>=0?'+':'') + m.gap_pct + '%' +
-        '</td>' +
-        '<td class="c-muted">' + m.vol_score + '</td>' +
-        '<td><span class="tag ' +
-          (m.momentum.includes('Bullish')
-            ? 'tag-bullish'
-            : m.momentum.includes('Bearish')
-              ? 'tag-bearish'
-              : 'tag-neutral') +
-        '">' + m.momentum + '</span></td>' +
-      '</tr>'
-    ).join('') +
-  '</tbody></table>';
-}
+   function moverTable(arr){
+     if(!arr || !arr.length) return '<div class="empty">No data</div>';
+
+        return '<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>' +
+          arr.map(m =>
+            '<tr>' +
+              '<td style="font-weight:700;color:var(--amber);">' + m.symbol + '</td>' +
+              '<td>₹' + m.price + '</td>' +
+              '<td style="color:' + (m.gap_pct>=0 ? 'var(--green)' : 'var(--red)') + ';">' +
+                (m.gap_pct>=0?'+':'') + m.gap_pct + '%' +
+              '</td>' +
+              '<td class="c-muted">' + m.vol_score + '</td>' +
+              '<td><span class="tag ' +
+                (m.momentum.includes('Bullish')
+                  ? 'tag-bullish'
+                  : m.momentum.includes('Bearish')
+                    ? 'tag-bearish'
+                    : 'tag-neutral') +
+              '">' + m.momentum + '</span></td>' +
+            '</tr>'
+          ).join('') +
+        '</tbody></table>';
+    }
     document.getElementById('pm-gapups').innerHTML=moverTable(d.gap_ups);
     document.getElementById('pm-gapdowns').innerHTML=moverTable(d.gap_downs);
     const movers=d.movers||[];
