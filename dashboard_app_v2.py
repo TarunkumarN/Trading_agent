@@ -1203,52 +1203,27 @@ function loadPremarket(){
     setIdx('pm-vix','pm-vix-chg',idx.vix)
     setIdx('pm-sensex','pm-sensex-chg',idx.sensex)
 
-    function moverTable(arr){
-  if(!arr || !arr.length){
-    return `<div class="empty">No data</div>`
-  }
+function moverTable(arr){
+  if(!arr || !arr.length) return '<div class="empty">No data</div>';
 
-  let rows=""
-
-  arr.forEach(m=>{
-    let tag="tag-neutral"
-
-    if(m.momentum.includes("Bullish")) tag="tag-bullish"
-    if(m.momentum.includes("Bearish")) tag="tag-bearish"
-
-    rows += `
-      <tr>
-        <td style="font-weight:700;color:var(--amber);">${m.symbol}</td>
-        <td>₹${m.price}</td>
-        <td style="color:${m.gap_pct>=0?'var(--green)':'var(--red)'};">
-          ${(m.gap_pct>=0?'+':'')}${m.gap_pct}%
-        </td>
-        <td class="c-muted">${m.vol_score}</td>
-        <td>
-          <span class="tag ${tag}">
-            ${m.momentum}
-          </span>
-        </td>
-      </tr>
-    `
-  })
-
-  return `
-    <table>
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>Gap%</th>
-          <th>Volume</th>
-          <th>Momentum</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-  `
+  return '<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>' +
+    arr.map(m =>
+      '<tr>' +
+        '<td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td>' +
+        '<td>₹'+m.price+'</td>' +
+        '<td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+
+          (m.gap_pct>=0?'+':'')+m.gap_pct+'%</td>' +
+        '<td class="c-muted">'+m.vol_score+'</td>' +
+        '<td><span class="tag '+
+          (m.momentum.includes('Bullish')
+            ? 'tag-bullish'
+            : m.momentum.includes('Bearish')
+              ? 'tag-bearish'
+              : 'tag-neutral') +
+        '">'+m.momentum+'</span></td>' +
+      '</tr>'
+    ).join('') +
+  '</tbody></table>';
 }
 
     document.getElementById('pm-gapups').innerHTML=moverTable(d.gap_ups)
