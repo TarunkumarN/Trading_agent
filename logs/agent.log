@@ -7089,3 +7089,18 @@
 2026-03-11 01:34:44,469 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:35:44 IST)" executed successfully
 2026-03-11 01:35:44,468 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:36:44 IST)" (scheduled at 2026-03-11 01:35:44.468102+05:30)
 2026-03-11 01:35:44,469 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:36:44 IST)" executed successfully
+2026-03-11 01:36:44,468 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:37:44 IST)" (scheduled at 2026-03-11 01:36:44.468102+05:30)
+2026-03-11 01:36:44,469 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:37:44 IST)" executed successfully
+2026-03-11 01:37:44,468 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:38:44 IST)" (scheduled at 2026-03-11 01:37:44.468102+05:30)
+2026-03-11 01:37:44,469 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 01:38:44 IST)" executed successfully
+2026-03-11 01:37:50,989 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-11 01:37:51,580 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 01:37:51,580 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 01:37:51,581 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 01:37:51,581 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 01:37:51,582 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-11 01:37:51,582 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-11 01:37:51,582 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-11 01:37:51,582 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-11 01:37:51,583 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-11 01:37:51,583 [INFO] main: Scheduler started. Agent is running.

@@ -9,7 +9,8 @@ Complete professional dashboard with:
 - F&O Calculator
 - P&L History
 """
-from flask import Flask, jsonify, request, session
+from flask import Flask
+from data.database import db, jsonify, request, session
 from pathlib import Path
 import json, os, subprocess, requests
 from datetime import datetime, timedelta
