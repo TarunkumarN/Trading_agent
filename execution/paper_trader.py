@@ -33,6 +33,8 @@ class PaperTrader:
         if qty <= 0 or entry <= 0:
             print(f"[PAPER] Invalid qty/entry for {stock}")
             return
+        # SELL/SHORT is now allowed
+        # SELL/SHORT is now allowed
         self.positions[stock] = {
             "stock": stock, "action": action, "qty": qty,
             "entry": entry, "sl": sl, "target": target,

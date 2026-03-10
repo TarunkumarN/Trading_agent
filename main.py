@@ -28,7 +28,7 @@ from config import TRADING_MODE, MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE
 from config import MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE
 
 from agent.pre_market import run_pre_market, run_end_of_day_review
-from strategies.signal_scorer import calculate_signals
+from strategies.signal_scorer import calculate_signals, set_nifty_bias, update_opening_range, reset_opening_ranges
 from risk.position_sizer import calculate_quantity, calculate_stop_and_target
 from risk.daily_guard import DailyGuard
 from execution.paper_trader import PaperTrader
@@ -80,6 +80,40 @@ def save_watchlist(wl):
         logger.warning(f"Could not save watchlist: {e}")
 
 watchlist = load_watchlist()
+
+# Auto-start stream on restart during market hours
+if watchlist:
+    try:
+        from datetime import datetime as _dt
+        _now = _dt.now()
+        _open = _now.hour > 9 or (_now.hour == 9 and _now.minute >= 15)
+        _closed = _now.hour > 15 or (_now.hour == 15 and _now.minute >= 30)
+        if _open and not _closed:
+            logger.info(f"Restarting stream for existing watchlist: {watchlist}")
+            _tokens = get_tokens(watchlist)
+            if _tokens:
+                stream = start_stream(candle_builder, _tokens)
+                logger.info(f"Stream auto-restarted for {len(_tokens)} instruments")
+    except Exception as e:
+        logger.error(f"Auto stream restart failed: {e}")
+
+
+# Auto-start stream on restart during market hours
+if watchlist:
+    try:
+        from datetime import datetime as _dt
+        _now = _dt.now()
+        _open = _now.hour > 9 or (_now.hour == 9 and _now.minute >= 15)
+        _closed = _now.hour > 15 or (_now.hour == 15 and _now.minute >= 30)
+        if _open and not _closed:
+            logger.info(f"Restarting stream for existing watchlist: {watchlist}")
+            _tokens = get_tokens(watchlist)
+            if _tokens:
+                stream = start_stream(candle_builder, _tokens)
+                logger.info(f"Stream auto-restarted for {len(_tokens)} instruments")
+    except Exception as e:
+        logger.error(f"Auto stream restart failed: {e}")
+
 
 
 def save_trade_log():

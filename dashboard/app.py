@@ -74,28 +74,62 @@ def fetch_nse_preopen():
         return {}
 
 
-def fetch_yahoo_quote(symbols):
-    """Fetch quotes from Yahoo Finance"""
+def fetch_nse_quote(symbols_ns):
+    """Fetch from NSE India — no rate limit"""
     results = {}
     try:
-        sym_str = " ".join(symbols)
-        url = f"https://query1.finance.yahoo.com/v7/finance/quote?symbols={sym_str}"
-        r = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"})
-        if r.ok:
-            data = r.json().get("quoteResponse", {}).get("result", [])
-            for q in data:
-                results[q.get("symbol", "")] = {
-                    "price": q.get("regularMarketPrice", 0),
-                    "change": q.get("regularMarketChange", 0),
-                    "changePct": q.get("regularMarketChangePercent", 0),
-                    "volume": q.get("regularMarketVolume", 0),
-                    "prevClose": q.get("regularMarketPreviousClose", 0),
-                    "high": q.get("regularMarketDayHigh", 0),
-                    "low": q.get("regularMarketDayLow", 0),
-                    "name": q.get("shortName", q.get("symbol", "")),
-                }
-    except:
-        pass
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Referer": "https://www.nseindia.com/",
+        }
+        s = requests.Session()
+        s.get("https://www.nseindia.com", headers=headers, timeout=6)
+        # NSE equity quotes
+        nse_syms = [sym.replace(".NS","") for sym in symbols_ns if "^" not in sym]
+        if nse_syms:
+            url = "https://www.nseindia.com/api/quote-equity?symbol=" 
+            for sym in nse_syms[:10]:
+                try:
+                    r = s.get(url + sym, headers=headers, timeout=4)
+                    if r.ok:
+                        d = r.json()
+                        pd = d.get("priceInfo", {})
+                        prev = pd.get("previousClose", 0)
+                        ltp  = pd.get("lastPrice", 0)
+                        chg  = round(ltp - prev, 2)
+                        chgp = round((chg/prev)*100, 2) if prev else 0
+                        results[sym+".NS"] = {
+                            "price": ltp, "change": chg, "changePct": chgp,
+                            "volume": d.get("marketDeptOrderBook",{}).get("tradeInfo",{}).get("totalTradedVolume",0),
+                            "prevClose": prev,
+                            "high": pd.get("intraDayHighLow",{}).get("max", ltp),
+                            "low":  pd.get("intraDayHighLow",{}).get("min", ltp),
+                            "name": sym,
+                        }
+                except: pass
+        # NSE indices
+        try:
+            r = s.get("https://www.nseindia.com/api/allIndices", headers=headers, timeout=5)
+            if r.ok:
+                for idx in r.json().get("data", []):
+                    name = idx.get("index","")
+                    ltp  = idx.get("last", 0)
+                    prev = idx.get("previousClose", 0)
+                    chg  = round(ltp - prev, 2)
+                    chgp = round(idx.get("percentChange", 0), 2)
+                    if "NIFTY 50" == name:
+                        results["^NSEI"] = {"price":ltp,"change":chg,"changePct":chgp,"prevClose":prev,"volume":0,"high":idx.get("high",ltp),"low":idx.get("low",ltp),"name":"NIFTY 50"}
+                    elif "NIFTY BANK" == name:
+                        results["^NSEBANK"] = {"price":ltp,"change":chg,"changePct":chgp,"prevClose":prev,"volume":0,"high":idx.get("high",ltp),"low":idx.get("low",ltp),"name":"BANK NIFTY"}
+                    elif "INDIA VIX" == name:
+                        results["^INDIAVIX"] = {"price":ltp,"change":chg,"changePct":chgp,"prevClose":prev,"volume":0,"high":idx.get("high",ltp),"low":idx.get("low",ltp),"name":"INDIA VIX"}
+                    elif "S&P BSE SENSEX" == name:
+                        results["^BSESN"] = {"price":ltp,"change":chg,"changePct":chgp,"prevClose":prev,"volume":0,"high":idx.get("high",ltp),"low":idx.get("low",ltp),"name":"SENSEX"}
+        except: pass
+    except Exception as e:
+        print(f"NSE fetch error: {e}")
     return results
 
 
@@ -157,35 +191,40 @@ def api_health():
 # ── PREMARKET DATA ────────────────────────────────────────────
 @app.route("/api/premarket")
 def api_premarket():
-    if not session.get("auth"): return jsonify({"error": "unauthorized"}), 401
+    pass  # public market data, no auth needed
     # Index quotes
-    indices = fetch_yahoo_quote(["^NSEI", "^NSEBANK", "^INDIAVIX", "^BSESN"])
-    # Top Nifty 50 movers
-    nifty50 = ["RELIANCE.NS","TCS.NS","HDFCBANK.NS","INFY.NS","ICICIBANK.NS",
-                "HINDUNILVR.NS","KOTAKBANK.NS","SBIN.NS","BAJFINANCE.NS","BHARTIARTL.NS",
-                "AXISBANK.NS","MARUTI.NS","TITAN.NS","SUNPHARMA.NS","WIPRO.NS"]
-    stocks = fetch_yahoo_quote(nifty50)
+    indices = fetch_nse_quote(["^NSEI", "^NSEBANK", "^INDIAVIX", "^BSESN"])
+    # Fetch Nifty 50 movers from NSE
     movers = []
-    for sym, d in stocks.items():
-        if d["prevClose"] > 0:
-            gap_pct = ((d["price"] - d["prevClose"]) / d["prevClose"]) * 100
-            vol_score = "High" if d["volume"] > 2000000 else "Medium" if d["volume"] > 500000 else "Low"
-            momentum = "Strong Bullish" if gap_pct > 2 else "Bullish" if gap_pct > 0.5 \
-                       else "Strong Bearish" if gap_pct < -2 else "Bearish" if gap_pct < -0.5 \
-                       else "Neutral"
-            movers.append({
-                "symbol":   sym.replace(".NS", ""),
-                "price":    round(d["price"], 2),
-                "change":   round(d["change"], 2),
-                "gap_pct":  round(gap_pct, 2),
-                "volume":   d["volume"],
-                "vol_score":vol_score,
-                "high":     round(d["high"], 2),
-                "low":      round(d["low"], 2),
-                "momentum": momentum,
-                "score":    round(min(10, max(-10, gap_pct * 2 + (1 if d["volume"] > 1000000 else 0))), 1),
-            })
-    movers.sort(key=lambda x: abs(x["gap_pct"]), reverse=True)
+    try:
+        headers2 = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Accept": "*/*", "Referer": "https://www.nseindia.com/",
+        }
+        s2 = requests.Session()
+        s2.get("https://www.nseindia.com", headers=headers2, timeout=6)
+        r2 = s2.get("https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050", headers=headers2, timeout=6)
+        if r2.ok:
+            for item in r2.json().get("data", [])[1:]:
+                sym    = item.get("symbol","")
+                ltp    = item.get("lastPrice", 0)
+                prev   = item.get("previousClose", 0)
+                chg    = item.get("change", 0)
+                chgp   = item.get("pChange", 0)
+                vol    = item.get("totalTradedVolume", 0)
+                high   = item.get("dayHigh", ltp)
+                low    = item.get("dayLow", ltp)
+                vol_score = "High" if vol > 2000000 else "Medium" if vol > 500000 else "Low"
+                momentum = "Strong Bullish" if chgp > 2 else "Bullish" if chgp > 0.5                            else "Strong Bearish" if chgp < -2 else "Bearish" if chgp < -0.5                            else "Neutral"
+                movers.append({
+                    "symbol": sym, "price": round(ltp,2), "change": round(chg,2),
+                    "gap_pct": round(chgp,2), "volume": vol, "vol_score": vol_score,
+                    "high": round(high,2), "low": round(low,2), "momentum": momentum,
+                    "score": round(min(10, max(-10, chgp*2 + (1 if vol>1000000 else 0))),1),
+                })
+        movers.sort(key=lambda x: abs(x["gap_pct"]), reverse=True)
+    except Exception as e:
+        print(f"Movers error: {e}")
 
     nifty  = indices.get("^NSEI", {})
     bank   = indices.get("^NSEBANK", {})
@@ -319,7 +358,8 @@ def api_risk():
 def api_data():
     if not session.get("auth"): return jsonify({"error": "unauthorized"}), 401
     all_trades  = load_json(TRADES_FILE, [])
-    watchlist   = load_json(WATCHLIST_FILE, [])
+    watchlist   = [s.split(":")[-1] for s in load_json(WATCHLIST_FILE, [])]
+    # Strip exchange prefix e.g. "NSE:RELIANCE" → "RELIANCE"
     open_pos    = load_json(POSITIONS_FILE, [])
     today       = datetime.now().strftime("%Y-%m-%d")
     closed      = [t for t in all_trades if t.get("exit", 0) > 0 and t.get("pnl") is not None]
@@ -992,7 +1032,7 @@ function doLogin(){
   fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,pass:p})})
     .then(r=>r.json()).then(d=>{if(d.ok)showApp();else document.getElementById('lerr').textContent='Invalid credentials';});
 }
-fetch('/api/check').then(r=>r.json()).then(d=>{if(d.ok)showApp();});
+fetch('/api/check',{credentials:'include'}).then(r=>r.json()).then(d=>{if(d.ok)showApp();});
 
 function showApp(){
   document.getElementById('loginWrap').style.display='none';
@@ -1057,7 +1097,7 @@ return `<div class="${cls}">${m.symbol}<br>${m.change.toFixed(2)}%</div>`;
 }).join("");
 }
 function refresh(){
-  fetch('/api/data').then(r=>r.json()).then(d=>{
+  fetch('/api/data',{credentials:'include'}).then(r=>r.json()).then(d=>{
     D=d; updateDashboard(); renderTrades(); updatePositions();
 renderHeatmap(d);
 if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].data.push(d.pnl||0);if(headerChart.data.labels.length>40){headerChart.data.labels.shift();headerChart.data.datasets[0].data.shift();}headerChart.update();}
@@ -1180,7 +1220,7 @@ function updatePositions(){
 
 // SYSTEM HEALTH
 function loadHealth(){
-  fetch('/api/health').then(r=>r.json()).then(d=>{
+  fetch('/api/health',{credentials:'include'}).then(r=>r.json()).then(d=>{
     document.getElementById('h-ts').textContent=d.timestamp;
     const svc=d.services||{};
     const svcNames={'trading-agent':'Trading Agent','trading-dashboard':'Dashboard','token-server':'Token Server','nginx':'Nginx Proxy'};
@@ -1211,7 +1251,7 @@ function loadHealth(){
 function updateTicker(data){const i=data.indices||{};const t=['NIFTY '+(i.nifty?.price||'--')+' ('+(i.nifty?.change||0)+'%)','BANKNIFTY '+(i.banknifty?.price||'--')+' ('+(i.banknifty?.change||0)+'%)','VIX '+(i.vix?.price||'--')+' ('+(i.vix?.change||0)+'%)','SENSEX '+(i.sensex?.price||'--')+' ('+(i.sensex?.change||0)+'%)'];document.getElementById('ticker').textContent='  •  '+t.join('  •  ')+'  •  ';}
 function loadPremarket(){
   document.getElementById('pm-movers').innerHTML='<div class="empty">Fetching live data...</div>';
-  fetch('/api/premarket').then(r=>r.json()).then(d=>{
+  fetch('/api/premarket',{credentials:'include'}).then(r=>r.json()).then(d=>{
     const idx=d.indices||{};
     function setIdx(id,chgId,data){
       if(!data){return;}
@@ -1233,14 +1273,29 @@ function loadPremarket(){
     document.getElementById('pm-gapdowns').innerHTML=moverTable(d.gap_downs);
     const movers=d.movers||[];
     if(!movers.length){document.getElementById('pm-movers').innerHTML='<div class="empty">No data available — market may be closed</div>';return;}
+    const mRows = movers.map(m=>{
+      const gc=m.change>=0?'var(--green)':'var(--red)';
+      const pc=m.gap_pct>=0?'var(--green)':'var(--red)';
+      const mt=m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral';
+      const st=m.score>=5?'tag-ok':m.score<=-5?'tag-fail':'tag-warn';
+      return '<tr><td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td>'
+        +'<td>\u20b9'+m.price+'</td>'
+        +'<td style="color:'+gc+';">'+(m.change>=0?'+':'')+m.change.toFixed(2)+'</td>'
+        +'<td style="color:'+pc+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td>'
+        +'<td class="c-muted">\u20b9'+m.high+'</td>'
+        +'<td class="c-muted">\u20b9'+m.low+'</td>'
+        +'<td class="c-muted">'+m.vol_score+'</td>'
+        +'<td><span class="tag '+mt+'">'+m.momentum+'</span></td>'
+        +'<td><span class="tag '+st+'">'+m.score+'/10</span></td></tr>';
+    });
     document.getElementById('pm-movers').innerHTML='<table><thead><tr><th>Symbol</th><th>Price</th><th>Change</th><th>Gap%</th><th>High</th><th>Low</th><th>Volume</th><th>Momentum</th><th>Score</th></tr></thead><tbody>'+
-      movers.map(m=>''+(t.pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td><td>₹'+m.price+'</td><td style="color:'+(m.change>=0?'var(--green)':'var(--red)')+';">'+(m.change>=0?'+':'')+m.change.toFixed(2)+'</td><td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td><td class="c-muted">₹'+m.high+'</td><td class="c-muted">₹'+m.low+'</td><td class="c-muted">'+m.vol_score+'</td><td><span class="tag '+(m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral')+'">'+m.momentum+'</span></td><td><span class="tag '+(m.score>=5?'tag-ok':m.score<=-5?'tag-fail':'tag-warn')+'">'+m.score+'/10</span></td></tr>').join('')+'</tbody></table>';
+      movers.map(m=>'<tr><td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td><td>₹'+m.price+'</td><td style="color:'+(m.change>=0?'var(--green)':'var(--red)')+';">'+(m.change>=0?'+':'')+m.change.toFixed(2)+'</td><td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td><td class="c-muted">₹'+m.high+'</td><td class="c-muted">₹'+m.low+'</td><td class="c-muted">'+m.vol_score+'</td><td><span class="tag '+(m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral')+'">'+m.momentum+'</span></td><td><span class="tag '+(m.score>=5?'tag-ok':m.score<=-5?'tag-fail':'tag-warn')+'">'+m.score+'/10</span></td></tr>').join('')+'</tbody></table>';
   }).catch(()=>{document.getElementById('pm-movers').innerHTML='<div class="empty">Failed to fetch — check internet connection</div>';});
 }
 
 // STRATEGIES
 function loadStrategies(){
-  fetch('/api/strategies').then(r=>r.json()).then(d=>{
+  fetch('/api/strategies',{credentials:'include'}).then(r=>r.json()).then(d=>{
     const strats=d.strategies||[];
     document.getElementById('st-state').textContent=d.agent_state||'NORMAL';
     const sc={NORMAL:'var(--purple)',SELECTIVE:'var(--amber)',HALTED:'var(--red)'};
@@ -1266,7 +1321,7 @@ function loadStrategies(){
 
 // RISK
 function loadRisk(){
-  fetch('/api/risk').then(r=>r.json()).then(d=>{
+  fetch('/api/risk',{credentials:'include'}).then(r=>r.json()).then(d=>{
     const luEl=document.getElementById('r-lossused');
     luEl.textContent='₹'+d.loss_used.toFixed(2); luEl.style.color=d.loss_used>400?'var(--red)':'var(--amber)';
     document.getElementById('r-lossrem').textContent='₹'+d.loss_remaining.toFixed(2)+' remaining';
