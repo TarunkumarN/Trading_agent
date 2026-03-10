@@ -749,33 +749,66 @@ def seed_strategies():
 
 
 def seed_sample_data():
-    """Seed sample trade data for dashboard demo."""
+    """Seed rich sample trade data for dashboard demo."""
     if col_trades.count_documents({}) > 0:
         return
-    today = get_ist_now().strftime("%Y-%m-%d")
-    yesterday = (get_ist_now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    now = get_ist_now()
+    today = now.strftime("%Y-%m-%d")
+    d1 = (now - timedelta(days=1)).strftime("%Y-%m-%d")
+    d2 = (now - timedelta(days=2)).strftime("%Y-%m-%d")
+    d3 = (now - timedelta(days=3)).strftime("%Y-%m-%d")
+    d4 = (now - timedelta(days=4)).strftime("%Y-%m-%d")
+    d5 = (now - timedelta(days=5)).strftime("%Y-%m-%d")
+
     sample_trades = [
-        {"symbol": "RELIANCE", "action": "BUY", "qty": 3, "entry": 2450.00, "exit": 2472.50,
-         "pnl": 27.50, "gross_pnl": 67.50, "reason": "TARGET HIT", "score": 7,
-         "entry_time": "09:35:12", "exit_time": "09:48:30", "date": yesterday},
-        {"symbol": "HDFCBANK", "action": "BUY", "qty": 5, "entry": 1620.00, "exit": 1608.50,
-         "pnl": -97.50, "gross_pnl": -57.50, "reason": "STOP LOSS", "score": 6,
-         "entry_time": "10:15:45", "exit_time": "10:22:18", "date": yesterday},
-        {"symbol": "INFY", "action": "SELL", "qty": 4, "entry": 1580.00, "exit": 1565.20,
-         "pnl": 19.20, "gross_pnl": 59.20, "reason": "TARGET HIT", "score": 8,
-         "entry_time": "11:05:33", "exit_time": "11:18:05", "date": yesterday},
-        {"symbol": "TCS", "action": "BUY", "qty": 2, "entry": 3820.00, "exit": 3845.50,
-         "pnl": 11.00, "gross_pnl": 51.00, "reason": "TIME STOP (15 min)", "score": 7,
-         "entry_time": "13:20:10", "exit_time": "13:35:10", "date": today},
-        {"symbol": "ICICIBANK", "action": "BUY", "qty": 8, "entry": 1085.00, "exit": 1092.75,
-         "pnl": 22.00, "gross_pnl": 62.00, "reason": "TARGET HIT", "score": 9,
-         "entry_time": "14:10:22", "exit_time": "14:25:15", "date": today},
+        # Day -5
+        {"symbol": "RELIANCE", "action": "BUY", "qty": 4, "entry": 2425.00, "exit": 2448.50, "pnl": 54.00, "gross_pnl": 94.00, "reason": "TARGET HIT", "score": 8, "entry_time": "09:32:10", "exit_time": "09:45:22", "date": d5, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "TCS", "action": "BUY", "qty": 2, "entry": 3790.00, "exit": 3778.00, "pnl": -64.00, "gross_pnl": -24.00, "reason": "STOP LOSS", "score": 6, "entry_time": "10:12:30", "exit_time": "10:20:45", "date": d5, "strategy": "VWAP + Volume"},
+        {"symbol": "INFY", "action": "SELL", "qty": 5, "entry": 1595.00, "exit": 1580.20, "pnl": 34.00, "gross_pnl": 74.00, "reason": "TARGET HIT", "score": 7, "entry_time": "11:20:15", "exit_time": "11:35:08", "date": d5, "strategy": "RSI + Bollinger Bands"},
+        # Day -4
+        {"symbol": "HDFCBANK", "action": "BUY", "qty": 6, "entry": 1615.00, "exit": 1632.50, "pnl": 65.00, "gross_pnl": 105.00, "reason": "TARGET HIT", "score": 9, "entry_time": "09:35:18", "exit_time": "09:48:55", "date": d4, "strategy": "Opening Range Breakout"},
+        {"symbol": "BAJFINANCE", "action": "BUY", "qty": 1, "entry": 6850.00, "exit": 6820.00, "pnl": -70.00, "gross_pnl": -30.00, "reason": "STOP LOSS", "score": 6, "entry_time": "10:30:22", "exit_time": "10:38:12", "date": d4, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "SBIN", "action": "BUY", "qty": 10, "entry": 780.00, "exit": 788.50, "pnl": 45.00, "gross_pnl": 85.00, "reason": "TARGET HIT", "score": 8, "entry_time": "13:15:30", "exit_time": "13:28:45", "date": d4, "strategy": "VWAP + Volume"},
+        {"symbol": "WIPRO", "action": "SELL", "qty": 15, "entry": 452.00, "exit": 448.50, "pnl": 12.50, "gross_pnl": 52.50, "reason": "TIME STOP (15 min)", "score": 7, "entry_time": "14:05:10", "exit_time": "14:20:10", "date": d4, "strategy": "RSI + Bollinger Bands"},
+        # Day -3
+        {"symbol": "ICICIBANK", "action": "BUY", "qty": 8, "entry": 1078.00, "exit": 1092.00, "pnl": 72.00, "gross_pnl": 112.00, "reason": "TARGET HIT", "score": 9, "entry_time": "09:38:45", "exit_time": "09:52:30", "date": d3, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "KOTAKBANK", "action": "SELL", "qty": 4, "entry": 1820.00, "exit": 1835.00, "pnl": -100.00, "gross_pnl": -60.00, "reason": "STOP LOSS", "score": 6, "entry_time": "11:10:20", "exit_time": "11:18:35", "date": d3, "strategy": "VWAP + Volume"},
+        {"symbol": "LT", "action": "BUY", "qty": 3, "entry": 3420.00, "exit": 3452.00, "pnl": 56.00, "gross_pnl": 96.00, "reason": "TARGET HIT", "score": 8, "entry_time": "13:40:55", "exit_time": "13:55:10", "date": d3, "strategy": "Opening Range Breakout"},
+        # Day -2
+        {"symbol": "RELIANCE", "action": "BUY", "qty": 3, "entry": 2450.00, "exit": 2472.50, "pnl": 27.50, "gross_pnl": 67.50, "reason": "TARGET HIT", "score": 7, "entry_time": "09:35:12", "exit_time": "09:48:30", "date": d2, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "HDFCBANK", "action": "BUY", "qty": 5, "entry": 1620.00, "exit": 1608.50, "pnl": -97.50, "gross_pnl": -57.50, "reason": "STOP LOSS", "score": 6, "entry_time": "10:15:45", "exit_time": "10:22:18", "date": d2, "strategy": "RSI + Bollinger Bands"},
+        {"symbol": "INFY", "action": "SELL", "qty": 4, "entry": 1580.00, "exit": 1565.20, "pnl": 19.20, "gross_pnl": 59.20, "reason": "TARGET HIT", "score": 8, "entry_time": "11:05:33", "exit_time": "11:18:05", "date": d2, "strategy": "VWAP + Volume"},
+        # Day -1
+        {"symbol": "AXISBANK", "action": "BUY", "qty": 7, "entry": 1120.00, "exit": 1135.50, "pnl": 68.50, "gross_pnl": 108.50, "reason": "TARGET HIT", "score": 9, "entry_time": "09:40:18", "exit_time": "09:55:42", "date": d1, "strategy": "Opening Range Breakout"},
+        {"symbol": "SUNPHARMA", "action": "SELL", "qty": 5, "entry": 1680.00, "exit": 1695.00, "pnl": -115.00, "gross_pnl": -75.00, "reason": "STOP LOSS", "score": 6, "entry_time": "10:25:30", "exit_time": "10:33:15", "date": d1, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "MARUTI", "action": "BUY", "qty": 1, "entry": 12200.00, "exit": 12345.00, "pnl": 105.00, "gross_pnl": 145.00, "reason": "TARGET HIT", "score": 8, "entry_time": "11:50:22", "exit_time": "12:05:38", "date": d1, "strategy": "VWAP + Volume"},
+        {"symbol": "TITAN", "action": "BUY", "qty": 2, "entry": 3580.00, "exit": 3610.00, "pnl": 20.00, "gross_pnl": 60.00, "reason": "TIME STOP (15 min)", "score": 7, "entry_time": "14:12:08", "exit_time": "14:27:08", "date": d1, "strategy": "RSI + Bollinger Bands"},
+        # Today
+        {"symbol": "TCS", "action": "BUY", "qty": 2, "entry": 3820.00, "exit": 3845.50, "pnl": 11.00, "gross_pnl": 51.00, "reason": "TIME STOP (15 min)", "score": 7, "entry_time": "09:32:10", "exit_time": "09:47:10", "date": today, "strategy": "EMA 9/21 Crossover"},
+        {"symbol": "ICICIBANK", "action": "BUY", "qty": 8, "entry": 1085.00, "exit": 1092.75, "pnl": 22.00, "gross_pnl": 62.00, "reason": "TARGET HIT", "score": 9, "entry_time": "10:10:22", "exit_time": "10:25:15", "date": today, "strategy": "Opening Range Breakout"},
+        {"symbol": "RELIANCE", "action": "BUY", "qty": 4, "entry": 2460.00, "exit": 2478.00, "pnl": 32.00, "gross_pnl": 72.00, "reason": "TARGET HIT", "score": 8, "entry_time": "11:22:45", "exit_time": "11:38:20", "date": today, "strategy": "VWAP + Volume"},
+        {"symbol": "HDFCBANK", "action": "SELL", "qty": 5, "entry": 1640.00, "exit": 1648.00, "pnl": -80.00, "gross_pnl": -40.00, "reason": "STOP LOSS", "score": 6, "entry_time": "13:05:30", "exit_time": "13:12:18", "date": today, "strategy": "RSI + Bollinger Bands"},
     ]
     for t in sample_trades:
         t["created_at"] = datetime.now(timezone.utc).isoformat()
         t["sl_phase"] = "INITIAL"
+        if "strategy" not in t:
+            t["strategy"] = "MiniMax Scalper"
     col_trades.insert_many(sample_trades)
-    logger.info("Seeded sample trade data")
+
+    # Seed AI signals
+    if col_signals.count_documents({}) == 0:
+        for t in sample_trades[:8]:
+            col_signals.insert_one({
+                "symbol": t["symbol"], "score": t["score"], "action": t["action"],
+                "rsi": 45 + t["score"] * 2.5 if t["action"] == "BUY" else 55 - t["score"] * 2.5,
+                "reasons": [f"EMA crossover: {'Bullish' if t['action'] == 'BUY' else 'Bearish'}",
+                            f"VWAP: {'Above' if t['action'] == 'BUY' else 'Below'}",
+                            f"Volume: {'Spike' if t['score'] >= 8 else 'Normal'}"],
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
+
+    logger.info("Seeded rich sample trade data")
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -799,6 +832,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Register dashboard route modules
+from dashboard.api_server import register_dashboard_routes
+register_dashboard_routes(app)
 
 
 # ═══════════════════════════════════════════════════════════════════

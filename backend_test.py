@@ -222,19 +222,220 @@ class TradingAgentAPITester:
         else:
             self.log_test("F&O Calculator endpoint", False, "Failed to calculate F&O", response)
     
-    def test_premarket_endpoint(self):
-        """Test GET /api/premarket returns indices and movers data"""
-        success, response = self.make_request('GET', '/api/premarket')
+    def test_portfolio_endpoint(self):
+        """Test GET /api/portfolio returns initial_capital, current_equity, equity_curve, daily_pnl_chart, win_rate, profit_factor, max_drawdown"""
+        success, response = self.make_request('GET', '/api/portfolio')
         
         if success:
-            indices = response.get("indices", {})
-            movers = response.get("movers", [])
+            required_fields = ["initial_capital", "current_equity", "equity_curve", "daily_pnl_chart", "win_rate", "profit_factor", "max_drawdown"]
+            missing_fields = [f for f in required_fields if f not in response]
             
-            # This endpoint may have limited data due to NSE API restrictions
-            self.log_test("Premarket endpoint", True, 
-                         f"Indices data: {len(indices)} indices, {len(movers)} movers (NSE data may be limited)")
+            if not missing_fields:
+                self.log_test("Portfolio endpoint", True, 
+                             f"Portfolio: ₹{response.get('current_equity')}, Win Rate: {response.get('win_rate')}%")
+            else:
+                self.log_test("Portfolio endpoint", False, 
+                             f"Missing portfolio fields: {missing_fields}", response)
         else:
-            self.log_test("Premarket endpoint", False, "Failed to fetch premarket data", response)
+            self.log_test("Portfolio endpoint", False, "Failed to fetch portfolio data", response)
+    
+    def test_open_positions_endpoint(self):
+        """Test GET /api/open-positions returns positions array with strategy and unrealised_pnl"""
+        success, response = self.make_request('GET', '/api/open-positions')
+        
+        if success and "positions" in response:
+            positions = response.get("positions", [])
+            self.log_test("Open positions endpoint", True, 
+                         f"Found {len(positions)} open positions")
+            
+            if positions:
+                pos = positions[0]
+                required_fields = ["strategy", "unrealised_pnl"]
+                missing_fields = [f for f in required_fields if f not in pos]
+                if missing_fields:
+                    self.log_test("Open positions structure", False, 
+                                 f"Missing position fields: {missing_fields}", pos)
+                else:
+                    self.log_test("Open positions structure", True, "Position structure valid")
+        else:
+            self.log_test("Open positions endpoint", False, 
+                         "Missing 'positions' in response", response)
+    
+    def test_trades_endpoint(self):
+        """Test GET /api/trades returns trades grouped by_date with total count"""
+        success, response = self.make_request('GET', '/api/trades')
+        
+        if success:
+            trades = response.get("trades", [])
+            by_date = response.get("by_date", [])
+            total = response.get("total", 0)
+            
+            self.log_test("Trades endpoint", True, 
+                         f"Found {len(trades)} trades, grouped by {len(by_date)} dates, total: {total}")
+        else:
+            self.log_test("Trades endpoint", False, "Failed to fetch trades data", response)
+    
+    def test_trade_detail_endpoint(self):
+        """Test GET /api/trades/{symbol} returns trade detail with ai_validation, market_regime, prediction_probability"""
+        # First try to get available trades
+        trades_success, trades_response = self.make_request('GET', '/api/trades')
+        if trades_success and trades_response.get("trades"):
+            first_trade = trades_response["trades"][0]
+            trade_symbol = first_trade['symbol']
+            
+            success, response = self.make_request('GET', f'/api/trades/{trade_symbol}')
+            
+            if success:
+                required_fields = ["ai_validation", "market_regime", "prediction_probability"]
+                missing_fields = [f for f in required_fields if f not in response]
+                
+                if not missing_fields:
+                    self.log_test("Trade detail endpoint", True, 
+                                 f"Trade detail for {trade_symbol}: Market regime: {response.get('market_regime')}, Confidence: {response.get('ai_validation', {}).get('confidence', 'N/A')}%")
+                else:
+                    self.log_test("Trade detail endpoint", False, 
+                                 f"Missing trade detail fields: {missing_fields}", response)
+            else:
+                self.log_test("Trade detail endpoint", False, 
+                             f"Failed to fetch trade detail for {trade_symbol}", response)
+        else:
+            self.log_test("Trade detail endpoint", False, "No trades available to test", trades_response)
+    
+    def test_strategies_performance_endpoint(self):
+        """Test GET /api/strategies/performance returns 4 strategies with metrics"""
+        success, response = self.make_request('GET', '/api/strategies/performance')
+        
+        if success and "strategies" in response:
+            strategies = response.get("strategies", [])
+            
+            if len(strategies) >= 4:
+                # Check first strategy has required metrics
+                if strategies:
+                    strat = strategies[0]
+                    metrics = strat.get("metrics", {})
+                    required_metrics = ["total_trades", "win_rate", "total_pnl", "avg_pnl", "max_drawdown"]
+                    missing_metrics = [m for m in required_metrics if m not in metrics]
+                    
+                    if not missing_metrics:
+                        self.log_test("Strategy performance endpoint", True, 
+                                     f"Found {len(strategies)} strategies with complete metrics")
+                    else:
+                        self.log_test("Strategy performance endpoint", False, 
+                                     f"Missing strategy metrics: {missing_metrics}", metrics)
+                else:
+                    self.log_test("Strategy performance endpoint", False, "No strategies found", response)
+            else:
+                self.log_test("Strategy performance endpoint", False, 
+                             f"Expected 4+ strategies, found {len(strategies)}", response)
+        else:
+            self.log_test("Strategy performance endpoint", False, 
+                         "Missing 'strategies' in response", response)
+    
+    def test_market_premarket_endpoint(self):
+        """Test GET /api/market/premarket returns indices, gap_ups, gap_downs, volume_leaders, ai_recommendation"""
+        success, response = self.make_request('GET', '/api/market/premarket')
+        
+        if success:
+            required_fields = ["indices", "gap_ups", "gap_downs", "volume_leaders", "ai_recommendation"]
+            missing_fields = [f for f in required_fields if f not in response]
+            
+            if not missing_fields:
+                indices = response.get("indices", {})
+                gap_ups = response.get("gap_ups", [])
+                self.log_test("Market premarket endpoint", True, 
+                             f"Premarket data: {len(indices)} indices, {len(gap_ups)} gap ups")
+            else:
+                self.log_test("Market premarket endpoint", False, 
+                             f"Missing premarket fields: {missing_fields}", response)
+        else:
+            self.log_test("Market premarket endpoint", False, "Failed to fetch premarket data", response)
+    
+    def test_market_postmarket_endpoint(self):
+        """Test GET /api/market/postmarket returns trading_summary, market_summary, best_performers, worst_performers"""
+        success, response = self.make_request('GET', '/api/market/postmarket')
+        
+        if success:
+            required_fields = ["trading_summary", "market_summary", "best_performers", "worst_performers"]
+            missing_fields = [f for f in required_fields if f not in response]
+            
+            if not missing_fields:
+                trading_summary = response.get("trading_summary", {})
+                self.log_test("Market postmarket endpoint", True, 
+                             f"Postmarket: {trading_summary.get('total_trades', 0)} trades today")
+            else:
+                self.log_test("Market postmarket endpoint", False, 
+                             f"Missing postmarket fields: {missing_fields}", response)
+        else:
+            self.log_test("Market postmarket endpoint", False, "Failed to fetch postmarket data", response)
+    
+    def test_market_gainers_endpoint(self):
+        """Test GET /api/market/gainers returns gainers array"""
+        success, response = self.make_request('GET', '/api/market/gainers')
+        
+        if success and "gainers" in response:
+            gainers = response.get("gainers", [])
+            self.log_test("Market gainers endpoint", True, f"Found {len(gainers)} gainers")
+        else:
+            self.log_test("Market gainers endpoint", False, "Missing 'gainers' in response", response)
+    
+    def test_market_losers_endpoint(self):
+        """Test GET /api/market/losers returns losers array"""
+        success, response = self.make_request('GET', '/api/market/losers')
+        
+        if success and "losers" in response:
+            losers = response.get("losers", [])
+            self.log_test("Market losers endpoint", True, f"Found {len(losers)} losers")
+        else:
+            self.log_test("Market losers endpoint", False, "Missing 'losers' in response", response)
+    
+    def test_ai_decisions_endpoint(self):
+        """Test GET /api/ai-decisions returns decisions with reasoning chain, confidence, ai_accuracy"""
+        success, response = self.make_request('GET', '/api/ai-decisions')
+        
+        if success:
+            required_fields = ["decisions", "ai_accuracy"]
+            missing_fields = [f for f in required_fields if f not in response]
+            
+            if not missing_fields:
+                decisions = response.get("decisions", [])
+                ai_accuracy = response.get("ai_accuracy", 0)
+                
+                if decisions:
+                    decision = decisions[0]
+                    required_decision_fields = ["reasoning", "confidence"]
+                    missing_decision_fields = [f for f in required_decision_fields if f not in decision]
+                    
+                    if not missing_decision_fields:
+                        self.log_test("AI decisions endpoint", True, 
+                                     f"Found {len(decisions)} decisions, AI accuracy: {ai_accuracy}%")
+                    else:
+                        self.log_test("AI decisions endpoint", False, 
+                                     f"Missing decision fields: {missing_decision_fields}", decision)
+                else:
+                    self.log_test("AI decisions endpoint", True, 
+                                 f"No decisions yet, AI accuracy: {ai_accuracy}%")
+            else:
+                self.log_test("AI decisions endpoint", False, 
+                             f"Missing AI decisions fields: {missing_fields}", response)
+        else:
+            self.log_test("AI decisions endpoint", False, "Failed to fetch AI decisions", response)
+    
+    def test_analytics_summary_endpoint(self):
+        """Test GET /api/analytics/summary returns hour_distribution, pnl_distribution"""
+        success, response = self.make_request('GET', '/api/analytics/summary')
+        
+        if success:
+            required_fields = ["hour_distribution", "pnl_distribution"]
+            missing_fields = [f for f in required_fields if f not in response]
+            
+            if not missing_fields:
+                self.log_test("Analytics summary endpoint", True, 
+                             f"Analytics data with hour and PnL distributions")
+            else:
+                self.log_test("Analytics summary endpoint", False, 
+                             f"Missing analytics fields: {missing_fields}", response)
+        else:
+            self.log_test("Analytics summary endpoint", False, "Failed to fetch analytics summary", response)
     
     def run_all_tests(self):
         """Run all backend API tests"""
@@ -250,8 +451,8 @@ class TradingAgentAPITester:
         # Test wrong credentials
         self.test_login_wrong_credentials()
         
-        # Test all other endpoints
-        print("\n📡 Testing API Endpoints...")
+        # Test core endpoints
+        print("\n📡 Testing Core API Endpoints...")
         self.test_health_endpoint()
         self.test_dashboard_data_endpoint()
         self.test_risk_endpoint()
@@ -259,8 +460,33 @@ class TradingAgentAPITester:
         self.test_logs_endpoint()
         self.test_audit_endpoint()
         self.test_config_endpoint()
+        
+        # Test portfolio endpoints
+        print("\n💼 Testing Portfolio Endpoints...")
+        self.test_portfolio_endpoint()
+        self.test_open_positions_endpoint()
+        
+        # Test trading endpoints
+        print("\n📈 Testing Trading Endpoints...")
+        self.test_trades_endpoint()
+        self.test_trade_detail_endpoint()
+        self.test_strategies_performance_endpoint()
+        
+        # Test market data endpoints
+        print("\n📊 Testing Market Data Endpoints...")
+        self.test_market_premarket_endpoint()
+        self.test_market_postmarket_endpoint()
+        self.test_market_gainers_endpoint()
+        self.test_market_losers_endpoint()
+        
+        # Test AI and analytics endpoints
+        print("\n🤖 Testing AI & Analytics Endpoints...")
+        self.test_ai_decisions_endpoint()
+        self.test_analytics_summary_endpoint()
+        
+        # Test utility endpoints
+        print("\n🔧 Testing Utility Endpoints...")
         self.test_fo_calculate_endpoint()
-        self.test_premarket_endpoint()
         
         # Print summary
         print("\n" + "=" * 60)

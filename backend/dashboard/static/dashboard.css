@@ -1,0 +1,43 @@
+/* dashboard.css — MiniMax Trading Dashboard Custom Styles */
+
+/* Override for Chart.js dark theme */
+.chartjs-render-monitor {
+  background: transparent !important;
+}
+
+/* Dashboard-specific overrides for data density */
+.dashboard-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+/* Profit/Loss color classes */
+.profit { color: #22c55e; }
+.loss { color: #ef4444; }
+.neutral { color: #a1a1aa; }
+
+/* Responsive table helpers */
+.responsive-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Animation for live data updates */
+@keyframes flash-green {
+  0% { background: rgba(34, 197, 94, 0.15); }
+  100% { background: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background: rgba(239, 68, 68, 0.15); }
+  100% { background: transparent; }
+}
+
+.flash-positive {
+  animation: flash-green 0.5s ease;
+}
+
+.flash-negative {
+  animation: flash-red 0.5s ease;
+}
