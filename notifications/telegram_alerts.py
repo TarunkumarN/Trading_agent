@@ -27,7 +27,7 @@ def alert_startup(mode: str):
     send_telegram(
         f"🤖 <b>MiniMax Scalping Agent STARTED</b>\n"
         f"Mode: {mode.upper()}\n"
-        f"Portfolio: ₹10,000 | Daily SL: ₹500 | Target: ₹300–500"
+        f"Portfolio: ₹50,000 | Daily SL: ₹2,500 | Target: ₹1,500–2,500"
     )
 
 
@@ -74,7 +74,7 @@ def alert_trade_exit(stock: str, action: str, entry: float,
 def alert_selective_mode(daily_pnl: float):
     send_telegram(
         f"🎯 <b>SELECTIVE MODE ACTIVATED</b>\n"
-        f"Daily profit ₹{daily_pnl:.0f} reached ₹500 target.\n"
+        f"Daily profit ₹{daily_pnl:.0f} reached ₹2,500 target.\n"
         f"Now accepting score 9+ signals only.\n"
         f"Keep going — protect the gains!"
     )
@@ -83,7 +83,7 @@ def alert_selective_mode(daily_pnl: float):
 def alert_circuit_breaker(daily_pnl: float, trades: int):
     send_telegram(
         f"⛔ <b>CIRCUIT BREAKER — TRADING STOPPED</b>\n"
-        f"Daily loss limit of ₹500 reached.\n"
+        f"Daily loss limit of ₹2,500 reached.\n"
         f"Final P&L: ₹{daily_pnl:.2f} | Trades today: {trades}\n"
         f"All positions closed. Resume tomorrow."
     )
@@ -92,7 +92,7 @@ def alert_circuit_breaker(daily_pnl: float, trades: int):
 def alert_protect_mode(daily_pnl: float):
     send_telegram(
         f"🏆 <b>PROTECT MODE — GREAT DAY!</b>\n"
-        f"Daily profit ₹{daily_pnl:.0f} hit ₹800.\n"
+        f"Daily profit ₹{daily_pnl:.0f} hit ₹4,000.\n"
         f"No new trades. Locking in the exceptional day."
     )
 
