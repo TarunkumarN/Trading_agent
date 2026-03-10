@@ -1,0 +1,163 @@
+{
+  "identity": {
+    "name": "MiniMax Scalping Agent",
+    "persona": "Professional Trading Terminal (Dark Mode)",
+    "tone": "Precision, Speed, Trust, High-Contrast",
+    "aesthetic": "Bloomberg Terminal met Cyberpunk. Minimalist, Data-Dense, Dark."
+  },
+  "typography": {
+    "font_family": {
+      "sans": ["Manrope", "system-ui", "sans-serif"],
+      "mono": ["JetBrains Mono", "monospace"],
+      "display": ["Chivo", "sans-serif"]
+    },
+    "scale": {
+      "h1": "text-3xl font-bold tracking-tight",
+      "h2": "text-2xl font-semibold tracking-tight",
+      "h3": "text-xl font-medium",
+      "body": "text-sm leading-relaxed",
+      "caption": "text-xs text-muted-foreground",
+      "data": "font-mono text-sm tracking-wide"
+    }
+  },
+  "colors": {
+    "theme": "dark",
+    "palette": {
+      "background": "#09090b",
+      "foreground": "#fafafa",
+      "card": "#121212",
+      "card_foreground": "#fafafa",
+      "popover": "#121212",
+      "popover_foreground": "#fafafa",
+      "primary": "#22c55e",
+      "primary_foreground": "#052e16",
+      "secondary": "#27272a",
+      "secondary_foreground": "#fafafa",
+      "muted": "#27272a",
+      "muted_foreground": "#a1a1aa",
+      "accent": "#27272a",
+      "accent_foreground": "#fafafa",
+      "destructive": "#ef4444",
+      "destructive_foreground": "#fafafa",
+      "border": "#27272a",
+      "input": "#27272a",
+      "ring": "#22c55e",
+      "chart_1": "#22c55e",
+      "chart_2": "#ef4444",
+      "chart_3": "#3b82f6",
+      "chart_4": "#eab308",
+      "chart_5": "#a855f7"
+    },
+    "status": {
+      "success": "#22c55e",
+      "warning": "#eab308",
+      "error": "#ef4444",
+      "info": "#3b82f6"
+    }
+  },
+  "layout": {
+    "grid_system": "Bento Grid (High Density)",
+    "spacing": {
+      "container_padding": "p-4 md:p-6",
+      "element_gap": "gap-4",
+      "section_gap": "gap-6"
+    },
+    "border_radius": "rounded-sm",
+    "container_style": "border border-border/40 bg-card/50 backdrop-blur-sm"
+  },
+  "components": {
+    "buttons": {
+      "default": "h-9 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-sm font-medium transition-colors text-sm",
+      "outline": "h-9 px-4 py-2 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground rounded-sm transition-colors text-sm",
+      "ghost": "h-9 px-4 py-2 hover:bg-accent hover:text-accent-foreground rounded-sm transition-colors text-sm",
+      "destructive": "h-9 px-4 py-2 bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-sm transition-colors text-sm"
+    },
+    "cards": {
+      "base": "rounded-sm border border-border bg-card text-card-foreground shadow-sm",
+      "header": "flex flex-col space-y-1.5 p-4 border-b border-border/50",
+      "content": "p-4 pt-4",
+      "footer": "flex items-center p-4 pt-0"
+    },
+    "inputs": {
+      "base": "flex h-9 w-full rounded-sm border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "tables": {
+      "wrapper": "relative w-full overflow-auto border border-border rounded-sm",
+      "table": "w-full caption-bottom text-sm",
+      "header": "[&_tr]:border-b border-border/50",
+      "row": "border-b border-border/50 transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+      "head_cell": "h-10 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "cell": "p-4 align-middle [&:has([role=checkbox])]:pr-0 font-mono text-xs"
+    }
+  },
+  "pages": {
+    "login": {
+      "layout": "Centered Card",
+      "elements": ["Logo", "Username Input", "Password Input", "Login Button", "Remember Me"]
+    },
+    "dashboard_overview": {
+      "layout": "Grid 12 cols",
+      "sections": [
+        {"name": "PnL Summary", "col_span": "col-span-12 md:col-span-3", "type": "StatCard"},
+        {"name": "Active Trades", "col_span": "col-span-12 md:col-span-3", "type": "StatCard"},
+        {"name": "Win Rate", "col_span": "col-span-12 md:col-span-3", "type": "StatCard"},
+        {"name": "Total Portfolio", "col_span": "col-span-12 md:col-span-3", "type": "StatCard"},
+        {"name": "Live Chart", "col_span": "col-span-12 md:col-span-8 row-span-2", "type": "Chart"},
+        {"name": "Recent Trades", "col_span": "col-span-12 md:col-span-4 row-span-2", "type": "List"}
+      ]
+    },
+    "system_health": {
+      "layout": "Grid 4 cols",
+      "sections": [
+        {"name": "Service Status", "col_span": "col-span-2", "type": "StatusList"},
+        {"name": "WebSocket Connection", "col_span": "col-span-2", "type": "StatusIndicator"},
+        {"name": "System Logs", "col_span": "col-span-4", "type": "LogViewer"}
+      ]
+    },
+    "pre_market_scanner": {
+      "layout": "Grid 1 cols",
+      "sections": [
+        {"name": "NSE Indices", "type": "Ticker"},
+        {"name": "Top Gainers/Losers", "type": "Table"},
+        {"name": "Gap Analysis", "type": "Chart"}
+      ]
+    }
+  },
+  "assets": {
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width: 1.5px; size: 16px"
+    },
+    "images": []
+  },
+  "motion": {
+    "transitions": "transition-all duration-200 ease-in-out",
+    "animations": {
+      "fade_in": "animate-in fade-in duration-300",
+      "slide_in": "animate-in slide-in-from-bottom-2 duration-300"
+    }
+  },
+  "tech_stack": {
+    "frontend": "React (Create React App), Tailwind CSS, Recharts, Lucide React",
+    "backend": "FastAPI (Python)",
+    "data_fetching": "Fetch API / Axios (Polled every 15s)"
+  },
+  "installation_instructions": [
+    "npm install -D tailwindcss postcss autoprefixer",
+    "npx tailwindcss init -p",
+    "npm install clsx tailwind-merge class-variance-authority lucide-react recharts date-fns"
+  ],
+  "universal_guidelines": [
+    "Use dark mode ONLY. Do not implement light mode toggle.",
+    "Use 'manrope' for UI text and 'jetbrains mono' for all numbers, prices, and tickers.",
+    "Ensure all positive values are Green (#22c55e) and negative values are Red (#ef4444).",
+    "Use dense layouts. Avoid excessive padding in data tables.",
+    "All interactive elements must have hover states (bg-accent/50).",
+    "Use Recharts for all visualizations. Style them to match the dark theme (no white backgrounds).",
+    "Implement 'Retro-Futurism' touches: 1px borders, subtle glows on active elements.",
+    "Data polling interval: 15 seconds.",
+    "Create .js or .jsx files. Remove all Type annotations if copying from TS sources.",
+    "Use 'sonner' for notifications (Toast).",
+    "Add 'data-testid' to all interactive elements."
+  ]
+}
