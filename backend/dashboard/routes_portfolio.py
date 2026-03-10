@@ -10,7 +10,7 @@ router = APIRouter(prefix="/api", tags=["portfolio"])
 
 MONGO_URL = os.environ.get("MONGO_URL")
 DB_NAME = os.environ.get("DB_NAME")
-PORTFOLIO_VALUE = float(os.getenv("PORTFOLIO_VALUE", "10000"))
+PORTFOLIO_VALUE = float(os.getenv("PORTFOLIO_VALUE", "50000"))
 client = MongoClient(MONGO_URL)
 db = client[DB_NAME]
 
