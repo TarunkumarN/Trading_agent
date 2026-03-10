@@ -9,8 +9,8 @@ Complete professional dashboard with:
 - F&O Calculator
 - P&L History
 """
-from flask import Flask
-from data.database import db, jsonify, request, session
+from flask import Flask, request, session, jsonify, redirect, url_for
+
 from pathlib import Path
 import json, os, subprocess, requests
 from datetime import datetime, timedelta
@@ -28,7 +28,7 @@ WATCHLIST_FILE = BASE / "logs/watchlist.json"
 POSITIONS_FILE = BASE / "logs/positions.json"
 DASHBOARD_USER = os.getenv("DASHBOARD_USER", "admin")
 DASHBOARD_PASS = os.getenv("DASHBOARD_PASS", "minimax123")
-PORTFOLIO_SIZE = float(os.getenv("PORTFOLIO_SIZE", "10000"))
+PORTFOLIO_SIZE = float(os.getenv("PORTFOLIO_SIZE", "50000"))
 DAILY_LOSS_LIMIT = float(os.getenv("DAILY_LOSS_LIMIT", "800"))
 MAX_DAILY_TARGET = float(os.getenv("MAX_DAILY_TARGET", "500"))
 
