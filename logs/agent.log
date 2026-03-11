@@ -8994,3 +8994,156 @@
 2026-03-11 11:33:32,275 [INFO] main: BHARTIARTL: 6 candles built
 2026-03-11 11:33:32,275 [INFO] main: KOTAKBANK: 6 candles built
 2026-03-11 11:33:32,275 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:34:32 IST)" executed successfully
+2026-03-11 11:34:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:35:32 IST)" (scheduled at 2026-03-11 11:34:32.238624+05:30)
+2026-03-11 11:34:32,244 [INFO] main: RELIANCE: 7 candles built
+2026-03-11 11:34:32,244 [INFO] main: HDFCBANK: 7 candles built
+2026-03-11 11:34:32,244 [INFO] main: ICICIBANK: 7 candles built
+2026-03-11 11:34:32,244 [INFO] main: INFY: 7 candles built
+2026-03-11 11:34:32,245 [INFO] main: TCS: 7 candles built
+2026-03-11 11:34:32,245 [INFO] main: BHARTIARTL: 7 candles built
+2026-03-11 11:34:32,245 [INFO] main: KOTAKBANK: 7 candles built
+2026-03-11 11:34:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:35:32 IST)" executed successfully
+2026-03-11 11:35:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:36:32 IST)" (scheduled at 2026-03-11 11:35:32.238624+05:30)
+2026-03-11 11:35:32,244 [INFO] main: RELIANCE: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: HDFCBANK: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: ICICIBANK: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: INFY: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: TCS: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: BHARTIARTL: 8 candles built
+2026-03-11 11:35:32,244 [INFO] main: KOTAKBANK: 8 candles built
+2026-03-11 11:35:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:36:32 IST)" executed successfully
+2026-03-11 11:36:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:37:32 IST)" (scheduled at 2026-03-11 11:36:32.238624+05:30)
+2026-03-11 11:36:32,245 [INFO] main: RELIANCE: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: HDFCBANK: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: ICICIBANK: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: INFY: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: TCS: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: BHARTIARTL: 9 candles built
+2026-03-11 11:36:32,245 [INFO] main: KOTAKBANK: 9 candles built
+2026-03-11 11:36:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:37:32 IST)" executed successfully
+2026-03-11 11:37:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:38:32 IST)" (scheduled at 2026-03-11 11:37:32.238624+05:30)
+2026-03-11 11:37:32,245 [INFO] main: RELIANCE: 10 candles built
+2026-03-11 11:37:32,245 [INFO] main: HDFCBANK: 10 candles built
+2026-03-11 11:37:32,245 [INFO] main: ICICIBANK: 10 candles built
+2026-03-11 11:37:32,245 [INFO] main: INFY: 10 candles built
+2026-03-11 11:37:32,245 [INFO] main: TCS: 10 candles built
+2026-03-11 11:37:32,246 [INFO] main: BHARTIARTL: 10 candles built
+2026-03-11 11:37:32,246 [INFO] main: KOTAKBANK: 10 candles built
+2026-03-11 11:37:32,246 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:38:32 IST)" executed successfully
+2026-03-11 11:38:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:39:32 IST)" (scheduled at 2026-03-11 11:38:32.238624+05:30)
+2026-03-11 11:38:32,244 [INFO] main: RELIANCE: 11 candles built
+2026-03-11 11:38:32,244 [INFO] main: HDFCBANK: 11 candles built
+2026-03-11 11:38:32,245 [INFO] main: ICICIBANK: 11 candles built
+2026-03-11 11:38:32,245 [INFO] main: INFY: 11 candles built
+2026-03-11 11:38:32,245 [INFO] main: TCS: 11 candles built
+2026-03-11 11:38:32,245 [INFO] main: BHARTIARTL: 11 candles built
+2026-03-11 11:38:32,245 [INFO] main: KOTAKBANK: 11 candles built
+2026-03-11 11:38:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:39:32 IST)" executed successfully
+2026-03-11 11:39:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:40:32 IST)" (scheduled at 2026-03-11 11:39:32.238624+05:30)
+2026-03-11 11:39:32,245 [INFO] main: RELIANCE: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: HDFCBANK: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: ICICIBANK: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: INFY: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: TCS: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: BHARTIARTL: 12 candles built
+2026-03-11 11:39:32,245 [INFO] main: KOTAKBANK: 12 candles built
+2026-03-11 11:39:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:40:32 IST)" executed successfully
+2026-03-11 11:40:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:41:32 IST)" (scheduled at 2026-03-11 11:40:32.238624+05:30)
+2026-03-11 11:40:32,246 [INFO] main: RELIANCE: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: HDFCBANK: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: ICICIBANK: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: INFY: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: TCS: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: BHARTIARTL: 13 candles built
+2026-03-11 11:40:32,247 [INFO] main: KOTAKBANK: 13 candles built
+2026-03-11 11:40:32,247 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:41:32 IST)" executed successfully
+2026-03-11 11:41:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:42:32 IST)" (scheduled at 2026-03-11 11:41:32.238624+05:30)
+2026-03-11 11:41:32,244 [INFO] main: RELIANCE: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: HDFCBANK: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: ICICIBANK: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: INFY: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: TCS: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: BHARTIARTL: 14 candles built
+2026-03-11 11:41:32,245 [INFO] main: KOTAKBANK: 14 candles built
+2026-03-11 11:41:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:42:32 IST)" executed successfully
+2026-03-11 11:42:32,328 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:43:32 IST)" (scheduled at 2026-03-11 11:42:32.238624+05:30)
+2026-03-11 11:42:32,335 [INFO] main: RELIANCE: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: HDFCBANK: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: ICICIBANK: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: INFY: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: TCS: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: BHARTIARTL: 15 candles built
+2026-03-11 11:42:32,336 [INFO] main: KOTAKBANK: 15 candles built
+2026-03-11 11:42:32,336 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:43:32 IST)" executed successfully
+2026-03-11 11:43:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:44:32 IST)" (scheduled at 2026-03-11 11:43:32.238624+05:30)
+2026-03-11 11:43:32,246 [INFO] main: RELIANCE: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: HDFCBANK: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: ICICIBANK: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: INFY: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: TCS: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: BHARTIARTL: 16 candles built
+2026-03-11 11:43:32,246 [INFO] main: KOTAKBANK: 16 candles built
+2026-03-11 11:43:32,246 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:44:32 IST)" executed successfully
+2026-03-11 11:44:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:45:32 IST)" (scheduled at 2026-03-11 11:44:32.238624+05:30)
+2026-03-11 11:44:32,258 [INFO] main: RELIANCE: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: HDFCBANK: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: ICICIBANK: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: INFY: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: TCS: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: BHARTIARTL: 17 candles built
+2026-03-11 11:44:32,259 [INFO] main: KOTAKBANK: 17 candles built
+2026-03-11 11:44:32,259 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:45:32 IST)" executed successfully
+2026-03-11 11:45:32,252 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:46:32 IST)" (scheduled at 2026-03-11 11:45:32.238624+05:30)
+2026-03-11 11:45:32,258 [INFO] main: RELIANCE: 18 candles built
+2026-03-11 11:45:32,258 [INFO] main: HDFCBANK: 18 candles built
+2026-03-11 11:45:32,258 [INFO] main: ICICIBANK: 18 candles built
+2026-03-11 11:45:32,259 [INFO] main: INFY: 18 candles built
+2026-03-11 11:45:32,259 [INFO] main: TCS: 18 candles built
+2026-03-11 11:45:32,259 [INFO] main: BHARTIARTL: 18 candles built
+2026-03-11 11:45:32,259 [INFO] main: KOTAKBANK: 18 candles built
+2026-03-11 11:45:32,259 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:46:32 IST)" executed successfully
+2026-03-11 11:46:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:47:32 IST)" (scheduled at 2026-03-11 11:46:32.238624+05:30)
+2026-03-11 11:46:32,244 [INFO] main: RELIANCE: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: HDFCBANK: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: ICICIBANK: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: INFY: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: TCS: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: BHARTIARTL: 19 candles built
+2026-03-11 11:46:32,245 [INFO] main: KOTAKBANK: 19 candles built
+2026-03-11 11:46:32,245 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:47:32 IST)" executed successfully
+2026-03-11 11:47:32,255 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:48:32 IST)" (scheduled at 2026-03-11 11:47:32.238624+05:30)
+2026-03-11 11:47:32,267 [INFO] main: RELIANCE: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: HDFCBANK: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: ICICIBANK: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: INFY: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: TCS: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: BHARTIARTL: 20 candles built
+2026-03-11 11:47:32,268 [INFO] main: KOTAKBANK: 20 candles built
+2026-03-11 11:47:32,268 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:48:32 IST)" executed successfully
+2026-03-11 11:48:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:49:32 IST)" (scheduled at 2026-03-11 11:48:32.238624+05:30)
+2026-03-11 11:48:32,304 [INFO] main: RELIANCE: 21 candles built
+2026-03-11 11:48:32,304 [INFO] main: HDFCBANK: 21 candles built
+2026-03-11 11:48:32,304 [INFO] main: ICICIBANK: 21 candles built
+2026-03-11 11:48:32,304 [INFO] main: INFY: 21 candles built
+2026-03-11 11:48:32,304 [INFO] main: TCS: 21 candles built
+2026-03-11 11:48:32,305 [INFO] main: BHARTIARTL: 21 candles built
+2026-03-11 11:48:32,305 [INFO] main: KOTAKBANK: 21 candles built
+2026-03-11 11:48:32,305 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:49:32 IST)" executed successfully
+2026-03-11 11:49:32,239 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:50:32 IST)" (scheduled at 2026-03-11 11:49:32.238624+05:30)
+2026-03-11 11:49:32,289 [INFO] main: RELIANCE: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: HDFCBANK: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: ICICIBANK: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: INFY: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: TCS: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: BHARTIARTL: 22 candles built
+2026-03-11 11:49:32,289 [INFO] main: KOTAKBANK: 22 candles built
+2026-03-11 11:49:32,289 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:50:32 IST)" executed successfully
+2026-03-11 11:50:32,354 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:50:32 IST)" (scheduled at 2026-03-11 11:50:32.238624+05:30)
+2026-03-11 11:50:33,238 [INFO] main: RELIANCE: 23 candles built
+2026-03-11 11:50:33,238 [INFO] main: HDFCBANK: 23 candles built
+2026-03-11 11:50:33,238 [INFO] main: ICICIBANK: 23 candles built
+2026-03-11 11:50:33,239 [INFO] main: INFY: 23 candles built
+2026-03-11 11:50:33,239 [INFO] main: TCS: 23 candles built
+2026-03-11 11:50:33,239 [INFO] main: BHARTIARTL: 23 candles built
+2026-03-11 11:50:33,239 [INFO] main: KOTAKBANK: 23 candles built
+2026-03-11 11:50:33,239 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:51:32 IST)" executed successfully

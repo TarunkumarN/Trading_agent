@@ -15,7 +15,7 @@ function LoginPage({ onLogin, theme, toggleTheme }) {
   const [loading, setLoading] = useState(false);
   const go = async () => {
     setLoading(true); setError('');
-    try { const r = await fetch(`${API}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user, pass }) }); const d = await r.json(); if (d.ok) onLogin(); else setError('Invalid credentials'); } catch { setError('Connection failed'); }
+    try { const r = await fetch(`${API}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user, pass }) }); const d = await r.json(); if (d.ok) { localStorage.setItem("mm_authed", "true"); onLogin(); } else setError('Invalid credentials'); } catch { setError('Connection failed'); }
     setLoading(false);
   };
   return (
@@ -154,7 +154,7 @@ const NAV = [
 const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', ai: 'AI Brain', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
 
 function App() {
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState(() => localStorage.getItem("mm_authed") === "true");
   const [page, setPage] = useState('dashboard');
   const [clock, setClock] = useState('');
   const [mktOpen, setMktOpen] = useState(false);
