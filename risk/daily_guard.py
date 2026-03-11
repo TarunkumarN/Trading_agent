@@ -1,98 +1,104 @@
 """
 risk/daily_guard.py
-Daily P&L circuit breaker and trading state manager.
-
-States:
-  NORMAL     → Trade freely (score >= 6)
-  SELECTIVE  → Daily profit >= Rs 500 (score >= 9 only)
-  PROTECTED  → Daily profit >= Rs 800 (no new trades)
-  HALTED     → Daily loss >= Rs 500 (no new trades, all closed)
+Daily P&L circuit breaker and portfolio state manager.
 """
 from config import (
-    DAILY_LOSS_LIMIT, DAILY_PROFIT_SELECTIVE, DAILY_PROFIT_STOP,
-    MIN_SIGNAL_SCORE, MIN_SCORE_SELECTIVE
+    DAILY_LOSS_LIMIT,
+    DAILY_PROFIT_SELECTIVE,
+    DAILY_PROFIT_STOP,
+    MAX_CONSECUTIVE_LOSSES,
+    MAX_TRADES_PER_DAY,
+    MIN_SCORE_SELECTIVE,
+    MIN_SIGNAL_SCORE,
 )
-from notifications.telegram_alerts import (
-    alert_circuit_breaker, alert_selective_mode, alert_protect_mode
-)
+from notifications.telegram_alerts import alert_circuit_breaker, alert_protect_mode, alert_selective_mode
 
 
 class DailyGuard:
-
     def __init__(self):
-        self.realised_pnl   = 0.0
+        self.realised_pnl = 0.0
         self.unrealised_pnl = 0.0
-        self.trades         = 0
-        self.wins           = 0
-        self.losses         = 0
-        self.halted         = False
-        self.selective      = False
-        self.protected      = False
+        self.trades = 0
+        self.wins = 0
+        self.losses = 0
+        self.consecutive_losses = 0
+        self.halted = False
+        self.selective = False
+        self.protected = False
 
-    # ── Call after every trade closes ────────────────────────
     def update(self, trade_pnl: float):
         self.realised_pnl += trade_pnl
-        self.trades       += 1
+        self.trades += 1
         if trade_pnl >= 0:
-            self.wins   += 1
+            self.wins += 1
+            self.consecutive_losses = 0
         else:
             self.losses += 1
+            self.consecutive_losses += 1
         self._check_thresholds()
 
     def _check_thresholds(self):
         pnl = self.realised_pnl
-
-        # Loss side — halt immediately
         if pnl <= -DAILY_LOSS_LIMIT and not self.halted:
             self.halted = True
             alert_circuit_breaker(pnl, self.trades)
-
-        # Profit side — protect the great day
-        elif pnl >= DAILY_PROFIT_STOP and not self.protected:
+            return
+        if self.trades >= MAX_TRADES_PER_DAY and not self.halted:
+            self.halted = True
+            return
+        if self.consecutive_losses >= MAX_CONSECUTIVE_LOSSES and not self.halted:
+            self.halted = True
+            return
+        if pnl >= DAILY_PROFIT_STOP and not self.protected:
             self.protected = True
             alert_protect_mode(pnl)
-
-        # Profit side — switch to selective mode
-        elif pnl >= DAILY_PROFIT_SELECTIVE and not self.selective:
+            return
+        if pnl >= DAILY_PROFIT_SELECTIVE and not self.selective:
             self.selective = True
             alert_selective_mode(pnl)
 
-    # ── Call before placing any new order ────────────────────
-    def can_trade(self, signal_score: int) -> tuple[bool, str]:
-        """
-        Returns (allowed: bool, reason: str)
-        Always call this before placing a new trade.
-        """
+    def can_trade(self, signal_score: int):
         if self.halted:
-            return False, "HALTED: Daily loss limit of Rs 500 reached"
-
+            if self.trades >= MAX_TRADES_PER_DAY:
+                return False, f"HALTED: Max trades per day {MAX_TRADES_PER_DAY} reached"
+            if self.consecutive_losses >= MAX_CONSECUTIVE_LOSSES:
+                return False, f"HALTED: {self.consecutive_losses} consecutive losses"
+            return False, f"HALTED: Daily loss limit of Rs {DAILY_LOSS_LIMIT:.0f} reached"
         if self.protected:
-            return False, "PROTECTED: Daily profit of Rs 800 reached — locking the day"
+            return False, f"PROTECTED: Daily profit of Rs {DAILY_PROFIT_STOP:.0f} reached"
 
         min_score = MIN_SCORE_SELECTIVE if self.selective else MIN_SIGNAL_SCORE
-
-        if signal_score < min_score:
-            mode = "SELECTIVE (9+ required)" if self.selective else "NORMAL (6+ required)"
-            return False, f"Score {signal_score} below threshold {min_score} [{mode}]"
-
+        strength = abs(signal_score)
+        if strength < min_score:
+            mode = "SELECTIVE" if self.selective else "NORMAL"
+            return False, f"Score strength {strength} below threshold {min_score} [{mode}]"
+        if self.trades >= MAX_TRADES_PER_DAY:
+            return False, f"Trade cap reached ({MAX_TRADES_PER_DAY})"
+        if self.consecutive_losses >= MAX_CONSECUTIVE_LOSSES:
+            return False, f"Loss streak cap reached ({MAX_CONSECUTIVE_LOSSES})"
         return True, "OK"
 
-    # ── Utility ───────────────────────────────────────────────
-    def status(self) -> str:
-        if self.halted:    return "HALTED"
-        if self.protected: return "PROTECTED"
-        if self.selective: return "SELECTIVE"
+    def status(self):
+        if self.halted:
+            return "HALTED"
+        if self.protected:
+            return "PROTECTED"
+        if self.selective:
+            return "SELECTIVE"
         return "NORMAL"
 
-    def win_rate(self) -> float:
+    def win_rate(self):
         return (self.wins / self.trades * 100) if self.trades > 0 else 0.0
 
-    def summary(self) -> dict:
+    def summary(self):
         return {
             "realised_pnl": round(self.realised_pnl, 2),
-            "trades":       self.trades,
-            "wins":         self.wins,
-            "losses":       self.losses,
-            "win_rate":     round(self.win_rate(), 1),
-            "state":        self.status()
+            "trades": self.trades,
+            "wins": self.wins,
+            "losses": self.losses,
+            "consecutive_losses": self.consecutive_losses,
+            "win_rate": round(self.win_rate(), 1),
+            "state": self.status(),
+            "max_trades_per_day": MAX_TRADES_PER_DAY,
+            "max_consecutive_losses": MAX_CONSECUTIVE_LOSSES,
         }

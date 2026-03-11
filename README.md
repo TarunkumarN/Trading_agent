@@ -103,3 +103,43 @@ trading-agent/
 | MiniMax API credits | ~₹40/month |
 | Server (Oracle Cloud) | ₹0/month |
 | **Total** | **₹540/month** |
+
+---
+
+## Replay Backtest
+
+Use the replay tool to test the strategy on candle CSV data before deploying:
+
+```cmd
+python scripts\backtest_replay.py scripts\backtest_sample.csv --output backtest_result.json
+```
+
+Optional flags:
+
+```cmd
+python scripts\backtest_replay.py my_data.csv --time-stop-bars 4 --output result.json
+```
+
+CSV columns required:
+- `timestamp`
+- `symbol`
+- `open`
+- `high`
+- `low`
+- `close`
+- `volume`
+
+Optional column:
+- `market_bias_pct`  (example: `-0.8` for bearish day, `+0.9` for bullish day)
+
+The backtest summary now includes:
+- win rate
+- gross and net P&L
+- average win / average loss
+- profit factor
+- expectancy
+- max drawdown
+- longest loss streak
+- reason breakdown
+- per-symbol performance
+- equity curve

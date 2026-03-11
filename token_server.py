@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 API_KEY    = os.getenv("KITE_API_KEY")
 API_SECRET = os.getenv("KITE_API_SECRET")
-ENV_FILE = Path("/home/taruntk1310/trading-agent/.env")
+ENV_FILE = Path(__file__).resolve().parent / ".env"
 
 HTML = """
 <!DOCTYPE html>
@@ -308,3 +308,4 @@ def restart_agent():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+

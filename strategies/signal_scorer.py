@@ -1,225 +1,247 @@
 """
-strategies/signal_scorer.py — Professional Edition
-Changes:
-- TWO-WAY: BUY (score>=6) and SELL/SHORT (score<=-6)
-- ATR-based dynamic stop loss
-- Market Regime filter (Nifty bias)
-- Opening Range Breakout (ORB)
-- Multi-timeframe alignment check
+strategies/signal_scorer.py - Professional trend-following signal engine
+- Two-way trading with explicit long/short trend filters
+- Market regime enforcement using Nifty bias
+- Opening range breakout support
+- ATR, ADX, EMA200, VWAP and volume-based quality checks
 """
 import pandas as pd
 import ta
 from config import EMA_FAST, EMA_SLOW, RSI_PERIOD, BB_PERIOD, BB_STD
 
-# ── Opening Range Store (resets daily at 9:15 AM) ────────────────────────────
-_opening_range = {}   # {symbol: {"high": x, "low": x, "set": bool}}
-_nifty_bias    = 0.0  # Nifty % change today — set externally
+_opening_range = {}
+_nifty_bias = 0.0
+
 
 def set_nifty_bias(pct_change: float):
-    """Call this every minute with Nifty % change for market regime filter."""
     global _nifty_bias
     _nifty_bias = pct_change
 
-def update_opening_range(symbol: str, candle_high: float, candle_low: float,
-                          candle_time_minute: int):
-    """
-    Call during 9:15–9:30 AM (minutes 0–14) to build the opening range.
-    After 9:30 AM the range is locked and used for ORB signals.
-    """
+
+def update_opening_range(symbol: str, candle_high: float, candle_low: float, candle_time_minute: int):
     if symbol not in _opening_range:
-        _opening_range[symbol] = {"high": candle_high, "low": candle_low,
-                                   "set": False, "minutes": 0}
-    r = _opening_range[symbol]
-    if not r["set"]:
-        r["high"]    = max(r["high"], candle_high)
-        r["low"]     = min(r["low"],  candle_low)
-        r["minutes"] += 1
-        if r["minutes"] >= 15:   # 15 candles = 15 minutes
-            r["set"] = True
+        _opening_range[symbol] = {"high": candle_high, "low": candle_low, "set": False, "minutes": 0}
+    rng = _opening_range[symbol]
+    if not rng["set"]:
+        rng["high"] = max(rng["high"], candle_high)
+        rng["low"] = min(rng["low"], candle_low)
+        rng["minutes"] += 1
+        if rng["minutes"] >= 15:
+            rng["set"] = True
+
 
 def reset_opening_ranges():
-    """Call at 9:15 AM every day."""
     global _opening_range
     _opening_range = {}
 
 
+def _hold_response(reason: str, latest=None, atr: float = 0.0, vwap: float = 0.0, orb=None):
+    latest = latest or {}
+    orb = orb or {}
+    return {
+        "score": 0,
+        "action": "HOLD",
+        "reasons": [reason],
+        "regime": "BIDIRECTIONAL",
+        "rsi": round(float(latest.get("rsi", 50) or 50), 1),
+        "ema_fast": round(float(latest.get("ema_fast", 0) or 0), 2),
+        "ema_slow": round(float(latest.get("ema_slow", 0) or 0), 2),
+        "ema_200": round(float(latest.get("ema_200", 0) or 0), 2),
+        "adx": round(float(latest.get("adx", 0) or 0), 2),
+        "bb_lower": round(float(latest.get("bb_lower", 0) or 0), 2),
+        "bb_upper": round(float(latest.get("bb_upper", 0) or 0), 2),
+        "atr": round(float(atr or 0), 2),
+        "sl_long": 0,
+        "sl_short": 0,
+        "vwap": round(vwap, 2) if vwap else 0,
+        "orb_high": orb.get("high", 0),
+        "orb_low": orb.get("low", 0),
+        "orb_set": orb.get("set", False),
+        "setup_quality": "FILTERED",
+        "direction_ok": False,
+    }
+
+
 def calculate_signals(prices: list, volumes: list, vwap: float,
-                       highs: list = None, lows: list = None,
-                       symbol: str = "") -> dict:
-    """
-    Main signal function. Returns score -10 to +10.
-    BUY  if score >= +6
-    SELL if score <= -6
-    HOLD otherwise
-    """
-    if len(prices) < 26:
-        return {
-            "score": 0, "action": "HOLD",
-            "reasons": [f"Need 26 candles, have {len(prices)}"],
-            "rsi": 50, "ema_fast": 0, "ema_slow": 0,
-            "bb_lower": 0, "bb_upper": 0, "atr": 0,
-            "sl_long": 0, "sl_short": 0,
-        }
+                      highs: list = None, lows: list = None,
+                      symbol: str = "") -> dict:
+    if len(prices) < 30:
+        return _hold_response(f"Need 30 candles, have {len(prices)}")
+
+    highs = highs if highs else prices
+    lows = lows if lows else prices
 
     df = pd.DataFrame({
-        "close":  prices,
+        "close": prices,
         "volume": volumes,
-        "high":   highs  if highs  else prices,
-        "low":    lows   if lows   else prices,
+        "high": highs,
+        "low": lows,
     })
 
-    # ── Indicators ──────────────────────────────────────────────────────────
     df["ema_fast"] = ta.trend.ema_indicator(df["close"], window=EMA_FAST)
     df["ema_slow"] = ta.trend.ema_indicator(df["close"], window=EMA_SLOW)
-    df["ema_200"]  = ta.trend.ema_indicator(df["close"], window=min(200, len(prices)))
-    df["rsi"]      = ta.momentum.rsi(df["close"], window=RSI_PERIOD)
-
+    df["ema_200"] = ta.trend.ema_indicator(df["close"], window=min(200, len(prices)))
+    df["rsi"] = ta.momentum.rsi(df["close"], window=RSI_PERIOD)
     bb = ta.volatility.BollingerBands(df["close"], window=BB_PERIOD, window_dev=BB_STD)
     df["bb_upper"] = bb.bollinger_hband()
     df["bb_lower"] = bb.bollinger_lband()
+    df["atr"] = ta.volatility.AverageTrueRange(df["high"], df["low"], df["close"], window=14).average_true_range()
+    df["adx"] = ta.trend.ADXIndicator(df["high"], df["low"], df["close"], window=14).adx()
 
-    # ATR — Volatility-Based Stop Loss
-    atr_ind     = ta.volatility.AverageTrueRange(df["high"], df["low"], df["close"], window=14)
-    df["atr"]   = atr_ind.average_true_range()
+    latest = df.iloc[-1]
+    prev = df.iloc[-2]
+    current_price = float(latest["close"])
+    prev_price = float(prev["close"])
+    atr = float(latest["atr"]) if not pd.isna(latest["atr"]) else 0.0
+    adx = float(latest["adx"]) if not pd.isna(latest["adx"]) else 0.0
+    rsi = float(latest["rsi"]) if not pd.isna(latest["rsi"]) else 50.0
+    ema_200 = float(latest["ema_200"]) if not pd.isna(latest["ema_200"]) else current_price
+    ema_200_prev = float(df.iloc[-3]["ema_200"]) if len(df) >= 3 and not pd.isna(df.iloc[-3]["ema_200"]) else ema_200
+    avg_vol = pd.Series(volumes).tail(20).mean()
+    current_vol = volumes[-1]
+    vol_ratio = (current_vol / avg_vol) if avg_vol else 0.0
+    atr_pct = (atr / current_price * 100) if current_price else 0.0
+    recent_high = max(prices[-5:-1])
+    recent_low = min(prices[-5:-1])
 
-    latest        = df.iloc[-1]
-    prev          = df.iloc[-2]
-    current_price = prices[-1]
-    avg_vol       = pd.Series(volumes).tail(20).mean()
-    current_vol   = volumes[-1]
-    atr           = float(latest["atr"]) if not pd.isna(latest["atr"]) else 0
-    rsi           = float(latest["rsi"])
+    bull_trend = current_price > ema_200 and latest["ema_fast"] > latest["ema_slow"] and ema_200 >= ema_200_prev
+    bear_trend = current_price < ema_200 and latest["ema_fast"] < latest["ema_slow"] and ema_200 <= ema_200_prev
 
-    # ATR Stop Loss levels
-    sl_long  = round(current_price - (2 * atr), 2)   # For BUY trades
-    sl_short = round(current_price + (2 * atr), 2)   # For SELL trades
-
-    score   = 0
-    reasons = []
-
-    # ── MARKET REGIME FILTER ─────────────────────────────────────────────────
-    regime = "BIDIRECTIONAL"
-    if _nifty_bias > 1.0:
+    if _nifty_bias >= 0.35:
         regime = "LONG_ONLY"
-        reasons.append(f"Nifty +{_nifty_bias:.1f}% → Long-only mode")
-    elif _nifty_bias < -1.0:
+    elif _nifty_bias <= -0.35:
         regime = "SHORT_ONLY"
-        reasons.append(f"Nifty {_nifty_bias:.1f}% → Short-only mode")
     else:
-        reasons.append(f"Nifty {_nifty_bias:+.1f}% → Bidirectional mode")
+        regime = "BIDIRECTIONAL"
 
-    # ── 1. EMA CROSSOVER (±3) ────────────────────────────────────────────────
-    if latest["ema_fast"] > latest["ema_slow"]:
-        score += 2
-        reasons.append(f"EMA{EMA_FAST}>{EMA_SLOW} bullish +2")
-        if prev["ema_fast"] <= prev["ema_slow"]:
-            score += 1
-            reasons.append("Fresh bullish crossover +1")
-    else:
-        score -= 2
-        reasons.append(f"EMA{EMA_FAST}<{EMA_SLOW} bearish -2")
-        if prev["ema_fast"] >= prev["ema_slow"]:
-            score -= 1
-            reasons.append("Fresh bearish crossover -1")
-
-    # ── 2. VWAP (±3) ─────────────────────────────────────────────────────────
-    if vwap and vwap > 0:
-        if current_price > vwap:
-            score += 2
-            reasons.append(f"Price ₹{current_price:.0f} above VWAP ₹{vwap:.0f} +2")
-        else:
-            score -= 2
-            reasons.append(f"Price ₹{current_price:.0f} below VWAP ₹{vwap:.0f} -2")
-        prev_price = prices[-2]
-        if abs(prev_price - vwap) / vwap < 0.002:
-            if current_price > vwap and current_price > prev_price:
-                score += 1
-                reasons.append("VWAP retest bounce +1")
-            elif current_price < vwap and current_price < prev_price:
-                score -= 1
-                reasons.append("VWAP rejection bounce -1")
-
-    # ── 3. VOLUME CONFIRMATION (±1) ──────────────────────────────────────────
-    if avg_vol > 0:
-        vol_ratio = current_vol / avg_vol
-        if vol_ratio > 1.5:
-            # Volume confirms direction of EMA
-            if latest["ema_fast"] > latest["ema_slow"]:
-                score += 1
-                reasons.append(f"Volume {vol_ratio:.1f}x confirms bullish +1")
-            else:
-                score -= 1
-                reasons.append(f"Volume {vol_ratio:.1f}x confirms bearish -1")
-        elif vol_ratio < 0.5:
-            score -= 1
-            reasons.append("Very low volume — weak signal -1")
-
-    # ── 4. RSI (±2) ──────────────────────────────────────────────────────────
-    if rsi < 30:
-        score += 2
-        reasons.append(f"RSI oversold {rsi:.0f} +2")
-    elif rsi > 70:
-        score -= 2
-        reasons.append(f"RSI overbought {rsi:.0f} -2")
-    elif 50 <= rsi <= 70:
-        score += 1
-        reasons.append(f"RSI bullish zone {rsi:.0f} +1")
-    elif 30 <= rsi < 50:
-        score -= 1
-        reasons.append(f"RSI bearish zone {rsi:.0f} -1")
-
-    # ── 5. BOLLINGER BANDS (±1) ──────────────────────────────────────────────
-    if current_price < latest["bb_lower"]:
-        score += 1
-        reasons.append("Below lower BB oversold +1")
-    elif current_price > latest["bb_upper"]:
-        score -= 1
-        reasons.append("Above upper BB overbought -1")
-
-    # ── 6. OPENING RANGE BREAKOUT (±2 bonus) ─────────────────────────────────
     orb = _opening_range.get(symbol, {})
-    if orb.get("set"):
-        orb_range = orb["high"] - orb["low"]
-        if orb_range > 0:
-            if current_price > orb["high"]:
-                score += 2
-                reasons.append(f"ORB breakout above ₹{orb['high']:.0f} +2")
-            elif current_price < orb["low"]:
-                score -= 2
-                reasons.append(f"ORB breakdown below ₹{orb['low']:.0f} -2")
+    score = 0
+    reasons = [f"Nifty bias {_nifty_bias:+.2f}% -> {regime}"]
 
-    # ── MARKET REGIME ENFORCEMENT ─────────────────────────────────────────────
-    # Override: In strong trending markets, block counter-trend signals
-    if regime == "LONG_ONLY" and score < 0:
-        score = max(score, 0)
-        reasons.append("Score floored to 0 — Long-only mode active")
-    elif regime == "SHORT_ONLY" and score > 0:
-        score = min(score, 0)
-        reasons.append("Score capped to 0 — Short-only mode active")
-
-    # ── FINAL DECISION ────────────────────────────────────────────────────────
-    if score >= 6:
-        action = "BUY"
-    elif score <= -6:
-        action = "SELL"
+    if bull_trend:
+        score += 3
+        reasons.append("Trend aligned bullish +3")
+    elif bear_trend:
+        score -= 3
+        reasons.append("Trend aligned bearish -3")
     else:
-        action = "HOLD"
+        reasons.append("Trend structure mixed")
+
+    if vwap and vwap > 0:
+        if current_price > vwap and latest["ema_fast"] > latest["ema_slow"]:
+            score += 2
+            reasons.append("Price above VWAP with bullish structure +2")
+        elif current_price < vwap and latest["ema_fast"] < latest["ema_slow"]:
+            score -= 2
+            reasons.append("Price below VWAP with bearish structure -2")
+        else:
+            reasons.append("VWAP not aligned")
+
+    if current_price > recent_high and bull_trend:
+        score += 2
+        reasons.append("Breakout above recent range +2")
+    elif current_price < recent_low and bear_trend:
+        score -= 2
+        reasons.append("Breakdown below recent range -2")
+
+    if vol_ratio >= 1.2:
+        if bull_trend:
+            score += 1
+            reasons.append(f"Volume confirmation {vol_ratio:.2f}x +1")
+        elif bear_trend:
+            score -= 1
+            reasons.append(f"Volume confirmation {vol_ratio:.2f}x -1")
+    else:
+        reasons.append(f"Volume muted {vol_ratio:.2f}x")
+
+    if bull_trend and 55 <= rsi <= 68:
+        score += 1
+        reasons.append(f"RSI trend support {rsi:.1f} +1")
+    elif bear_trend and 32 <= rsi <= 45:
+        score -= 1
+        reasons.append(f"RSI bearish pressure {rsi:.1f} -1")
+    elif bull_trend and rsi < 45:
+        score -= 1
+        reasons.append(f"Bull trend losing momentum {rsi:.1f} -1")
+    elif bear_trend and rsi > 55:
+        score += 1
+        reasons.append(f"Bear trend squeeze risk {rsi:.1f} +1")
+
+    if adx >= 20:
+        if bull_trend:
+            score += 1
+            reasons.append(f"ADX trend strength {adx:.1f} +1")
+        elif bear_trend:
+            score -= 1
+            reasons.append(f"ADX trend strength {adx:.1f} -1")
+    else:
+        reasons.append(f"ADX weak {adx:.1f}")
+
+    if orb.get("set"):
+        if current_price > orb["high"] and bull_trend:
+            score += 1
+            reasons.append("ORB bullish confirmation +1")
+        elif current_price < orb["low"] and bear_trend:
+            score -= 1
+            reasons.append("ORB bearish confirmation -1")
+
+    if atr_pct < 0.22:
+        return _hold_response(f"ATR too low for scalping ({atr_pct:.2f}%)", latest, atr, vwap, orb)
+    if adx < 16:
+        return _hold_response(f"Trend too weak (ADX {adx:.1f})", latest, atr, vwap, orb)
+    if vol_ratio < 0.9:
+        return _hold_response(f"Volume too weak ({vol_ratio:.2f}x)", latest, atr, vwap, orb)
+
+    allow_long = bull_trend and current_price > vwap and latest["ema_fast"] > latest["ema_slow"]
+    allow_short = bear_trend and current_price < vwap and latest["ema_fast"] < latest["ema_slow"]
+
+    if regime == "LONG_ONLY":
+        allow_short = False
+        if score < 0:
+            score = 0
+    elif regime == "SHORT_ONLY":
+        allow_long = False
+        if score > 0:
+            score = 0
+
+    action = "HOLD"
+    setup_quality = "FILTERED"
+    direction_ok = False
+    if score >= 7 and allow_long:
+        action = "BUY"
+        setup_quality = "A"
+        direction_ok = True
+    elif score <= -7 and allow_short:
+        action = "SELL"
+        setup_quality = "A"
+        direction_ok = True
+    elif abs(score) >= 6 and (allow_long or allow_short):
+        setup_quality = "B"
+
+    if action == "HOLD" and abs(score) >= 6:
+        reasons.append("High score blocked by direction filter")
 
     return {
-        "score":    score,
-        "action":   action,
-        "reasons":  reasons,
-        "regime":   regime,
-        "rsi":      round(rsi, 1),
+        "score": int(score),
+        "action": action,
+        "reasons": reasons,
+        "regime": regime,
+        "rsi": round(rsi, 1),
         "ema_fast": round(float(latest["ema_fast"]), 2),
         "ema_slow": round(float(latest["ema_slow"]), 2),
+        "ema_200": round(ema_200, 2),
+        "adx": round(adx, 2),
         "bb_lower": round(float(latest["bb_lower"]), 2),
         "bb_upper": round(float(latest["bb_upper"]), 2),
-        "atr":      round(atr, 2),
-        "sl_long":  sl_long,
-        "sl_short": sl_short,
-        "vwap":     round(vwap, 2) if vwap else 0,
+        "atr": round(atr, 2),
+        "sl_long": round(current_price - (1.3 * atr), 2) if atr else 0,
+        "sl_short": round(current_price + (1.3 * atr), 2) if atr else 0,
+        "vwap": round(vwap, 2) if vwap else 0,
         "orb_high": orb.get("high", 0),
-        "orb_low":  orb.get("low", 0),
-        "orb_set":  orb.get("set", False),
+        "orb_low": orb.get("low", 0),
+        "orb_set": orb.get("set", False),
+        "setup_quality": setup_quality,
+        "direction_ok": direction_ok,
+        "vol_ratio": round(vol_ratio, 2),
+        "atr_pct": round(atr_pct, 2),
     }

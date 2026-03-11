@@ -1,223 +1,211 @@
 """
-main.py — MiniMax Scalping Agent Entry Point
-============================================
-Run this file to start the agent:
-    python main.py
-
-The agent will:
-  8:30 AM  → Run pre-market analysis via MiniMax
-  9:20 AM  → Start scanning signals
-  Every 1 min → Close candles and evaluate signals
-  Every 30 min → Send heartbeat to Telegram
-  3:15 PM  → Close all open positions
-  3:30 PM  → Send end-of-day summary
+main.py - MiniMax Scalping Agent Entry Point
 """
 
-import time
 import json
 import logging
+import time
 from datetime import datetime
 from pathlib import Path
-from data.market_scanner import get_dynamic_watchlist
+
 from apscheduler.schedulers.background import BackgroundScheduler
+
+from agent.pre_market import run_end_of_day_review, run_pre_market
+from config import MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE, MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE, TRADING_MODE
+from data.candle_builder import CandleBuilder
 from data.kite_stream import start_stream
 from data.token_lookup import get_tokens
-from data.market_scanner import get_dynamic_watchlist
-
-from config import TRADING_MODE, MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE
-from config import MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE
-
-from agent.pre_market import run_pre_market, run_end_of_day_review
-from strategies.signal_scorer import calculate_signals, set_nifty_bias, update_opening_range, reset_opening_ranges
-from risk.position_sizer import calculate_quantity, calculate_stop_and_target
+from execution import create_trader
+from notifications.telegram_alerts import alert_daily_summary, alert_startup, send_heartbeat, send_telegram
 from risk.daily_guard import DailyGuard
-from execution.paper_trader import PaperTrader
-from data.candle_builder import CandleBuilder
-from notifications.telegram_alerts import (
-    alert_startup, alert_daily_summary, send_heartbeat, send_telegram
-)
+from risk.position_sizer import calculate_quantity, calculate_stop_and_target
+from strategies.signal_scorer import calculate_signals, reset_opening_ranges, set_nifty_bias, update_opening_range
 
-# ── Logging Setup ─────────────────────────────────────────────
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
-    level   = logging.INFO,
-    format  = "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    handlers=[
-        logging.FileHandler("logs/agent.log"),
-        logging.StreamHandler()
-    ]
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    handlers=[logging.FileHandler("logs/agent.log"), logging.StreamHandler()],
 )
 logger = logging.getLogger("main")
 
-# ── Global State ──────────────────────────────────────────────
-guard          = DailyGuard()
-candle_builder = CandleBuilder()
-trader         = PaperTrader(guard)
-day_started    = False
-stream         = None
-
-# ── Load Watchlist from File (Survives Restarts) ──────────────
 WATCHLIST_FILE = Path("logs/watchlist.json")
+MARKET_BIAS_FILE = Path("logs/market_bias.json")
+
+guard = DailyGuard()
+candle_builder = CandleBuilder()
+trader = create_trader(guard)
+day_started = False
+stream = None
+market_bias_pct = 0.0
+
 
 def load_watchlist():
-    """Load watchlist from file if it exists."""
     if WATCHLIST_FILE.exists():
         try:
-            wl = json.loads(WATCHLIST_FILE.read_text())
-            if wl:
-                logger.info(f"Loaded watchlist from file: {wl}")
-                return wl
-        except Exception as e:
-            logger.warning(f"Could not load watchlist file: {e}")
+            watchlist = json.loads(WATCHLIST_FILE.read_text())
+            if watchlist:
+                logger.info(f"Loaded watchlist from file: {watchlist}")
+                return watchlist
+        except Exception as exc:
+            logger.warning(f"Could not load watchlist file: {exc}")
     return []
 
-def save_watchlist(wl):
-    """Save watchlist to file so it survives restarts."""
+
+def save_watchlist(watchlist):
     try:
-        WATCHLIST_FILE.write_text(json.dumps(wl))
-        logger.info(f"Watchlist saved to file: {wl}")
-    except Exception as e:
-        logger.warning(f"Could not save watchlist: {e}")
+        WATCHLIST_FILE.write_text(json.dumps(watchlist))
+        logger.info(f"Watchlist saved to file: {watchlist}")
+    except Exception as exc:
+        logger.warning(f"Could not save watchlist: {exc}")
 
-watchlist = load_watchlist()
 
-# Auto-start stream on restart during market hours
-if watchlist:
+def load_market_bias():
+    if MARKET_BIAS_FILE.exists():
+        try:
+            payload = json.loads(MARKET_BIAS_FILE.read_text())
+            return float(payload.get("market_bias_pct", 0.0))
+        except Exception as exc:
+            logger.warning(f"Could not load market bias file: {exc}")
+    return 0.0
+
+
+def save_market_bias(value: float):
     try:
-        from datetime import datetime as _dt
-        _now = _dt.now()
-        _open = _now.hour > 9 or (_now.hour == 9 and _now.minute >= 15)
-        _closed = _now.hour > 15 or (_now.hour == 15 and _now.minute >= 30)
-        if _open and not _closed:
-            logger.info(f"Restarting stream for existing watchlist: {watchlist}")
-            _tokens = get_tokens(watchlist)
-            if _tokens:
-                stream = start_stream(candle_builder, _tokens)
-                logger.info(f"Stream auto-restarted for {len(_tokens)} instruments")
-    except Exception as e:
-        logger.error(f"Auto stream restart failed: {e}")
-
-
-# Auto-start stream on restart during market hours
-if watchlist:
-    try:
-        from datetime import datetime as _dt
-        _now = _dt.now()
-        _open = _now.hour > 9 or (_now.hour == 9 and _now.minute >= 15)
-        _closed = _now.hour > 15 or (_now.hour == 15 and _now.minute >= 30)
-        if _open and not _closed:
-            logger.info(f"Restarting stream for existing watchlist: {watchlist}")
-            _tokens = get_tokens(watchlist)
-            if _tokens:
-                stream = start_stream(candle_builder, _tokens)
-                logger.info(f"Stream auto-restarted for {len(_tokens)} instruments")
-    except Exception as e:
-        logger.error(f"Auto stream restart failed: {e}")
-
+        MARKET_BIAS_FILE.write_text(json.dumps({"market_bias_pct": value}))
+    except Exception as exc:
+        logger.warning(f"Could not save market bias: {exc}")
 
 
 def save_trade_log():
-    """Save trade log to JSON for dashboard."""
-    log_file = Path("logs/trades.json")
-    with open(log_file, "w") as f:
-        json.dump(trader.trade_log, f, indent=2)
+    Path("logs/trades.json").write_text(json.dumps(trader.trade_log, indent=2))
 
 
-# ── Scheduled Jobs ────────────────────────────────────────────
+def _market_bias_to_pct(bias: str) -> float:
+    bias = (bias or "").upper()
+    if bias in {"STRONG_BULLISH", "BULLISH"}:
+        return 1.0
+    if bias in {"STRONG_BEARISH", "BEARISH"}:
+        return -1.0
+    return 0.0
+
+
+def _is_market_session(now: datetime) -> bool:
+    market_open = now.hour > 9 or (now.hour == 9 and now.minute >= 15)
+    market_closed = now.hour > 15 or (now.hour == 15 and now.minute >= 30)
+    return market_open and not market_closed
+
+
+def _prime_existing_stream(existing_watchlist):
+    global stream
+    if not existing_watchlist:
+        return
+    try:
+        now = datetime.now()
+        if not _is_market_session(now):
+            return
+        tokens = get_tokens(existing_watchlist)
+        if tokens:
+            logger.info(f"Restarting stream for existing watchlist: {existing_watchlist}")
+            stream = start_stream(candle_builder, tokens)
+            logger.info(f"Stream auto-restarted for {len(tokens)} instruments")
+    except Exception as exc:
+        logger.error(f"Auto stream restart failed: {exc}")
+
 
 def pre_market_job():
-    """Runs at 8:30 AM — collect market data and build watchlist."""
-    global watchlist, stream
+    global watchlist, stream, market_bias_pct
+
     logger.info("Starting pre-market analysis...")
-    result    = run_pre_market()
+    result = run_pre_market()
     watchlist = result.get("watchlist", [])
     save_watchlist(watchlist)
-    logger.info(f"Watchlist: {watchlist}")
 
-    # Start Kite WebSocket stream for live tick data
+    market_bias_pct = _market_bias_to_pct(result.get("market_bias", "NEUTRAL"))
+    set_nifty_bias(market_bias_pct)
+    save_market_bias(market_bias_pct)
+    logger.info(f"Watchlist: {watchlist} | Market bias pct: {market_bias_pct:+.2f}")
+
     try:
         tokens = get_tokens(watchlist)
         if tokens:
             logger.info(f"Starting Kite stream for tokens: {tokens}")
             stream = start_stream(candle_builder, tokens)
-            send_telegram(f"📡 Live stream started for {len(tokens)} stocks")
+            send_telegram(f"Live stream started for {len(tokens)} stocks")
         else:
-            logger.warning("No tokens found — stream not started")
-            send_telegram("⚠️ Could not get instrument tokens — using simulated prices")
-    except Exception as e:
-        logger.error(f"Stream start error: {e}")
-        send_telegram(f"⚠️ Stream error: {e} — using simulated prices")
+            logger.warning("No tokens found - stream not started")
+            send_telegram("Could not get instrument tokens - using simulated prices")
+    except Exception as exc:
+        logger.error(f"Stream start error: {exc}")
+        send_telegram(f"Stream error: {exc} - using simulated prices")
 
 
 def candle_close_job():
-    """
-    Runs every 1 minute — closes candles and evaluates signals.
-    This is the heart of the agent.
-    """
     global day_started
+
     now = datetime.now()
 
-    # Not yet market open
-    if now.hour < MARKET_OPEN_HOUR or \
-       (now.hour == MARKET_OPEN_HOUR and now.minute < MARKET_OPEN_MINUTE):
+    if now.hour < MARKET_OPEN_HOUR or (now.hour == MARKET_OPEN_HOUR and now.minute < MARKET_OPEN_MINUTE):
         return
 
-    # Market closed — close all positions
-    if now.hour > MARKET_CLOSE_HOUR or \
-       (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MINUTE):
+    if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MINUTE):
         if trader.positions:
-            logger.info("3:15 PM — closing all open positions")
+            logger.info("3:15 PM - closing all open positions")
             trader.close_all(candle_builder.get_latest_prices())
             save_trade_log()
         return
 
-    # Mark day as started
     if not day_started:
         day_started = True
-        logger.info("Market open — scanning started")
+        reset_opening_ranges()
+        logger.info(f"Market open - scanning started | bias {market_bias_pct:+.2f}%")
 
     if not watchlist:
-        logger.warning("No watchlist yet — skipping scan")
+        logger.warning("No watchlist yet - skipping scan")
         return
 
-    # Close completed candles for all stocks
     for stock in watchlist:
         candle_builder.close_candle(stock)
 
-    # Check time stops on open positions
     trader.check_time_stops(candle_builder.get_latest_prices())
 
-    # Evaluate signals for each stock
-    for stock in watchlist:
-        prices  = candle_builder.price_history.get(stock, [])
-        volumes = candle_builder.volume_history.get(stock, [])
-        vwap    = candle_builder.vwap.get(stock, 0)
+    if now.hour == 9 and now.minute <= 34:
+        for stock in watchlist:
+            latest_highs = candle_builder.high_history.get(stock, [])
+            latest_lows = candle_builder.low_history.get(stock, [])
+            if latest_highs and latest_lows:
+                update_opening_range(stock, latest_highs[-1], latest_lows[-1], now.minute)
 
-        if len(prices) < 26:
+    for stock in watchlist:
+        prices = candle_builder.price_history.get(stock, [])
+        volumes = candle_builder.volume_history.get(stock, [])
+        highs = candle_builder.high_history.get(stock, [])
+        lows = candle_builder.low_history.get(stock, [])
+        vwap = candle_builder.vwap.get(stock, 0)
+
+        if len(prices) < 30:
             logger.info(f"{stock}: {len(prices)} candles built")
             continue
 
-        sig = calculate_signals(prices, volumes, vwap)
-        allowed, reason = guard.can_trade(sig["score"])
-
-        logger.debug(
-            f"{stock} | Score:{sig['score']} | Action:{sig['action']} | "
-            f"Allowed:{allowed} | RSI:{sig['rsi']}"
+        signal = calculate_signals(prices, volumes, vwap, highs=highs, lows=lows, symbol=stock)
+        allowed, reason = guard.can_trade(signal["score"])
+        logger.info(
+            f"{stock} | score={signal['score']} | action={signal['action']} | "
+            f"quality={signal.get('setup_quality')} | allowed={allowed} ({reason})"
         )
 
-        if sig["action"] in ("BUY", "SELL") and allowed:
+        if signal["action"] in ("BUY", "SELL") and allowed:
             current_price = prices[-1]
-            sl, target    = calculate_stop_and_target(current_price, sig["action"])
-            sizing        = calculate_quantity(current_price, sl)
+            stop_loss, target = calculate_stop_and_target(current_price, signal["action"], signal.get("atr"))
+            sizing = calculate_quantity(current_price, stop_loss)
+            can_open, open_reason = trader.can_open(stock)
 
-            if sizing["qty"] > 0 and stock not in trader.positions:
-                trader.enter(
-                    stock, sig["action"], sizing["qty"],
-                    current_price, sl, target, sig["score"]
-                )
+            if sizing["qty"] > 0 and can_open:
+                trader.enter(stock, signal["action"], sizing["qty"], current_price, stop_loss, target, signal["score"])
                 save_trade_log()
+            elif sizing["qty"] > 0 and not can_open:
+                logger.info(f"{stock}: entry skipped - {open_reason}")
 
-        # Update open positions with real-time LTP
         if stock in trader.positions:
             ltp = candle_builder.get_latest_prices().get(stock) or (prices[-1] if prices else 0)
             if ltp > 0:
@@ -226,69 +214,54 @@ def candle_close_job():
 
 
 def heartbeat_job():
-    """Runs every 30 minutes — sends heartbeat to Telegram."""
-    send_heartbeat(
-        daily_pnl      = guard.realised_pnl,
-        open_positions = len(trader.positions),
-        state          = guard.status()
-    )
+    send_heartbeat(daily_pnl=guard.realised_pnl, open_positions=len(trader.positions), state=guard.status())
 
 
 def end_of_day_job():
-    """Runs at 3:30 PM — sends daily summary and AI review."""
     summary = guard.summary()
     alert_daily_summary(
-        trades    = summary["trades"],
-        wins      = summary["wins"],
-        losses    = summary["losses"],
-        gross_pnl = summary["realised_pnl"],
-        brokerage = trader.brokerage,
-        net_pnl   = summary["realised_pnl"] - trader.brokerage
+        trades=summary["trades"],
+        wins=summary["wins"],
+        losses=summary["losses"],
+        gross_pnl=summary["realised_pnl"],
+        brokerage=trader.brokerage,
+        net_pnl=summary["realised_pnl"] - trader.brokerage,
     )
     review = run_end_of_day_review(trader.trade_log, guard.realised_pnl)
     if review:
-        send_telegram(f"🤖 <b>AI Review</b>\n{review}")
-
-    # Clear watchlist file at end of day so fresh one is built tomorrow
+        send_telegram(f"AI Review\n{review}")
     if WATCHLIST_FILE.exists():
         WATCHLIST_FILE.unlink()
         logger.info("Watchlist file cleared for tomorrow.")
+    if MARKET_BIAS_FILE.exists():
+        MARKET_BIAS_FILE.unlink()
 
 
-# ── Main ──────────────────────────────────────────────────────
+watchlist = load_watchlist()
+market_bias_pct = load_market_bias()
+set_nifty_bias(market_bias_pct)
+_prime_existing_stream(watchlist)
+
+
 if __name__ == "__main__":
     logger.info(f"=== MiniMax Scalping Agent STARTING | Mode: {TRADING_MODE.upper()} ===")
     alert_startup(TRADING_MODE)
 
-    # If market is open and no watchlist — run pre-market immediately
     now = datetime.now()
-    market_open  = now.replace(hour=MARKET_OPEN_HOUR,  minute=MARKET_OPEN_MINUTE,  second=0)
-    market_close = now.replace(hour=MARKET_CLOSE_HOUR, minute=MARKET_CLOSE_MINUTE, second=0)
+    market_open = now.replace(hour=MARKET_OPEN_HOUR, minute=MARKET_OPEN_MINUTE, second=0, microsecond=0)
+    market_close = now.replace(hour=MARKET_CLOSE_HOUR, minute=MARKET_CLOSE_MINUTE, second=0, microsecond=0)
+
     if market_open <= now <= market_close and not watchlist:
-        logger.info("Market is open but no watchlist — running pre-market now...")
+        logger.info("Market is open but no watchlist - running pre-market now...")
         pre_market_job()
     elif market_open <= now <= market_close and watchlist:
-        # Market open, watchlist exists — just restart the stream
-        try:
-            tokens = get_tokens(watchlist)
-            if tokens:
-                logger.info(f"Restarting stream for existing watchlist: {watchlist}")
-                stream = start_stream(candle_builder, tokens)
-                send_telegram(f"📡 Stream restarted for {len(tokens)} stocks")
-        except Exception as e:
-            logger.error(f"Stream restart error: {e}")
+        _prime_existing_stream(watchlist)
 
     scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
-
-    # Pre-market analysis at 8:30 AM on weekdays
-    scheduler.add_job(pre_market_job,  "cron", hour=8,  minute=30, day_of_week="mon-fri")
-    # Candle close and signal scan every minute
-    scheduler.add_job(candle_close_job,"interval", seconds=60)
-    # Heartbeat every 30 minutes
-    scheduler.add_job(heartbeat_job,   "interval", minutes=30)
-    # End of day summary at 3:30 PM
-    scheduler.add_job(end_of_day_job,  "cron", hour=15, minute=30, day_of_week="mon-fri")
-
+    scheduler.add_job(pre_market_job, "cron", hour=8, minute=30, day_of_week="mon-fri")
+    scheduler.add_job(candle_close_job, "interval", seconds=60)
+    scheduler.add_job(heartbeat_job, "interval", minutes=30)
+    scheduler.add_job(end_of_day_job, "cron", hour=15, minute=30, day_of_week="mon-fri")
     scheduler.start()
     logger.info("Scheduler started. Agent is running.")
 
@@ -299,7 +272,8 @@ if __name__ == "__main__":
         logger.info("Stopping agent...")
         scheduler.shutdown()
         if trader.positions:
-            send_telegram("⚠️ Agent stopped manually with open positions! Check Zerodha immediately.")
+            send_telegram("Agent stopped manually with open positions. Check Zerodha immediately.")
         else:
-            send_telegram("🛑 Agent stopped manually.")
+            send_telegram("Agent stopped manually.")
         logger.info("Agent stopped.")
+
