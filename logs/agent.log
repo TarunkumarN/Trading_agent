@@ -8853,3 +8853,89 @@
 2026-03-11 11:20:13,403 [INFO] main: BHARTIARTL: 11 candles built
 2026-03-11 11:20:13,403 [INFO] main: KOTAKBANK: 11 candles built
 2026-03-11 11:20:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:21:13 IST)" executed successfully
+2026-03-11 11:21:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:22:13 IST)" (scheduled at 2026-03-11 11:21:13.401827+05:30)
+2026-03-11 11:21:13,402 [INFO] main: RELIANCE: 12 candles built
+2026-03-11 11:21:13,402 [INFO] main: HDFCBANK: 12 candles built
+2026-03-11 11:21:13,402 [INFO] main: ICICIBANK: 12 candles built
+2026-03-11 11:21:13,403 [INFO] main: INFY: 12 candles built
+2026-03-11 11:21:13,403 [INFO] main: TCS: 12 candles built
+2026-03-11 11:21:13,403 [INFO] main: BHARTIARTL: 12 candles built
+2026-03-11 11:21:13,403 [INFO] main: KOTAKBANK: 12 candles built
+2026-03-11 11:21:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:22:13 IST)" executed successfully
+2026-03-11 11:22:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:23:13 IST)" (scheduled at 2026-03-11 11:22:13.401827+05:30)
+2026-03-11 11:22:13,404 [INFO] main: RELIANCE: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: HDFCBANK: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: ICICIBANK: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: INFY: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: TCS: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: BHARTIARTL: 13 candles built
+2026-03-11 11:22:13,404 [INFO] main: KOTAKBANK: 13 candles built
+2026-03-11 11:22:13,404 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:23:13 IST)" executed successfully
+2026-03-11 11:23:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:24:13 IST)" (scheduled at 2026-03-11 11:23:13.401827+05:30)
+2026-03-11 11:23:13,404 [INFO] main: RELIANCE: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: HDFCBANK: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: ICICIBANK: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: INFY: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: TCS: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: BHARTIARTL: 14 candles built
+2026-03-11 11:23:13,404 [INFO] main: KOTAKBANK: 14 candles built
+2026-03-11 11:23:13,404 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:24:13 IST)" executed successfully
+2026-03-11 11:24:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:25:13 IST)" (scheduled at 2026-03-11 11:24:13.401827+05:30)
+2026-03-11 11:24:13,402 [INFO] main: RELIANCE: 15 candles built
+2026-03-11 11:24:13,402 [INFO] main: HDFCBANK: 15 candles built
+2026-03-11 11:24:13,403 [INFO] main: ICICIBANK: 15 candles built
+2026-03-11 11:24:13,403 [INFO] main: INFY: 15 candles built
+2026-03-11 11:24:13,403 [INFO] main: TCS: 15 candles built
+2026-03-11 11:24:13,403 [INFO] main: BHARTIARTL: 15 candles built
+2026-03-11 11:24:13,403 [INFO] main: KOTAKBANK: 15 candles built
+2026-03-11 11:24:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:25:13 IST)" executed successfully
+2026-03-11 11:25:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:26:13 IST)" (scheduled at 2026-03-11 11:25:13.401827+05:30)
+2026-03-11 11:25:13,402 [INFO] main: RELIANCE: 16 candles built
+2026-03-11 11:25:13,402 [INFO] main: HDFCBANK: 16 candles built
+2026-03-11 11:25:13,402 [INFO] main: ICICIBANK: 16 candles built
+2026-03-11 11:25:13,403 [INFO] main: INFY: 16 candles built
+2026-03-11 11:25:13,403 [INFO] main: TCS: 16 candles built
+2026-03-11 11:25:13,403 [INFO] main: BHARTIARTL: 16 candles built
+2026-03-11 11:25:13,403 [INFO] main: KOTAKBANK: 16 candles built
+2026-03-11 11:25:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:26:13 IST)" executed successfully
+2026-03-11 11:26:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:27:13 IST)" (scheduled at 2026-03-11 11:26:13.401827+05:30)
+2026-03-11 11:26:13,402 [INFO] main: RELIANCE: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: HDFCBANK: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: ICICIBANK: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: INFY: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: TCS: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: BHARTIARTL: 17 candles built
+2026-03-11 11:26:13,403 [INFO] main: KOTAKBANK: 17 candles built
+2026-03-11 11:26:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:27:13 IST)" executed successfully
+2026-03-11 11:27:13,402 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:28:13 IST)" (scheduled at 2026-03-11 11:27:13.401827+05:30)
+2026-03-11 11:27:13,402 [INFO] main: RELIANCE: 18 candles built
+2026-03-11 11:27:13,402 [INFO] main: HDFCBANK: 18 candles built
+2026-03-11 11:27:13,403 [INFO] main: ICICIBANK: 18 candles built
+2026-03-11 11:27:13,403 [INFO] main: INFY: 18 candles built
+2026-03-11 11:27:13,403 [INFO] main: TCS: 18 candles built
+2026-03-11 11:27:13,403 [INFO] main: BHARTIARTL: 18 candles built
+2026-03-11 11:27:13,403 [INFO] main: KOTAKBANK: 18 candles built
+2026-03-11 11:27:13,403 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-11 11:28:13 IST)" executed successfully
+2026-03-11 11:27:29,343 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'BHARTIARTL', 'KOTAKBANK']
+2026-03-11 11:27:29,344 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'BHARTIARTL', 'KOTAKBANK']
+2026-03-11 11:27:30,143 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-11 11:27:30,143 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-11 11:27:30,143 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'BHARTIARTL', 'KOTAKBANK']
+2026-03-11 11:27:30,672 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-11 11:27:30,672 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-11 11:27:30,672 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-11 11:27:31,121 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 2714625, 492033]
+2026-03-11 11:27:31,656 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'BHARTIARTL', 'KOTAKBANK']
+2026-03-11 11:27:31,657 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-11 11:27:31,823 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 2714625, 492033]
+2026-03-11 11:27:32,237 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 11:27:32,238 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 11:27:32,238 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 11:27:32,239 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-11 11:27:32,240 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-11 11:27:32,240 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-11 11:27:32,240 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-11 11:27:32,240 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-11 11:27:32,240 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-11 11:27:32,241 [INFO] main: Scheduler started. Agent is running.
+2026-03-11 11:27:32,770 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 2714625, 492033]
