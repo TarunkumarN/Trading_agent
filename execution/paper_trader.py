@@ -110,6 +110,7 @@ class PaperTrader:
         self.trade_log.append(trade)
         _save_trades(self.trade_log)
         _save_positions(self.positions)
+        _sync_to_mongo(self.trade_log, self.positions)
         alert_trade_exit(stock, pos["action"], pos["entry"], exit_price, net_pnl, self.guard.realised_pnl, reason)
         print(f"[PAPER] EXIT {stock} @ Rs{exit_price:.2f} | Net P&L: Rs{net_pnl:+.2f} | {reason}")
 
@@ -136,3 +137,24 @@ class PaperTrader:
                     self._close(stock, price, pnl, "TIME STOP (15 min)")
             except Exception as e:
                 print(f"[PAPER] Time stop error for {stock}: {e}")
+
+
+# MongoDB sync — add after each trade save
+def _sync_to_mongo(trades, positions):
+    try:
+        import os
+        from pymongo import MongoClient
+        url = os.environ.get("MONGODB_URL") or open("/home/taruntk1310/trading-agent/.env").read().split("MONGODB_URL=")[1].split("\n")[0].strip()
+        client = MongoClient(url)
+        db = client["minimax_trading"]
+        # Sync trades
+        if trades:
+            db.trades.delete_many({})
+            db.trades.insert_many([{**t} for t in trades])
+        # Sync positions
+        db.positions.delete_many({})
+        if positions:
+            db.positions.insert_many([{"symbol": k, **v} for k, v in positions.items()])
+        client.close()
+    except Exception as e:
+        pass
