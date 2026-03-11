@@ -17,6 +17,7 @@ class CandleBuilder:
         # vwap[stock] = current VWAP
         self.vwap           = defaultdict(float)
         # Internal VWAP accumulators
+        self._latest_prices = {}
         self._vwap_tp_vol   = defaultdict(float)  # sum(typical_price * volume)
         self._vwap_vol      = defaultdict(float)  # sum(volume)
         # Current candle accumulators
@@ -30,10 +31,13 @@ class CandleBuilder:
         # ── VWAP calculation ──────────────────────────────────
         # Typical price = (High + Low + Close) / 3
         # For tick data we approximate with LTP
+        self._latest_prices = {}
         self._vwap_tp_vol[stock] += ltp * volume
+        self._latest_prices[stock] = ltp
         self._vwap_vol[stock]    += volume
         if self._vwap_vol[stock] > 0:
-            self.vwap[stock] = self._vwap_tp_vol[stock] / self._vwap_vol[stock]
+            self.vwap[stock] = self._latest_prices = {}
+        self._vwap_tp_vol[stock] / self._vwap_vol[stock]
 
         # ── Candle accumulation ───────────────────────────────
         candle = self._candle[stock]
@@ -70,6 +74,7 @@ class CandleBuilder:
         self.price_history[stock]  = []
         self.volume_history[stock] = []
         self.vwap[stock]           = 0.0
+        self._latest_prices = {}
         self._vwap_tp_vol[stock]   = 0.0
         self._vwap_vol[stock]      = 0.0
         self._candle[stock]        = {}
@@ -81,3 +86,7 @@ class CandleBuilder:
     def get_all_prices(self) -> dict:
         """Returns {stock: latest_price} for all tracked stocks."""
         return {s: self.get_latest_price(s) for s in self._candle}
+
+    def get_latest_prices(self) -> dict:
+        """Returns latest LTP for all tracked stocks."""
+        return dict(self._latest_prices)

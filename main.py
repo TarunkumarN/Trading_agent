@@ -167,7 +167,7 @@ def candle_close_job():
        (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MINUTE):
         if trader.positions:
             logger.info("3:15 PM — closing all open positions")
-            trader.close_all(candle_builder.get_all_prices())
+            trader.close_all(candle_builder.get_latest_prices())
             save_trade_log()
         return
 
@@ -185,7 +185,7 @@ def candle_close_job():
         candle_builder.close_candle(stock)
 
     # Check time stops on open positions
-    trader.check_time_stops(candle_builder.get_all_prices())
+    trader.check_time_stops(candle_builder.get_latest_prices())
 
     # Evaluate signals for each stock
     for stock in watchlist:
@@ -217,9 +217,11 @@ def candle_close_job():
                 )
                 save_trade_log()
 
-        # Update open positions with latest price
-        if stock in trader.positions and prices:
-            trader.update_price(stock, prices[-1])
+        # Update open positions with real-time LTP
+        if stock in trader.positions:
+            ltp = candle_builder.get_latest_prices().get(stock) or (prices[-1] if prices else 0)
+            if ltp > 0:
+                trader.update_price(stock, ltp)
             save_trade_log()
 
 
