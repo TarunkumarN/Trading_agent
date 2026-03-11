@@ -77,7 +77,7 @@ client = MongoClient(MONGO_URL)
 db = client[DB_NAME]
 
 # Collections
-col_positions = db["open_positions"]
+col_positions = db["positions"]
 col_trades = db["trades"]
 col_logs = db["event_logs"]
 col_portfolio = db["portfolio_history"]
