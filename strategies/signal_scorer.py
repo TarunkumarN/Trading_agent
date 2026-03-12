@@ -108,9 +108,9 @@ def calculate_signals(prices: list, volumes: list, vwap: float,
     bull_trend = current_price > ema_200 and latest["ema_fast"] > latest["ema_slow"] and ema_200 >= ema_200_prev
     bear_trend = current_price < ema_200 and latest["ema_fast"] < latest["ema_slow"] and ema_200 <= ema_200_prev
 
-    if _nifty_bias >= 0.35:
+    if _nifty_bias >= 0.15:
         regime = "LONG_ONLY"
-    elif _nifty_bias <= -0.35:
+    elif _nifty_bias <= -0.15:
         regime = "SHORT_ONLY"
     else:
         regime = "BIDIRECTIONAL"
@@ -212,7 +212,7 @@ def calculate_signals(prices: list, volumes: list, vwap: float,
         action = "BUY"
         setup_quality = "A"
         direction_ok = True
-    elif score <= -7 and allow_short:
+    elif score <= -6 and allow_short:
         action = "SELL"
         setup_quality = "A"
         direction_ok = True
@@ -235,8 +235,8 @@ def calculate_signals(prices: list, volumes: list, vwap: float,
         "bb_lower": round(float(latest["bb_lower"]), 2),
         "bb_upper": round(float(latest["bb_upper"]), 2),
         "atr": round(atr, 2),
-        "sl_long": round(current_price - (1.3 * atr), 2) if atr else 0,
-        "sl_short": round(current_price + (1.3 * atr), 2) if atr else 0,
+        "sl_long": round(current_price - (2.5 * atr), 2) if atr else 0,
+        "sl_short": round(current_price + (2.5 * atr), 2) if atr else 0,
         "vwap": round(vwap, 2) if vwap else 0,
         "orb_high": orb.get("high", 0),
         "orb_low": orb.get("low", 0),

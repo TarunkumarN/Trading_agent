@@ -12547,3 +12547,1079 @@ ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.i
 2026-03-12 10:19:33,428 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
 2026-03-12 10:19:33,438 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
 2026-03-12 10:19:33,439 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:20:33 IST)" executed successfully
+2026-03-12 10:20:33,396 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:21:33 IST)" (scheduled at 2026-03-12 10:20:33.364189+05:30)
+2026-03-12 10:20:34,177 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,189 [INFO] main: HDFCBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:20:34,199 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,208 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,216 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,227 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,237 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:20:34,237 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:21:33 IST)" executed successfully
+2026-03-12 10:21:33,364 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:22:33 IST)" (scheduled at 2026-03-12 10:21:33.364189+05:30)
+2026-03-12 10:21:33,383 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,396 [INFO] main: HDFCBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,407 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,416 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,426 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,436 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,446 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:21:33,446 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:22:33 IST)" executed successfully
+2026-03-12 10:22:33,406 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:22:33 IST)" (scheduled at 2026-03-12 10:22:33.364189+05:30)
+2026-03-12 10:22:33,716 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,728 [INFO] main: HDFCBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:22:33,738 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,747 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,758 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,773 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,804 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:22:33,804 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:23:33 IST)" executed successfully
+2026-03-12 10:23:33,365 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:24:33 IST)" (scheduled at 2026-03-12 10:23:33.364189+05:30)
+2026-03-12 10:23:33,448 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,492 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,503 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,514 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,524 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,536 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,549 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:23:33,549 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:24:33 IST)" executed successfully
+2026-03-12 10:24:33,391 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:25:33 IST)" (scheduled at 2026-03-12 10:24:33.364189+05:30)
+2026-03-12 10:24:33,409 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,439 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,502 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,511 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,521 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,531 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,540 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:24:33,541 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:25:33 IST)" executed successfully
+2026-03-12 10:25:33,364 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:26:33 IST)" (scheduled at 2026-03-12 10:25:33.364189+05:30)
+2026-03-12 10:25:33,463 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,474 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,483 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,497 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,509 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,520 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,529 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:25:33,530 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:26:33 IST)" executed successfully
+2026-03-12 10:26:33,364 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:27:33 IST)" (scheduled at 2026-03-12 10:26:33.364189+05:30)
+2026-03-12 10:26:33,462 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:33,477 [INFO] main: HDFCBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:26:34,802 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:34,815 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:34,825 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:34,836 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:34,846 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:26:34,847 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:27:33 IST)" executed successfully
+2026-03-12 10:27:33,419 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:28:33 IST)" (scheduled at 2026-03-12 10:27:33.364189+05:30)
+2026-03-12 10:27:33,598 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:27:33,598 [INFO] main: RELIANCE: entry skipped - Cooldown active for 7 more min
+2026-03-12 10:27:33,608 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:27:33,619 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:27:33,628 [INFO] main: INFY | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:27:34,373 [INFO] main: TCS | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:27:35,050 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:27:35,060 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:27:35,060 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:28:33 IST)" executed successfully
+2026-03-12 10:28:33,377 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:29:33 IST)" (scheduled at 2026-03-12 10:28:33.364189+05:30)
+2026-03-12 10:28:33,410 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:28:33,410 [INFO] main: RELIANCE: entry skipped - Max open positions reached (3)
+2026-03-12 10:28:33,420 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:28:34,232 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:28:34,243 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:28:40,501 [INFO] main: TCS | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:28:40,503 [INFO] main: TCS: entry skipped - Position already open
+2026-03-12 10:28:44,595 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:28:44,605 [INFO] main: SBIN | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:28:44,606 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:29:33 IST)" executed successfully
+2026-03-12 10:29:33,365 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:30:33 IST)" (scheduled at 2026-03-12 10:29:33.364189+05:30)
+2026-03-12 10:29:33,386 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:29:33,443 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,457 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,468 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,478 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,489 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,499 [INFO] main: SBIN | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:29:33,499 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:30:33 IST)" executed successfully
+2026-03-12 10:30:02,010 [INFO] candle_builder: Restored candle cache: {'RELIANCE': 68, 'HDFCBANK': 68, 'ICICIBANK': 68, 'INFY': 68, 'TCS': 68, 'SUNPHARMA': 68, 'SBIN': 68}
+2026-03-12 10:30:02,013 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 10:30:02,561 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 10:30:02,564 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 10:30:02,564 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 10:30:02,564 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-12 10:30:03,581 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 10:30:04,437 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 10:30:04,438 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 10:30:04,438 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 10:30:04,481 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 10:30:04,482 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 10:30:04,482 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 10:30:04,482 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 10:30:04,484 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-12 10:30:04,484 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-12 10:30:04,485 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-12 10:30:04,485 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-12 10:30:04,485 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-12 10:30:04,486 [INFO] main: Scheduler started. Agent is running.
+2026-03-12 10:30:05,538 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 10:31:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:31:04 IST)" (scheduled at 2026-03-12 10:31:04.482396+05:30)
+2026-03-12 10:31:04,483 [INFO] main: Market open - scanning started | bias +1.00%
+2026-03-12 10:31:04,542 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,551 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,560 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,570 [INFO] main: INFY | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,579 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,587 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,597 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:31:04,597 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:32:04 IST)" executed successfully
+2026-03-12 10:32:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:33:04 IST)" (scheduled at 2026-03-12 10:32:04.482396+05:30)
+2026-03-12 10:32:04,506 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,523 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,535 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,546 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,559 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,572 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,582 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:32:04,583 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:33:04 IST)" executed successfully
+2026-03-12 10:33:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:34:04 IST)" (scheduled at 2026-03-12 10:33:04.482396+05:30)
+2026-03-12 10:33:04,506 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:33:04,507 [INFO] main: RELIANCE: entry skipped - Cooldown active for 2 more min
+2026-03-12 10:33:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:33:04,528 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:33:05,173 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:33:05,183 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:33:05,192 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:33:05,200 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:33:05,200 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:34:04 IST)" executed successfully
+2026-03-12 10:34:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:35:04 IST)" (scheduled at 2026-03-12 10:34:04.482396+05:30)
+2026-03-12 10:34:04,507 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:34:04,507 [INFO] main: RELIANCE: entry skipped - Cooldown active for 1 more min
+2026-03-12 10:34:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:34:04,530 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:34:04,530 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 10:34:04,541 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:34:04,553 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:34:04,565 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:34:04,574 [INFO] main: SBIN | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:34:04,574 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:35:04 IST)" executed successfully
+2026-03-12 10:35:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:36:04 IST)" (scheduled at 2026-03-12 10:35:04.482396+05:30)
+2026-03-12 10:35:04,527 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:35:05,112 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:35:05,122 [INFO] main: ICICIBANK | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:35:05,122 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 10:35:05,133 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:35:05,143 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:35:05,152 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:35:05,161 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:35:05,731 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:36:04 IST)" executed successfully
+2026-03-12 10:36:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:37:04 IST)" (scheduled at 2026-03-12 10:36:04.482396+05:30)
+2026-03-12 10:36:04,502 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:36:04,503 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:36:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:36:04,523 [INFO] main: ICICIBANK | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:36:04,523 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 10:36:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:36:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:36:04,555 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:36:04,565 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:36:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:37:04 IST)" executed successfully
+2026-03-12 10:37:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:38:04 IST)" (scheduled at 2026-03-12 10:37:04.482396+05:30)
+2026-03-12 10:37:04,501 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:37:04,501 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:37:04,511 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:37:04,520 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:37:04,520 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 10:37:04,530 [INFO] main: INFY | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:37:04,530 [INFO] main: INFY: entry skipped - Max open positions reached (3)
+2026-03-12 10:37:04,539 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:37:04,548 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:37:04,557 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:37:04,557 [INFO] main: SBIN: entry skipped - Position already open
+2026-03-12 10:37:04,559 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:38:04 IST)" executed successfully
+2026-03-12 10:38:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:39:04 IST)" (scheduled at 2026-03-12 10:38:04.482396+05:30)
+2026-03-12 10:38:04,503 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:38:04,503 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:38:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:38:04,522 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:38:04,522 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 10:38:10,432 [INFO] main: INFY | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:38:10,433 [INFO] main: INFY: entry skipped - Cooldown active for 11 more min
+2026-03-12 10:38:10,442 [INFO] main: TCS | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:38:10,443 [INFO] main: TCS: entry skipped - Cooldown active for 11 more min
+2026-03-12 10:38:10,453 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:38:10,462 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:38:10,463 [INFO] main: SBIN: entry skipped - Position already open
+2026-03-12 10:38:10,465 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:39:04 IST)" executed successfully
+2026-03-12 10:39:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:40:04 IST)" (scheduled at 2026-03-12 10:39:04.482396+05:30)
+2026-03-12 10:39:04,504 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:04,505 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:39:04,516 [INFO] main: HDFCBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:05,118 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:05,118 [INFO] main: ICICIBANK: entry skipped - Max open positions reached (3)
+2026-03-12 10:39:05,128 [INFO] main: INFY | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:05,129 [INFO] main: INFY: entry skipped - Max open positions reached (3)
+2026-03-12 10:39:05,140 [INFO] main: TCS | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:05,140 [INFO] main: TCS: entry skipped - Max open positions reached (3)
+2026-03-12 10:39:05,152 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:39:05,162 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:39:05,162 [INFO] main: SBIN: entry skipped - Position already open
+2026-03-12 10:39:05,164 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:40:04 IST)" executed successfully
+2026-03-12 10:40:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:41:04 IST)" (scheduled at 2026-03-12 10:40:04.482396+05:30)
+2026-03-12 10:40:04,504 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:40:04,504 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:40:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:40:04,527 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:40:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:40:04,547 [INFO] main: TCS | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:40:04,547 [INFO] main: TCS: entry skipped - Max open positions reached (3)
+2026-03-12 10:40:04,558 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:40:04,567 [INFO] main: SBIN | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:40:04,569 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:41:04 IST)" executed successfully
+2026-03-12 10:41:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:42:04 IST)" (scheduled at 2026-03-12 10:41:04.482396+05:30)
+2026-03-12 10:41:04,506 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:41:04,506 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:41:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:41:04,532 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:41:04,545 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:41:04,558 [INFO] main: TCS | score=10 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:41:04,559 [INFO] main: TCS: entry skipped - Max open positions reached (3)
+2026-03-12 10:41:04,572 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:41:04,588 [INFO] main: SBIN | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:41:04,591 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:42:04 IST)" executed successfully
+2026-03-12 10:42:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:43:04 IST)" (scheduled at 2026-03-12 10:42:04.482396+05:30)
+2026-03-12 10:42:04,503 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:42:04,504 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 10:42:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:42:04,526 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:42:04,536 [INFO] main: INFY | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:42:04,536 [INFO] main: INFY: entry skipped - Max open positions reached (3)
+2026-03-12 10:42:04,545 [INFO] main: TCS | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:42:04,546 [INFO] main: TCS: entry skipped - Max open positions reached (3)
+2026-03-12 10:42:04,555 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:42:04,566 [INFO] main: SBIN | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:42:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:43:04 IST)" executed successfully
+2026-03-12 10:43:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:44:04 IST)" (scheduled at 2026-03-12 10:43:04.482396+05:30)
+2026-03-12 10:43:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:43:04,516 [INFO] main: HDFCBANK | score=4 | action=HOLD | quality=FILTERED | allowed=False (Score strength 4 below threshold 6 [NORMAL])
+2026-03-12 10:43:08,688 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:43:08,699 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:43:08,708 [INFO] main: TCS | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:43:08,708 [INFO] main: TCS: entry skipped - Cooldown active for 6 more min
+2026-03-12 10:43:08,718 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:43:08,727 [INFO] main: SBIN | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:43:08,729 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:44:04 IST)" executed successfully
+2026-03-12 10:44:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:45:04 IST)" (scheduled at 2026-03-12 10:44:04.482396+05:30)
+2026-03-12 10:44:04,501 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,585 [INFO] main: HDFCBANK | score=4 | action=HOLD | quality=FILTERED | allowed=False (Score strength 4 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,596 [INFO] main: ICICIBANK | score=4 | action=HOLD | quality=FILTERED | allowed=False (Score strength 4 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,607 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,620 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,632 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,641 [INFO] main: SBIN | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:44:08,643 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:45:04 IST)" executed successfully
+2026-03-12 10:45:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:46:04 IST)" (scheduled at 2026-03-12 10:45:04.482396+05:30)
+2026-03-12 10:45:04,505 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:45:04,505 [INFO] main: RELIANCE: entry skipped - Cooldown active for 19 more min
+2026-03-12 10:45:04,516 [INFO] main: HDFCBANK | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,528 [INFO] main: ICICIBANK | score=4 | action=HOLD | quality=FILTERED | allowed=False (Score strength 4 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,538 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,564 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,576 [INFO] main: SBIN | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:45:04,578 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:46:04 IST)" executed successfully
+2026-03-12 10:46:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:47:04 IST)" (scheduled at 2026-03-12 10:46:04.482396+05:30)
+2026-03-12 10:46:04,506 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:46:04,506 [INFO] main: RELIANCE: entry skipped - Cooldown active for 18 more min
+2026-03-12 10:46:04,517 [INFO] main: HDFCBANK | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,528 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,538 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,549 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,561 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,571 [INFO] main: SBIN | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:46:04,574 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:47:04 IST)" executed successfully
+2026-03-12 10:47:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:48:04 IST)" (scheduled at 2026-03-12 10:47:04.482396+05:30)
+2026-03-12 10:47:04,504 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:47:04,504 [INFO] main: RELIANCE: entry skipped - Cooldown active for 17 more min
+2026-03-12 10:47:04,514 [INFO] main: HDFCBANK | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,523 [INFO] main: ICICIBANK | score=4 | action=HOLD | quality=FILTERED | allowed=False (Score strength 4 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,543 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,563 [INFO] main: SBIN | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:47:04,565 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:48:04 IST)" executed successfully
+2026-03-12 10:48:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:49:04 IST)" (scheduled at 2026-03-12 10:48:04.482396+05:30)
+2026-03-12 10:48:04,502 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:48:04,502 [INFO] main: RELIANCE: entry skipped - Cooldown active for 16 more min
+2026-03-12 10:48:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:48:04,524 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:48:04,524 [INFO] main: ICICIBANK: entry skipped - Cooldown active for 11 more min
+2026-03-12 10:48:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:48:04,544 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:48:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:48:04,562 [INFO] main: SBIN | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:48:04,564 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:49:04 IST)" executed successfully
+2026-03-12 10:49:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:50:04 IST)" (scheduled at 2026-03-12 10:49:04.482396+05:30)
+2026-03-12 10:49:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,528 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:49:04,529 [INFO] main: ICICIBANK: entry skipped - Cooldown active for 10 more min
+2026-03-12 10:49:04,541 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,571 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:49:04,573 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:50:04 IST)" executed successfully
+2026-03-12 10:50:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:51:04 IST)" (scheduled at 2026-03-12 10:50:04.482396+05:30)
+2026-03-12 10:50:04,507 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:50:04,507 [INFO] main: RELIANCE: entry skipped - Cooldown active for 14 more min
+2026-03-12 10:50:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:50:04,530 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:50:04,543 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:50:04,556 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:50:04,566 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:50:04,576 [INFO] main: SBIN | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:50:04,578 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:51:04 IST)" executed successfully
+2026-03-12 10:51:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:52:04 IST)" (scheduled at 2026-03-12 10:51:04.482396+05:30)
+2026-03-12 10:51:08,327 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:51:08,337 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,347 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,356 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,365 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,375 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,384 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:51:08,384 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:52:04 IST)" executed successfully
+2026-03-12 10:52:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:53:04 IST)" (scheduled at 2026-03-12 10:52:04.482396+05:30)
+2026-03-12 10:52:04,503 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,525 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,535 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,560 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,570 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:52:04,570 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:53:04 IST)" executed successfully
+2026-03-12 10:53:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:54:04 IST)" (scheduled at 2026-03-12 10:53:04.482396+05:30)
+2026-03-12 10:53:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,525 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,535 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,566 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:53:04,566 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:54:04 IST)" executed successfully
+2026-03-12 10:54:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:55:04 IST)" (scheduled at 2026-03-12 10:54:04.482396+05:30)
+2026-03-12 10:54:04,504 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:54:04,504 [INFO] main: RELIANCE: entry skipped - Cooldown active for 10 more min
+2026-03-12 10:54:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:54:04,522 [INFO] main: ICICIBANK | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:54:04,522 [INFO] main: ICICIBANK: entry skipped - Cooldown active for 5 more min
+2026-03-12 10:54:04,531 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:54:04,540 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:54:04,548 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:54:04,558 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:54:04,559 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:55:04 IST)" executed successfully
+2026-03-12 10:55:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:56:04 IST)" (scheduled at 2026-03-12 10:55:04.482396+05:30)
+2026-03-12 10:55:04,503 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:55:04,503 [INFO] main: RELIANCE: entry skipped - Cooldown active for 9 more min
+2026-03-12 10:55:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:55:04,524 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:55:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:55:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:55:04,555 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:55:04,565 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:55:04,565 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:56:04 IST)" executed successfully
+2026-03-12 10:56:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:57:04 IST)" (scheduled at 2026-03-12 10:56:04.482396+05:30)
+2026-03-12 10:56:04,503 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,514 [INFO] main: HDFCBANK | score=3 | action=HOLD | quality=FILTERED | allowed=False (Score strength 3 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,527 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,547 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:56:04,568 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:57:04 IST)" executed successfully
+2026-03-12 10:57:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:58:04 IST)" (scheduled at 2026-03-12 10:57:04.482396+05:30)
+2026-03-12 10:57:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,527 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:57:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,561 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,571 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:57:04,572 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:58:04 IST)" executed successfully
+2026-03-12 10:58:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:59:04 IST)" (scheduled at 2026-03-12 10:58:04.482396+05:30)
+2026-03-12 10:58:04,506 [INFO] main: RELIANCE | score=10 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:58:04,506 [INFO] main: RELIANCE: entry skipped - Cooldown active for 6 more min
+2026-03-12 10:58:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:58:04,527 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:58:04,527 [INFO] main: ICICIBANK: entry skipped - Cooldown active for 1 more min
+2026-03-12 10:58:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:58:04,548 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:58:04,558 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:58:04,568 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:58:04,569 [INFO] main: SBIN: entry skipped - Cooldown active for 13 more min
+2026-03-12 10:58:04,569 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 10:59:04 IST)" executed successfully
+2026-03-12 10:59:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:00:04 IST)" (scheduled at 2026-03-12 10:59:04.482396+05:30)
+2026-03-12 10:59:04,503 [INFO] main: RELIANCE | score=10 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:59:04,503 [INFO] main: RELIANCE: entry skipped - Cooldown active for 5 more min
+2026-03-12 10:59:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:59:04,523 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 10:59:04,533 [INFO] main: INFY | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:59:05,142 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:59:05,152 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 10:59:05,162 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 10:59:05,162 [INFO] main: SBIN: entry skipped - Cooldown active for 12 more min
+2026-03-12 10:59:05,162 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:00:04 IST)" executed successfully
+2026-03-12 11:00:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:01:04 IST)" (scheduled at 2026-03-12 11:00:04.482396+05:30)
+2026-03-12 11:00:04,484 [INFO] apscheduler.executors.default: Running job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-12 11:30:04 IST)" (scheduled at 2026-03-12 11:00:04.482582+05:30)
+2026-03-12 11:00:04,509 [INFO] main: RELIANCE | score=10 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:00:04,509 [INFO] main: RELIANCE: entry skipped - Cooldown active for 4 more min
+2026-03-12 11:00:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:00:04,531 [INFO] main: ICICIBANK | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:00:05,131 [INFO] apscheduler.executors.default: Job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-12 11:30:04 IST)" executed successfully
+2026-03-12 11:00:05,174 [INFO] main: INFY | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:00:05,174 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:00:05,185 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:00:05,194 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:00:05,203 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:00:05,204 [INFO] main: SBIN: entry skipped - Cooldown active for 11 more min
+2026-03-12 11:00:05,204 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:01:04 IST)" executed successfully
+2026-03-12 11:01:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:02:04 IST)" (scheduled at 2026-03-12 11:01:04.482396+05:30)
+2026-03-12 11:01:04,505 [INFO] main: RELIANCE | score=10 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:01:04,505 [INFO] main: RELIANCE: entry skipped - Cooldown active for 3 more min
+2026-03-12 11:01:04,515 [INFO] main: HDFCBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:01:04,516 [INFO] main: HDFCBANK: entry skipped - Cooldown active for 3 more min
+2026-03-12 11:01:04,526 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:01:04,526 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:01:04,537 [INFO] main: INFY | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:01:04,538 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:01:04,550 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:01:04,560 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:01:04,570 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:01:04,570 [INFO] main: SBIN: entry skipped - Cooldown active for 10 more min
+2026-03-12 11:01:04,570 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:02:04 IST)" executed successfully
+2026-03-12 11:02:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:03:04 IST)" (scheduled at 2026-03-12 11:02:04.482396+05:30)
+2026-03-12 11:02:04,506 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:02:04,506 [INFO] main: RELIANCE: entry skipped - Cooldown active for 2 more min
+2026-03-12 11:02:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:02:04,526 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 11:02:04,538 [INFO] main: INFY | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:02:04,538 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:02:04,549 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:02:04,559 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:02:04,569 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:02:04,569 [INFO] main: SBIN: entry skipped - Cooldown active for 9 more min
+2026-03-12 11:02:04,569 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:03:04 IST)" executed successfully
+2026-03-12 11:03:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:04:04 IST)" (scheduled at 2026-03-12 11:03:04.482396+05:30)
+2026-03-12 11:03:04,505 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:03:04,506 [INFO] main: RELIANCE: entry skipped - Cooldown active for 1 more min
+2026-03-12 11:03:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:03:04,527 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 11:03:04,541 [INFO] main: INFY | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:03:04,541 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:03:04,556 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:03:04,567 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:03:04,578 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:03:04,578 [INFO] main: SBIN: entry skipped - Cooldown active for 8 more min
+2026-03-12 11:03:04,578 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:04:04 IST)" executed successfully
+2026-03-12 11:04:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:05:04 IST)" (scheduled at 2026-03-12 11:04:04.482396+05:30)
+2026-03-12 11:04:04,505 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:04:05,109 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:04:05,119 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:04:05,120 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:04:05,131 [INFO] main: INFY | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:04:05,132 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:04:05,143 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:04:05,153 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:04:05,163 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:04:05,164 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:04:05,164 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:05:04 IST)" executed successfully
+2026-03-12 11:05:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:06:04 IST)" (scheduled at 2026-03-12 11:05:04.482396+05:30)
+2026-03-12 11:05:04,569 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:05:04,580 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:05:04,589 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:05:04,590 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:05:04,601 [INFO] main: INFY | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:05:04,601 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:05:04,619 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:05:04,633 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:05:04,643 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:05:04,643 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:05:04,644 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:06:04 IST)" executed successfully
+2026-03-12 11:06:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:07:04 IST)" (scheduled at 2026-03-12 11:06:04.482396+05:30)
+2026-03-12 11:06:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:06:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:06:04,524 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:06:04,524 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:06:04,535 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:06:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:06:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:06:04,565 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:06:04,566 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:06:04,566 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:07:04 IST)" executed successfully
+2026-03-12 11:07:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:08:04 IST)" (scheduled at 2026-03-12 11:07:04.482396+05:30)
+2026-03-12 11:07:04,509 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:07:04,525 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:07:04,537 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:07:04,537 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:07:04,552 [INFO] main: INFY | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:07:04,552 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:07:04,564 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:07:04,574 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:07:04,584 [INFO] main: SBIN | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:07:04,585 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:07:04,585 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:08:04 IST)" executed successfully
+2026-03-12 11:08:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:09:04 IST)" (scheduled at 2026-03-12 11:08:04.482396+05:30)
+2026-03-12 11:08:04,506 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:08:04,506 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 11:08:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:08:04,528 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 11:08:04,541 [INFO] main: INFY | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:08:04,541 [INFO] main: INFY: entry skipped - Position already open
+2026-03-12 11:08:04,554 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:08:04,565 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:08:04,575 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:08:04,575 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:08:04,575 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:09:04 IST)" executed successfully
+2026-03-12 11:09:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:10:04 IST)" (scheduled at 2026-03-12 11:09:04.482396+05:30)
+2026-03-12 11:09:04,503 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:09:04,504 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 11:09:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,527 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,540 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,552 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,572 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:09:04,572 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:10:04 IST)" executed successfully
+2026-03-12 11:10:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:11:04 IST)" (scheduled at 2026-03-12 11:10:04.482396+05:30)
+2026-03-12 11:10:04,508 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:10:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:10:04,530 [INFO] main: ICICIBANK | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:10:04,530 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:10:04,541 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:10:04,554 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:10:04,564 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:10:04,574 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:10:04,574 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:10:04,574 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:11:04 IST)" executed successfully
+2026-03-12 11:11:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:12:04 IST)" (scheduled at 2026-03-12 11:11:04.482396+05:30)
+2026-03-12 11:11:04,502 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:11:04,512 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:11:04,522 [INFO] main: ICICIBANK | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:11:04,522 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:11:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:11:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:11:04,554 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:11:04,563 [INFO] main: SBIN | score=9 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:11:04,564 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:11:04,564 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:12:04 IST)" executed successfully
+2026-03-12 11:12:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:13:04 IST)" (scheduled at 2026-03-12 11:12:04.482396+05:30)
+2026-03-12 11:12:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:12:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:12:04,524 [INFO] main: ICICIBANK | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:12:04,525 [INFO] main: ICICIBANK: entry skipped - Position already open
+2026-03-12 11:12:04,535 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:12:04,548 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:12:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:12:04,567 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:12:04,567 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:12:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:13:04 IST)" executed successfully
+2026-03-12 11:13:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:14:04 IST)" (scheduled at 2026-03-12 11:13:04.482396+05:30)
+2026-03-12 11:13:04,503 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:13:04,503 [INFO] main: RELIANCE: entry skipped - Position already open
+2026-03-12 11:13:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:13:04,527 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 11:13:04,540 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:13:04,552 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:13:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:13:04,573 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:13:04,573 [INFO] main: SBIN: entry skipped - Max open positions reached (3)
+2026-03-12 11:13:04,573 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:14:04 IST)" executed successfully
+2026-03-12 11:14:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:15:04 IST)" (scheduled at 2026-03-12 11:14:04.482396+05:30)
+2026-03-12 11:14:08,601 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=False (HALTED: 4 consecutive losses)
+2026-03-12 11:14:12,638 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 5 consecutive losses)
+2026-03-12 11:14:12,650 [INFO] main: ICICIBANK | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 5 consecutive losses)
+2026-03-12 11:14:16,433 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:14:16,444 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:14:16,454 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:14:16,465 [INFO] main: SBIN | score=7 | action=BUY | quality=A | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:14:16,465 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:15:04 IST)" executed successfully
+2026-03-12 11:15:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:16:04 IST)" (scheduled at 2026-03-12 11:15:04.482396+05:30)
+2026-03-12 11:15:04,505 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,527 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,548 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,558 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,569 [INFO] main: SBIN | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:15:04,569 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:16:04 IST)" executed successfully
+2026-03-12 11:16:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:17:04 IST)" (scheduled at 2026-03-12 11:16:04.482396+05:30)
+2026-03-12 11:16:04,507 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,527 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,566 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:16:04,566 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:17:04 IST)" executed successfully
+2026-03-12 11:17:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:18:04 IST)" (scheduled at 2026-03-12 11:17:04.482396+05:30)
+2026-03-12 11:17:04,507 [INFO] main: RELIANCE | score=7 | action=BUY | quality=A | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,528 [INFO] main: ICICIBANK | score=5 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,538 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,549 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,560 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,569 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:17:04,570 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:18:04 IST)" executed successfully
+2026-03-12 11:18:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:19:04 IST)" (scheduled at 2026-03-12 11:18:04.482396+05:30)
+2026-03-12 11:18:04,504 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,526 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,548 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,558 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,570 [INFO] main: SBIN | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:18:04,570 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:19:04 IST)" executed successfully
+2026-03-12 11:19:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:20:04 IST)" (scheduled at 2026-03-12 11:19:04.482396+05:30)
+2026-03-12 11:19:04,505 [INFO] main: RELIANCE | score=4 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,528 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,539 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,571 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:19:04,572 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:20:04 IST)" executed successfully
+2026-03-12 11:20:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:21:04 IST)" (scheduled at 2026-03-12 11:20:04.482396+05:30)
+2026-03-12 11:20:04,506 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,527 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,547 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:20:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:21:04 IST)" executed successfully
+2026-03-12 11:21:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:22:04 IST)" (scheduled at 2026-03-12 11:21:04.482396+05:30)
+2026-03-12 11:21:04,506 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,519 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,531 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,541 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,550 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,561 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,571 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:21:04,571 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:22:04 IST)" executed successfully
+2026-03-12 11:22:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:23:04 IST)" (scheduled at 2026-03-12 11:22:04.482396+05:30)
+2026-03-12 11:22:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,516 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,527 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,538 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,549 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,560 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,571 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:22:04,571 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:23:04 IST)" executed successfully
+2026-03-12 11:23:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:24:04 IST)" (scheduled at 2026-03-12 11:23:04.482396+05:30)
+2026-03-12 11:23:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,519 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,530 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,542 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,554 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,566 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,577 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:23:04,577 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:24:04 IST)" executed successfully
+2026-03-12 11:24:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:25:04 IST)" (scheduled at 2026-03-12 11:24:04.482396+05:30)
+2026-03-12 11:24:04,506 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,531 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,542 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,553 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,565 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,575 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:24:04,575 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:25:04 IST)" executed successfully
+2026-03-12 11:25:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:26:04 IST)" (scheduled at 2026-03-12 11:25:04.482396+05:30)
+2026-03-12 11:25:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,542 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,551 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,560 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:25:04,560 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:26:04 IST)" executed successfully
+2026-03-12 11:26:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:27:04 IST)" (scheduled at 2026-03-12 11:26:04.482396+05:30)
+2026-03-12 11:26:04,525 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,534 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,544 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,554 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,565 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,574 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,585 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:26:04,586 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:27:04 IST)" executed successfully
+2026-03-12 11:27:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:28:04 IST)" (scheduled at 2026-03-12 11:27:04.482396+05:30)
+2026-03-12 11:27:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,543 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,563 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:27:04,563 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:28:04 IST)" executed successfully
+2026-03-12 11:28:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:29:04 IST)" (scheduled at 2026-03-12 11:28:04.482396+05:30)
+2026-03-12 11:28:04,503 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,512 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,522 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,531 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,541 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,550 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,559 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:28:04,560 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:29:04 IST)" executed successfully
+2026-03-12 11:29:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:30:04 IST)" (scheduled at 2026-03-12 11:29:04.482396+05:30)
+2026-03-12 11:29:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,526 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,547 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:29:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:30:04 IST)" executed successfully
+2026-03-12 11:30:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:31:04 IST)" (scheduled at 2026-03-12 11:30:04.482396+05:30)
+2026-03-12 11:30:04,483 [INFO] apscheduler.executors.default: Running job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-12 12:00:04 IST)" (scheduled at 2026-03-12 11:30:04.482582+05:30)
+2026-03-12 11:30:04,508 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,519 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,529 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,540 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,573 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:30:04,574 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:31:04 IST)" executed successfully
+2026-03-12 11:30:05,080 [INFO] apscheduler.executors.default: Job "heartbeat_job (trigger: interval[0:30:00], next run at: 2026-03-12 12:00:04 IST)" executed successfully
+2026-03-12 11:31:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:32:04 IST)" (scheduled at 2026-03-12 11:31:04.482396+05:30)
+2026-03-12 11:31:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,525 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,535 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:31:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:32:04 IST)" executed successfully
+2026-03-12 11:32:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:33:04 IST)" (scheduled at 2026-03-12 11:32:04.482396+05:30)
+2026-03-12 11:32:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,530 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,541 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,552 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,563 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,573 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:32:04,574 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:33:04 IST)" executed successfully
+2026-03-12 11:33:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:34:04 IST)" (scheduled at 2026-03-12 11:33:04.482396+05:30)
+2026-03-12 11:33:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,543 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,562 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:33:04,562 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:34:04 IST)" executed successfully
+2026-03-12 11:34:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:35:04 IST)" (scheduled at 2026-03-12 11:34:04.482396+05:30)
+2026-03-12 11:34:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,524 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,566 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:34:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:35:04 IST)" executed successfully
+2026-03-12 11:35:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:36:04 IST)" (scheduled at 2026-03-12 11:35:04.482396+05:30)
+2026-03-12 11:35:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,524 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,544 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,562 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:35:04,563 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:36:04 IST)" executed successfully
+2026-03-12 11:36:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:37:04 IST)" (scheduled at 2026-03-12 11:36:04.482396+05:30)
+2026-03-12 11:36:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,527 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,559 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,569 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:36:04,570 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:37:04 IST)" executed successfully
+2026-03-12 11:37:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:38:04 IST)" (scheduled at 2026-03-12 11:37:04.482396+05:30)
+2026-03-12 11:37:04,509 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,520 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,531 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,543 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,555 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,566 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,577 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:37:04,577 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:38:04 IST)" executed successfully
+2026-03-12 11:38:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:39:04 IST)" (scheduled at 2026-03-12 11:38:04.482396+05:30)
+2026-03-12 11:38:04,507 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,527 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,547 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,566 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:38:04,566 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:39:04 IST)" executed successfully
+2026-03-12 11:39:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:40:04 IST)" (scheduled at 2026-03-12 11:39:04.482396+05:30)
+2026-03-12 11:39:04,503 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,544 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,563 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:39:04,564 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:40:04 IST)" executed successfully
+2026-03-12 11:40:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:41:04 IST)" (scheduled at 2026-03-12 11:40:04.482396+05:30)
+2026-03-12 11:40:04,507 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,528 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,539 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,550 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,573 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:40:04,573 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:41:04 IST)" executed successfully
+2026-03-12 11:41:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:42:04 IST)" (scheduled at 2026-03-12 11:41:04.482396+05:30)
+2026-03-12 11:41:04,507 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,519 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,530 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,540 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,551 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,562 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,572 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:41:04,572 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:42:04 IST)" executed successfully
+2026-03-12 11:42:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:43:04 IST)" (scheduled at 2026-03-12 11:42:04.482396+05:30)
+2026-03-12 11:42:04,507 [INFO] main: RELIANCE | score=3 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,517 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,527 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,537 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,547 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:42:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:43:04 IST)" executed successfully
+2026-03-12 11:43:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:44:04 IST)" (scheduled at 2026-03-12 11:43:04.482396+05:30)
+2026-03-12 11:43:04,507 [INFO] main: RELIANCE | score=3 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,518 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,529 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,542 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,554 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,565 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,576 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:43:04,577 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:44:04 IST)" executed successfully
+2026-03-12 11:44:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:45:04 IST)" (scheduled at 2026-03-12 11:44:04.482396+05:30)
+2026-03-12 11:44:04,503 [INFO] main: RELIANCE | score=3 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,512 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,522 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,531 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,541 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,551 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,562 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:44:04,562 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:45:04 IST)" executed successfully
+2026-03-12 11:45:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:46:04 IST)" (scheduled at 2026-03-12 11:45:04.482396+05:30)
+2026-03-12 11:45:04,504 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,514 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,524 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,534 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,543 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,563 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:45:04,563 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:46:04 IST)" executed successfully
+2026-03-12 11:46:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:47:04 IST)" (scheduled at 2026-03-12 11:46:04.482396+05:30)
+2026-03-12 11:46:04,503 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,544 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,554 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,567 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:46:04,567 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:47:04 IST)" executed successfully
+2026-03-12 11:47:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:48:04 IST)" (scheduled at 2026-03-12 11:47:04.482396+05:30)
+2026-03-12 11:47:04,505 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,515 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,526 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,536 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,546 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,557 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,568 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:47:04,568 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:48:04 IST)" executed successfully
+2026-03-12 11:48:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:49:04 IST)" (scheduled at 2026-03-12 11:48:04.482396+05:30)
+2026-03-12 11:48:04,504 [INFO] main: RELIANCE | score=9 | action=BUY | quality=A | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,523 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,543 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,553 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,563 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:48:04,563 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:49:04 IST)" executed successfully
+2026-03-12 11:49:04,483 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:50:04 IST)" (scheduled at 2026-03-12 11:49:04.482396+05:30)
+2026-03-12 11:49:04,504 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,513 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,522 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,533 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,545 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,556 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,565 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (HALTED: 6 consecutive losses)
+2026-03-12 11:49:04,565 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:50:04 IST)" executed successfully
+2026-03-12 11:49:18,139 [INFO] candle_builder: Restored candle cache: {'RELIANCE': 100, 'HDFCBANK': 100, 'ICICIBANK': 100, 'INFY': 100, 'TCS': 100, 'SUNPHARMA': 100, 'SBIN': 100}
+2026-03-12 11:49:18,156 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:49:18,691 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:49:18,693 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:49:18,694 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:49:18,694 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-12 11:49:19,711 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 11:49:20,559 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:49:20,561 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:49:20,561 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:49:20,569 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:49:20,571 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:49:20,571 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:49:20,572 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:49:20,573 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-12 11:49:20,573 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-12 11:49:20,573 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-12 11:49:20,573 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-12 11:49:20,573 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-12 11:49:20,574 [INFO] main: Scheduler started. Agent is running.
+2026-03-12 11:49:21,921 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 11:50:20,572 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:50:20 IST)" (scheduled at 2026-03-12 11:50:20.571253+05:30)
+2026-03-12 11:50:20,573 [INFO] main: Market open - scanning started | bias +1.00%
+2026-03-12 11:50:20,719 [INFO] main: RELIANCE | score=6 | action=HOLD | quality=B | allowed=True (OK)
+2026-03-12 11:50:20,730 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,741 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,753 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,763 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,773 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,784 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:50:20,784 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:51:20 IST)" executed successfully
+2026-03-12 11:51:20,571 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:52:20 IST)" (scheduled at 2026-03-12 11:51:20.571253+05:30)
+2026-03-12 11:51:20,591 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,601 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,610 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,626 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,639 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,649 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,660 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:51:20,660 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:52:20 IST)" executed successfully
+2026-03-12 11:52:20,572 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:53:20 IST)" (scheduled at 2026-03-12 11:52:20.571253+05:30)
+2026-03-12 11:52:20,636 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,653 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,664 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,674 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,685 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,694 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,704 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:52:20,704 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:53:20 IST)" executed successfully
+2026-03-12 11:53:20,571 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:54:20 IST)" (scheduled at 2026-03-12 11:53:20.571253+05:30)
+2026-03-12 11:53:20,593 [INFO] main: RELIANCE | score=5 | action=HOLD | quality=FILTERED | allowed=False (Score strength 5 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,603 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,612 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,625 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,635 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,644 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,654 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:53:20,654 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:54:20 IST)" executed successfully
+2026-03-12 11:54:20,571 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:55:20 IST)" (scheduled at 2026-03-12 11:54:20.571253+05:30)
+2026-03-12 11:54:20,593 [INFO] main: RELIANCE | score=8 | action=BUY | quality=A | allowed=True (OK)
+2026-03-12 11:54:20,594 [INFO] main: RELIANCE: entry skipped - Cooldown active for 5 more min
+2026-03-12 11:54:20,604 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,615 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,629 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,639 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,652 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,662 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:54:20,662 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:55:20 IST)" executed successfully
+2026-03-12 11:55:20,571 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:56:20 IST)" (scheduled at 2026-03-12 11:55:20.571253+05:30)
+2026-03-12 11:55:20,592 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,601 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,610 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,623 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,635 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,644 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,655 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:55:20,655 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:56:20 IST)" executed successfully
+2026-03-12 11:56:20,572 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:57:20 IST)" (scheduled at 2026-03-12 11:56:20.571253+05:30)
+2026-03-12 11:56:20,592 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,601 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,610 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,626 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,637 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,647 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,659 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 6 [NORMAL])
+2026-03-12 11:56:20,659 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:57:20 IST)" executed successfully
+2026-03-12 11:56:30,306 [INFO] candle_builder: Restored candle cache: {'RELIANCE': 100, 'HDFCBANK': 100, 'ICICIBANK': 100, 'INFY': 100, 'TCS': 100, 'SUNPHARMA': 100, 'SBIN': 100}
+2026-03-12 11:56:30,320 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:56:30,882 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:56:30,884 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:56:30,884 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:56:30,884 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-12 11:56:31,861 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 11:56:31,913 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:56:31,915 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:56:31,915 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:56:31,919 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:56:31,919 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:56:31,919 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:56:31,920 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:56:31,921 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-12 11:56:31,921 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-12 11:56:31,921 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-12 11:56:31,921 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-12 11:56:31,921 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-12 11:56:31,922 [INFO] main: Scheduler started. Agent is running.
+2026-03-12 11:56:33,056 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 11:57:31,920 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:57:31 IST)" (scheduled at 2026-03-12 11:57:31.919661+05:30)
+2026-03-12 11:57:31,921 [INFO] main: Market open - scanning started | bias +1.00%
+2026-03-12 11:57:31,951 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:31,971 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:31,985 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:31,998 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:32,010 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:32,022 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:32,034 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:57:32,035 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:58:31 IST)" executed successfully
+2026-03-12 11:58:31,920 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:59:31 IST)" (scheduled at 2026-03-12 11:58:31.919661+05:30)
+2026-03-12 11:58:31,959 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:31,969 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:31,979 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:31,989 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:31,999 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:32,009 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:32,019 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:58:32,019 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 11:59:31 IST)" executed successfully
+2026-03-12 11:59:31,920 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 12:00:31 IST)" (scheduled at 2026-03-12 11:59:31.919661+05:30)
+2026-03-12 11:59:31,942 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:31,951 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:31,962 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:31,971 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:31,981 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:31,991 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:32,005 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 11:59:32,006 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 12:00:31 IST)" executed successfully
+2026-03-12 11:59:37,828 [INFO] candle_builder: Restored candle cache: {'RELIANCE': 100, 'HDFCBANK': 100, 'ICICIBANK': 100, 'INFY': 100, 'TCS': 100, 'SUNPHARMA': 100, 'SBIN': 100}
+2026-03-12 11:59:37,860 [INFO] main: Loaded watchlist from file: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:59:38,343 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:59:38,345 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:59:38,346 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:59:38,346 [INFO] main: === MiniMax Scalping Agent STARTING | Mode: PAPER ===
+2026-03-12 11:59:39,348 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 11:59:39,435 [INFO] main: Restarting stream for existing watchlist: ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'INFY', 'TCS', 'SUNPHARMA', 'SBIN']
+2026-03-12 11:59:39,436 [INFO] data.kite_stream: KiteStream connecting for 7 instruments
+2026-03-12 11:59:39,436 [INFO] main: Stream auto-restarted for 7 instruments
+2026-03-12 11:59:39,487 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:59:39,489 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:59:39,490 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:59:39,490 [INFO] apscheduler.scheduler: Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-12 11:59:39,493 [INFO] apscheduler.scheduler: Added job "pre_market_job" to job store "default"
+2026-03-12 11:59:39,493 [INFO] apscheduler.scheduler: Added job "candle_close_job" to job store "default"
+2026-03-12 11:59:39,493 [INFO] apscheduler.scheduler: Added job "heartbeat_job" to job store "default"
+2026-03-12 11:59:39,493 [INFO] apscheduler.scheduler: Added job "end_of_day_job" to job store "default"
+2026-03-12 11:59:39,493 [INFO] apscheduler.scheduler: Scheduler started
+2026-03-12 11:59:39,494 [INFO] main: Scheduler started. Agent is running.
+2026-03-12 11:59:40,548 [INFO] data.kite_stream: WebSocket connected. Subscribed to [738561, 341249, 1270529, 408065, 2953217, 857857, 779521]
+2026-03-12 12:00:39,490 [INFO] apscheduler.executors.default: Running job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 12:00:39 IST)" (scheduled at 2026-03-12 12:00:39.489571+05:30)
+2026-03-12 12:00:39,491 [INFO] main: Market open - scanning started | bias +1.00%
+2026-03-12 12:00:39,533 [INFO] main: RELIANCE | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,543 [INFO] main: HDFCBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,553 [INFO] main: ICICIBANK | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,564 [INFO] main: INFY | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,576 [INFO] main: TCS | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,591 [INFO] main: SUNPHARMA | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,601 [INFO] main: SBIN | score=0 | action=HOLD | quality=FILTERED | allowed=False (Score strength 0 below threshold 7 [NORMAL])
+2026-03-12 12:00:39,601 [INFO] apscheduler.executors.default: Job "candle_close_job (trigger: interval[0:01:00], next run at: 2026-03-12 12:01:39 IST)" executed successfully
