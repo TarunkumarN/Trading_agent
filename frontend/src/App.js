@@ -40,7 +40,8 @@ function ReportPage({ report }) {
   useEffect(() => { setCurrent(report); setDate(report?.date || ''); }, [report]);
   const loadDate = async value => { try { const r = await fetch(`${API}/api/report/daily?date=${value}`); const d = await r.json(); setCurrent(d); setDate(d.date || value); } catch {} };
   if (!current) return <div className="empty">Loading report...</div>;
-  return <div className="page-enter"><div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, gap: 12, flexWrap: 'wrap' }}><div className="card-label">Daily report</div><select value={date} onChange={e => loadDate(e.target.value)}>{(current.available_dates || []).map(d => <option key={d} value={d}>{d}</option>)}</select></div><div className="grid-4"><Stat label="Trades" value={current.total_trades || 0} /><Stat label="Wins / Losses" value={`${current.winning_trades || 0} / ${current.losing_trades || 0}`} /><Stat label="Day P&L" value={`Rs ${fmt(current.daily_pnl || 0)}`} color={(current.daily_pnl || 0) >= 0 ? 'var(--green)' : 'var(--red)'} /><Stat label="Profit Factor" value={current.profit_factor || 0} /></div><div className="card" style={{ marginTop: 16 }}><div className="card-head"><span className="card-head-title">Strategy Breakdown</span></div>{(current.strategy_performance || []).length ? <div className="tbl-wrap"><table><thead><tr><th>Strategy</th><th>Trades</th><th>Win%</th><th>P&L</th></tr></thead><tbody>{current.strategy_performance.map((s, i) => <tr key={i}><td>{s.name}</td><td>{s.trades}</td><td>{s.win_rate}%</td><td style={{ color: s.pnl >= 0 ? 'var(--green)' : 'var(--red)' }}>Rs {fmt(s.pnl)}</td></tr>)}</tbody></table></div> : <div className="empty">No strategy data</div>}</div></div>;
+  const dates = current.available_dates || (current.date ? [current.date] : []);
+  return <div className="page-enter"><div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, gap: 12, flexWrap: 'wrap' }}><div className="card-label">Daily report</div><select value={date} onChange={e => loadDate(e.target.value)}>{dates.map(d => <option key={d} value={d}>{d}</option>)}</select></div><div className="grid-4"><Stat label="Trades" value={current.total_trades || 0} /><Stat label="Wins / Losses" value={`${current.winning_trades || 0} / ${current.losing_trades || 0}`} /><Stat label="Day P&L" value={`Rs ${fmt(current.daily_pnl || 0)}`} color={(current.daily_pnl || 0) >= 0 ? 'var(--green)' : 'var(--red)'} /><Stat label="Portfolio" value={`Rs ${fmtINR(current.portfolio_value || 0)}`} /></div><div className="card" style={{ marginTop: 16 }}><div className="card-head"><span className="card-head-title">Performance Metrics</span></div><div className="fo-row"><span className="c-dim">Avg Profit</span><span>Rs {fmt(current.avg_profit || 0)}</span></div><div className="fo-row"><span className="c-dim">Avg Loss</span><span>Rs {fmt(current.avg_loss || 0)}</span></div><div className="fo-row"><span className="c-dim">Profit Factor</span><span>{current.profit_factor || 0}x</span></div><div className="fo-row"><span className="c-dim">Best Trade</span><span>{current.best_trade ? `${current.best_trade.symbol} (${fmt(current.best_trade.pnl || 0)})` : '--'}</span></div><div className="fo-row"><span className="c-dim">Worst Trade</span><span>{current.worst_trade ? `${current.worst_trade.symbol} (${fmt(current.worst_trade.pnl || 0)})` : '--'}</span></div></div><div className="card" style={{ marginTop: 16 }}><div className="card-head"><span className="card-head-title">Strategy Breakdown</span></div>{(current.strategy_performance || []).length ? <div className="tbl-wrap"><table><thead><tr><th>Strategy</th><th>Trades</th><th>Win%</th><th>P&L</th></tr></thead><tbody>{current.strategy_performance.map((s, i) => <tr key={i}><td>{s.name}</td><td>{s.trades}</td><td>{s.win_rate}%</td><td style={{ color: s.pnl >= 0 ? 'var(--green)' : 'var(--red)' }}>Rs {fmt(s.pnl)}</td></tr>)}</tbody></table></div> : <div className="empty">No strategy data</div>}</div></div>;
 }
 
 function PositionsPage({ positions }) {
@@ -72,6 +73,8 @@ function ChartPage() {
   const seriesRef = useRef({});
   const [universe, setUniverse] = useState(null);
   const [symbol, setSymbol] = useState('RELIANCE');
+  const [underlying, setUnderlying] = useState('NIFTY');
+  const [optionSide, setOptionSide] = useState('CALL');
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
@@ -84,6 +87,15 @@ function ChartPage() {
   useEffect(() => {
     if (!symbol) return;
     fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {});
+  }, [symbol]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (symbol) {
+        fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {});
+      }
+    }, 8000);
+    return () => clearInterval(timer);
   }, [symbol]);
 
   useEffect(() => {
@@ -139,7 +151,17 @@ function ChartPage() {
     ['Commodities', universe?.commodities || []],
   ];
 
-  return <div className="page-enter"><div className="card" style={{ marginBottom: 16 }}><div className="card-head"><span className="card-head-title">TradingView Style Chart</span><span className="tag tag-active">{chartData?.instrument_type || '--'}</span></div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>{groups.map(([label, rows]) => <select key={label} value={rows.some(row => row.symbol === symbol) ? symbol : ''} onChange={e => e.target.value && setSymbol(e.target.value)}><option value="">{label}</option>{rows.map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select>)}</div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}><span className="tag tag-ok">Candles</span><span className="tag tag-active">EMA20</span><span className="tag tag-warn">EMA50</span><span className="tag tag-paper">VWAP</span></div><div ref={hostRef} style={{ width: '100%', minHeight: 420 }} /></div><div className="grid-3"><Stat label="Symbol" value={chartData?.symbol || symbol} /><Stat label="Instrument" value={chartData?.instrument_type || '--'} /><Stat label="Candles" value={chartData?.candles?.length || 0} /></div></div>;
+  useEffect(() => {
+    if (underlying && optionSide) {
+      setSymbol(`${underlying}-${optionSide}`);
+    }
+  }, [underlying, optionSide]);
+
+  const commodityBadge = chartData?.instrument_type === 'COMMODITY'
+    ? (symbol.includes('GOLD') || symbol.includes('SILVER') ? 'Metal breakout / VWAP hold' : 'Crude range expansion')
+    : (symbol.includes('CALL') ? 'Bullish option momentum' : symbol.includes('PUT') ? 'Bearish option momentum' : 'Trend / VWAP alignment');
+
+  return <div className="page-enter"><div className="card" style={{ marginBottom: 16 }}><div className="card-head"><span className="card-head-title">TradingView Style Chart</span><span className="tag tag-active">{chartData?.instrument_type || '--'}</span></div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>{groups.map(([label, rows]) => <select key={label} value={rows.some(row => row.symbol === symbol) ? symbol : ''} onChange={e => e.target.value && setSymbol(e.target.value)}><option value="">{label}</option>{rows.map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select>)}</div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}><select value={underlying} onChange={e => setUnderlying(e.target.value)}>{(universe?.fno || []).map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select><select value={optionSide} onChange={e => setOptionSide(e.target.value)}><option value="CALL">CALL</option><option value="PUT">PUT</option></select><button className="fo-btn" onClick={() => fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {})}>Refresh</button></div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}><span className="tag tag-ok">Candles</span><span className="tag tag-active">EMA20</span><span className="tag tag-warn">EMA50</span><span className="tag tag-paper">VWAP</span><span className="tag tag-info">{commodityBadge}</span></div><div ref={hostRef} style={{ width: '100%', minHeight: 420 }} /></div><div className="grid-3"><Stat label="Symbol" value={chartData?.symbol || symbol} /><Stat label="Instrument" value={chartData?.instrument_type || '--'} /><Stat label="Candles" value={chartData?.candles?.length || 0} /></div></div>;
 }
 
 function HealthPage({ health }) {

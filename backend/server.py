@@ -1320,8 +1320,14 @@ async def get_daily_report(date: str = None):
         gross_loss = abs(sum(t["pnl"] for t in losses))
         profit_factor = round(gross_profit / gross_loss, 2) if gross_loss > 0 else 0
 
+        available_dates = sorted({t.get("date", "") for t in all_trades if t.get("date")}, reverse=True)
+
+        def trade_symbol(trade):
+            return trade.get("symbol") or trade.get("stock") or "UNKNOWN"
+
         return {
             "date": target_date,
+            "available_dates": available_dates,
             "total_trades": len(day_trades),
             "winning_trades": len(wins),
             "losing_trades": len(losses),
@@ -1333,12 +1339,12 @@ async def get_daily_report(date: str = None):
             "avg_profit": avg_profit,
             "avg_loss": avg_loss,
             "profit_factor": profit_factor,
-            "best_trade": {"symbol": best["symbol"], "pnl": best["pnl"], "strategy": best.get("strategy", "")} if best else None,
-            "worst_trade": {"symbol": worst["symbol"], "pnl": worst["pnl"], "strategy": worst.get("strategy", "")} if worst else None,
+            "best_trade": {"symbol": trade_symbol(best), "pnl": best.get("pnl", 0), "strategy": best.get("strategy", "")} if best else None,
+            "worst_trade": {"symbol": trade_symbol(worst), "pnl": worst.get("pnl", 0), "strategy": worst.get("strategy", "")} if worst else None,
             "strategy_performance": list(strat_perf.values()),
             "portfolio_growth": portfolio_growth,
             "daily_pnl_history": cumulative,
-            "trades": day_trades,
+            "trades": [_normalize_trade(trade) for trade in day_trades],
         }
     except Exception as e:
         logger.error(f"Daily report error: {e}")
@@ -1738,6 +1744,13 @@ async def get_market_universe():
         return {
             "equities": [row(symbol, "EQUITY") for symbol in DEFAULT_WATCHLIST],
             "fno": [row(symbol, "FNO") for symbol in FNO_SYMBOLS],
+            "options": [
+                {"symbol": f"{symbol}-CALL", "underlying": symbol, "side": "CALL", "instrument_type": "FNO"}
+                for symbol in FNO_SYMBOLS[:8]
+            ] + [
+                {"symbol": f"{symbol}-PUT", "underlying": symbol, "side": "PUT", "instrument_type": "FNO"}
+                for symbol in FNO_SYMBOLS[:8]
+            ],
             "commodities": [row(symbol, "COMMODITY") for symbol in COMMODITY_SYMBOLS],
             "timestamp": get_ist_now().strftime("%H:%M:%S"),
         }
