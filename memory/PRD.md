@@ -1,84 +1,89 @@
-# MiniMax Scalping Agent — PRD
+# MiniMax Pro Trading Terminal - PRD
 
 ## Original Problem Statement
-Audit and harden the TarunkumarN/Trading_agent repository for production trading. Build a professional monitoring dashboard with analytics interface. Zerodha broker, NSE/BSE India market, paper trading mode. Extended with: dashboard/ folder structure, pre/post market analysis, AI brain decisions, bigger fonts, mobile responsive.
+Audit and harden a trading bot from a public GitHub repository, then build a professional trading dashboard on top. The platform evolved to include advanced quant trading intelligence modules for institutional-grade trade quality.
 
 ## Architecture
-- **Backend**: FastAPI (Python) on port 8001 with modular dashboard/ routes
-- **Frontend**: React dashboard on port 3000 (responsive, Chivo + JetBrains Mono fonts)
-- **Database**: MongoDB (minimax_trading) — 8 collections
-- **Broker**: Zerodha Kite Connect
-- **Market**: NSE/BSE India (9:15 AM - 3:30 PM IST)
-
-## User Personas
-- Indian retail trader running automated scalping bot
-- Algo trading enthusiast monitoring performance via dashboard (desktop + mobile)
-
-## Dashboard Folder Structure
 ```
-/app/backend/dashboard/
-├── __init__.py
-├── api_server.py              # Router registration
-├── routes_portfolio.py        # /api/portfolio, /api/open-positions
-├── routes_trades.py           # /api/trades, /api/trades/{trade_id}
-├── routes_market.py           # /api/market/premarket, /postmarket, /gainers, /losers, /active
-├── routes_analytics.py        # /api/strategies/performance, /api/ai-decisions, /api/analytics/summary
-├── templates/                 # HTML templates (for standalone mode)
-└── static/
-    ├── dashboard.css          # Custom styles
-    └── charts.js              # Chart.js configurations
+/app
+├── backend/
+│   ├── ai/                          # AI Intelligence Modules
+│   │   ├── market_predictor.py      # Short-term market direction prediction
+│   │   └── trade_ranker.py          # 0-100 AI trade ranking engine
+│   ├── market/                      # Market Analysis Modules
+│   │   ├── options_flow.py          # Unusual options activity detection
+│   │   ├── dark_pool_detector.py    # Institutional accumulation/distribution zones
+│   │   └── correlation_filter.py    # Multi-asset correlation confirmation
+│   ├── risk/                        # Risk Management
+│   │   └── hedging_engine.py        # Portfolio hedging with exposure analysis
+│   ├── quant/                       # Quant Pipeline
+│   │   └── pipeline.py              # 10-step trade intelligence pipeline orchestrator
+│   ├── dashboard/                   # API Routes
+│   │   ├── api_server.py            # Route registration
+│   │   ├── routes_analytics.py      # Strategy & AI endpoints
+│   │   ├── routes_market.py         # Market data endpoints
+│   │   ├── routes_portfolio.py      # Portfolio endpoints
+│   │   ├── routes_quant.py          # Quant intelligence endpoints (8 new)
+│   │   └── routes_trades.py         # Trade history endpoints
+│   ├── strategies/                  # (Reserved for strategy modules)
+│   ├── tests/                       # Test suite
+│   │   ├── test_minimax_apis.py     # Core API tests
+│   │   └── test_quant_intelligence.py  # Quant module tests
+│   ├── server.py                    # Main FastAPI app + trading engine
+│   └── requirements.txt
+├── frontend/
+│   └── src/
+│       ├── App.js                   # React SPA (14 pages including Quant Intelligence)
+│       └── App.css                  # Theme styles (light/dark)
+└── memory/
+    └── PRD.md
 ```
 
 ## What's Been Implemented
 
-### Phase 1 (2026-03-10) — System Audit & Hardening
-- Full system audit: 14 issues identified and FIXED
-- MongoDB state persistence (8 collections)
-- Duplicate order prevention, 3-retry logic, risk controls
-- Market hours enforcement, trailing SL, drawdown detection
+### Core Platform
+- [x] Full-stack React + FastAPI + MongoDB trading platform
+- [x] 14-page dashboard: Dashboard, Portfolio, Daily Report, System Health, Market Analysis, AI Brain, Quant Intelligence, Strategies, Positions, Trade History, Risk, F&O Calculator, Audit & Logs, Settings
+- [x] Login authentication
+- [x] Light/Dark mode toggle
+- [x] SIM/LIVE mode switch
+- [x] ₹50,000 initial capital
+- [x] Mobile responsive UI
 
-### Phase 2 (2026-03-10) — Dashboard Extension
-- Created dashboard/ folder with modular route files
-- **Portfolio Page**: Equity curve, daily P&L chart, metrics (win rate, profit factor, max drawdown, avg profit/loss)
-- **AI Brain Page**: 6-step reasoning chain per trade, confidence bars, accuracy stats
-- **Market Analysis**: Pre-market (gap ups/downs, volume leaders, AI market bias) + Post-market (day summary, best/worst performers, breadth)
-- **Strategy Performance**: Per-strategy metrics with P&L history charts
-- **Trade Detail Modal**: Full trade analysis with AI validation, market regime, prediction probability
-- **Bigger Fonts**: Base 16px (was 14px), metrics at 2.2rem
-- **Mobile Responsive**: Hamburger menu, stacked grids, collapsible sidebar
-- 21 API endpoints total, 12 dashboard pages, 21 sample trades across 6 days
+### Quant Intelligence Modules (NEW - Mar 2026)
+- [x] **Options Flow Analysis** (`market/options_flow.py`): Detects unusual call/put buying, block trades, volume-price divergences
+- [x] **Dark Pool Detection** (`market/dark_pool_detector.py`): Simulated institutional accumulation/distribution zones via volume clusters, VWAP deviations, absorption candles
+- [x] **AI Market Predictor** (`ai/market_predictor.py`): 7-factor prediction model (EMA trend, RSI, VWAP, volume, momentum, BB, regime). Trade allowed only if confidence >= 65
+- [x] **AI Trade Ranker** (`ai/trade_ranker.py`): 0-100 scoring across 6 components. Trade allowed only if score >= 85
+- [x] **Correlation Filter** (`market/correlation_filter.py`): Multi-asset confirmation (NIFTY-BANKNIFTY, sector correlations, inverse correlations)
+- [x] **Portfolio Hedging Engine** (`risk/hedging_engine.py`): Exposure analysis, hedge recommendations when bullish > 60%
+- [x] **Trade Intelligence Pipeline** (`quant/pipeline.py`): 10-step sequential validation (time filter -> frequency -> regime -> dark pool -> options flow -> correlation -> AI prediction -> R:R check -> rank -> hedge)
 
-## Testing Status
-- Backend: 100% (21/21 endpoints passed)
-- Frontend: 100% (12 pages, navigation, login, modals, charts all working)
-- Mobile: CSS media queries at 768px and 480px breakpoints
+### Trading Rules
+- [x] Trading window: 09:30 - 14:45 IST
+- [x] Max trades/day: 4
+- [x] Max consecutive losses: 3
+- [x] Daily drawdown limit: 4%
+- [x] Minimum risk-reward: 1:2
+- [x] Minimum trade rank score: 85/100
 
-## MongoDB Collections
-- `open_positions` — Active positions (unique by symbol)
-- `trades` — Closed trade history (21 seeded)
-- `event_logs` — System events
-- `portfolio_history` — Portfolio snapshots
-- `active_strategies` — 4 strategies
-- `signals_generated` — AI signal history
-- `bot_state` — Runtime config
-- `daily_stats` — Daily risk state
+### API Endpoints (29 total)
+Core: /api/data, /api/portfolio, /api/report/daily, /api/health, /api/risk, /api/config, /api/mode, /api/mode/switch, /api/auth/login, /api/market/live, /api/ai/regime, /api/ai-decisions, /api/strategies/performance, /api/open-positions, /api/trades, /api/fo/calculate, /api/audit, /api/logs
+Quant: /api/quant/dashboard, /api/quant/pipeline/{symbol}, /api/quant/options-flow/{symbol}, /api/quant/dark-pool/{symbol}, /api/quant/ai-prediction/{symbol}, /api/quant/correlation/{symbol}, /api/quant/trade-rank/{symbol}, /api/quant/hedge-analysis, /api/quant/frequency-status
 
-## Prioritized Backlog
+## Remaining / Backlog
 
-### P0 (Critical for Live)
-- [ ] Kite Connect WebSocket integration (KiteTicker)
-- [ ] Live order placement via Kite API
-- [ ] Access token refresh automation
+### P0
+- [ ] Live Trading Broker Integration (Zerodha Kite Connect) - actual order execution
+- [ ] Live Market Data Feed (real-time NSE data instead of fallback/seeded)
 
-### P1 (High Priority)
-- [ ] Real-time position monitoring with broker LTP
-- [ ] Live NSE data feed (replace NSE API scraping)
+### P1
+- [ ] Commodity strategies (Gold, Silver, Crude Oil) implementation
 - [ ] Telegram bot commands (/status, /positions, /halt)
-- [ ] WebSocket reconnect with candle resume
-
-### P2 (Nice to Have)
-- [ ] MiniMax AI brain integration for live signal refinement
 - [ ] Backtesting module with historical data
-- [ ] Multi-timeframe analysis
+
+### P2
 - [ ] Export trade history to CSV/Excel
 - [ ] Portfolio allocation optimization
+- [ ] Real-time WebSocket price feed
+- [ ] MiniMax AI brain integration for live signal refinement
