@@ -14,6 +14,7 @@ from agent.pre_market import run_end_of_day_review, run_pre_market
 from analytics.performance_metrics import calculate_performance_metrics
 from config import MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE, MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE, TRADING_MODE
 from data.candle_builder import CandleBuilder
+from data.contract_resolver import get_live_price, lot_aligned_quantity
 from data.kite_stream import start_stream
 from data.token_lookup import get_tokens
 from execution import create_trader
@@ -144,9 +145,21 @@ def pre_market_job():
         send_telegram(f"Stream error: {exc} - using simulated prices")
 
 
+def _position_ltp(stock, latest_prices):
+    position = trader.positions.get(stock, {})
+    tradingsymbol = position.get("tradingsymbol", stock)
+    exchange = position.get("exchange", "NSE")
+    ltp = latest_prices.get(stock) or latest_prices.get(tradingsymbol) or position.get("current_price")
+    if not ltp and tradingsymbol != stock:
+        ltp = get_live_price(tradingsymbol, exchange)
+    if not ltp:
+        ltp = candle_builder.get_latest_price(stock)
+    return ltp
+
+
 def _update_open_positions(latest_prices):
     for stock in list(trader.positions.keys()):
-        ltp = latest_prices.get(stock) or candle_builder.get_latest_price(stock)
+        ltp = _position_ltp(stock, latest_prices)
         if ltp and ltp > 0:
             trader.update_price(stock, ltp)
 
@@ -183,7 +196,8 @@ def _evaluate_new_trades():
             logger.info(f"{stock}: guard blocked - {guard_reason}")
             continue
 
-        can_open, open_reason = trader.can_open(stock)
+        position_key = decision.get("underlying_symbol") or stock
+        can_open, open_reason = trader.can_open(position_key)
         if not can_open:
             logger.info(f"{stock}: entry skipped - {open_reason}")
             continue
@@ -194,8 +208,9 @@ def _evaluate_new_trades():
             ai_confidence=decision["ai_confidence"],
             trade_score=decision["trade_score"],
         )
-        if not sizing["allowed"]:
-            logger.info(f"{stock}: sizing blocked - {sizing['reason']}")
+        qty = lot_aligned_quantity(sizing["qty"], int(decision.get("lot_size", 1) or 1))
+        if not sizing["allowed"] or qty <= 0:
+            logger.info(f"{stock}: sizing blocked - {sizing['reason']} | lot_size={decision.get('lot_size', 1)}")
             continue
 
         metadata = {
@@ -209,6 +224,16 @@ def _evaluate_new_trades():
             "market_regime": decision.get("market_regime"),
             "instrument_type": decision.get("instrument_type", "EQUITY"),
             "option_side": decision.get("option_side"),
+            "tradingsymbol": decision.get("execution_symbol", stock),
+            "exchange": decision.get("exchange", "NSE"),
+            "expiry": decision.get("expiry"),
+            "strike": decision.get("strike"),
+            "lot_size": decision.get("lot_size", 1),
+            "underlying_symbol": decision.get("underlying_symbol", stock),
+            "spot_entry": decision.get("spot_entry"),
+            "spot_stop_loss": decision.get("spot_stop_loss"),
+            "spot_target": decision.get("spot_target"),
+            "price_source": decision.get("price_source"),
             "risk_reward": decision.get("risk_reward"),
             "volume_ratio": decision.get("volume_ratio"),
             "liquidity": decision.get("liquidity"),
@@ -216,9 +241,9 @@ def _evaluate_new_trades():
         }
 
         trader.enter(
-            stock=stock,
+            stock=position_key,
             action=decision["action"],
-            qty=sizing["qty"],
+            qty=qty,
             entry=decision["entry"],
             sl=decision["stop_loss"],
             target=decision["target"],
@@ -227,7 +252,7 @@ def _evaluate_new_trades():
         )
         logger.info(
             f"{stock}: entered {decision['action']} via {decision['strategy']} | "
-            f"trade_score={decision['trade_score']} ai={decision['ai_confidence']} qty={sizing['qty']}"
+            f"trade_score={decision['trade_score']} ai={decision['ai_confidence']} qty={qty} contract={decision.get('execution_symbol', stock)}"
         )
         save_trade_log()
 
@@ -259,8 +284,8 @@ def candle_close_job():
         candle_builder.close_candle(stock)
 
     latest_prices = candle_builder.get_latest_prices()
-    trader.check_time_stops(latest_prices)
     _update_open_positions(latest_prices)
+    trader.check_time_stops(latest_prices)
     _evaluate_new_trades()
     save_trade_log()
 

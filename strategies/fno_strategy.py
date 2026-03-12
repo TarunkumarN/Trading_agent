@@ -17,12 +17,13 @@ def evaluate(context: dict):
             "strategy_confidence": 84,
             "instrument_type": "FNO",
             "option_side": "CALL",
+            "market_view": "BULLISH",
         }
 
     if current_price < prev_day_low and vol_ratio >= 1.6:
         return {
             "strategy": "fno_breakdown_put",
-            "action": "SELL",
+            "action": "BUY",
             "entry": current_price,
             "stop_loss": context["highs"][-2],
             "target": current_price - (context["highs"][-2] - current_price) * 2,
@@ -30,6 +31,7 @@ def evaluate(context: dict):
             "strategy_confidence": 84,
             "instrument_type": "FNO",
             "option_side": "PUT",
+            "market_view": "BEARISH",
         }
 
     if current_price > context["vwap"] and rsi > 60 and vol_ratio >= 1.4:
@@ -43,12 +45,13 @@ def evaluate(context: dict):
             "strategy_confidence": 79,
             "instrument_type": "FNO",
             "option_side": "CALL",
+            "market_view": "BULLISH",
         }
 
     if current_price < context["vwap"] and rsi < 40 and vol_ratio >= 1.4:
         return {
             "strategy": "fno_momentum_put",
-            "action": "SELL",
+            "action": "BUY",
             "entry": current_price,
             "stop_loss": current_price + context["atr"] * 1.2,
             "target": current_price - context["atr"] * 2.4,
@@ -56,6 +59,7 @@ def evaluate(context: dict):
             "strategy_confidence": 79,
             "instrument_type": "FNO",
             "option_side": "PUT",
+            "market_view": "BEARISH",
         }
 
     return None

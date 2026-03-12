@@ -6,6 +6,7 @@ import ta
 from ai.ai_signal_validator import AISignalValidator
 from analytics.trade_score import score_trade
 from config import RISK_REWARD_RATIO
+from data.contract_resolver import derive_contract_levels, resolve_trade_contract
 from market.market_regime import detect_market_regime
 from strategies import auction_strategy, breakout_strategy, commodity_strategy, fno_strategy, vwap_strategy
 
@@ -122,10 +123,38 @@ class TradeExecutor:
             and liquidity["allowed"]
             and risk_reward >= RISK_REWARD_RATIO
         )
+        contract = resolve_trade_contract(
+            symbol=symbol,
+            spot_price=entry,
+            instrument_type=candidate.get("instrument_type", "EQUITY"),
+            option_side=candidate.get("option_side"),
+        )
+        contract_entry = float(contract.get("contract_price") or entry)
+        contract_stop, contract_target = derive_contract_levels(
+            contract_price=contract_entry,
+            spot_entry=entry,
+            spot_stop=stop_loss,
+            spot_target=target,
+            action=candidate["action"],
+            instrument_type=candidate.get("instrument_type", "EQUITY"),
+        )
         return {
             **candidate,
             "symbol": symbol,
             "allowed": allowed,
+            "entry": contract_entry,
+            "stop_loss": contract_stop,
+            "target": contract_target,
+            "spot_entry": entry,
+            "spot_stop_loss": stop_loss,
+            "spot_target": target,
+            "execution_symbol": contract.get("tradingsymbol", symbol),
+            "exchange": contract.get("exchange", "NSE"),
+            "lot_size": contract.get("lot_size", 1),
+            "expiry": contract.get("expiry"),
+            "strike": contract.get("strike"),
+            "price_source": contract.get("price_source", "spot"),
+            "underlying_symbol": contract.get("underlying_symbol", symbol),
             "trade_score": trade_quality["score"],
             "trade_score_components": trade_quality["components"],
             "ai_confidence": ai_result["confidence"],

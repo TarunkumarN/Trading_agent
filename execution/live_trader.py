@@ -76,11 +76,13 @@ class LiveTrader:
             return
         metadata = metadata or {}
         try:
+            tradingsymbol = metadata.get("tradingsymbol", stock)
+            exchange = metadata.get("exchange", "NSE")
             txn = self.kite.TRANSACTION_TYPE_BUY if action == "BUY" else self.kite.TRANSACTION_TYPE_SELL
             order_id = self.kite.place_order(
                 variety=self.kite.VARIETY_REGULAR,
-                exchange=self.kite.EXCHANGE_NSE,
-                tradingsymbol=stock,
+                exchange=exchange,
+                tradingsymbol=tradingsymbol,
                 transaction_type=txn,
                 quantity=qty,
                 product=self.kite.PRODUCT_MIS,
@@ -88,6 +90,8 @@ class LiveTrader:
             )
             self.positions[stock] = {
                 "stock": stock,
+                "tradingsymbol": tradingsymbol,
+                "exchange": exchange,
                 "action": action,
                 "qty": qty,
                 "entry": entry,
@@ -132,8 +136,8 @@ class LiveTrader:
             txn = self.kite.TRANSACTION_TYPE_SELL if pos["action"] == "BUY" else self.kite.TRANSACTION_TYPE_BUY
             self.kite.place_order(
                 variety=self.kite.VARIETY_REGULAR,
-                exchange=self.kite.EXCHANGE_NSE,
-                tradingsymbol=stock,
+                exchange=pos.get("exchange", "NSE"),
+                tradingsymbol=pos.get("tradingsymbol", stock),
                 transaction_type=txn,
                 quantity=pos["qty"],
                 product=self.kite.PRODUCT_MIS,
@@ -163,6 +167,12 @@ class LiveTrader:
             "ai_summary": pos.get("ai_summary"),
             "market_regime": pos.get("market_regime"),
             "instrument_type": pos.get("instrument_type", "EQUITY"),
+            "option_side": pos.get("option_side"),
+            "contract_symbol": pos.get("tradingsymbol", stock),
+            "exchange": pos.get("exchange", "NSE"),
+            "expiry": pos.get("expiry"),
+            "strike": pos.get("strike"),
+            "underlying_symbol": pos.get("underlying_symbol", stock),
             "risk_reward": pos.get("risk_reward"),
             "volume_ratio": pos.get("volume_ratio"),
             "entry_time": pos["time"],
@@ -177,7 +187,7 @@ class LiveTrader:
     def close_all(self, latest_prices):
         for stock in list(self.positions.keys()):
             pos = self.positions[stock]
-            price = latest_prices.get(stock) or pos["entry"]
+            price = pos.get("current_price") or latest_prices.get(stock) or pos["entry"]
             qty, action = pos["qty"], pos["action"]
             pnl = (price - pos["entry"]) * qty if action == "BUY" else (pos["entry"] - price) * qty
             self._close(stock, price, pnl, "END OF DAY CLOSE")
@@ -189,7 +199,7 @@ class LiveTrader:
             try:
                 entry_time = datetime.strptime(f"{now.date()} {pos['time']}", "%Y-%m-%d %H:%M:%S")
                 if (now - entry_time).seconds / 60 >= 15:
-                    price = latest_prices.get(stock) or pos["entry"]
+                    price = pos.get("current_price") or latest_prices.get(stock) or pos["entry"]
                     qty, action = pos["qty"], pos["action"]
                     pnl = (price - pos["entry"]) * qty if action == "BUY" else (pos["entry"] - price) * qty
                     self._close(stock, price, pnl, "TIME STOP (15 min)")

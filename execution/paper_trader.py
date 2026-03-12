@@ -158,6 +158,12 @@ class PaperTrader:
             "ai_summary": pos.get("ai_summary"),
             "market_regime": pos.get("market_regime"),
             "instrument_type": pos.get("instrument_type", "EQUITY"),
+            "option_side": pos.get("option_side"),
+            "contract_symbol": pos.get("tradingsymbol", stock),
+            "exchange": pos.get("exchange", "NSE"),
+            "expiry": pos.get("expiry"),
+            "strike": pos.get("strike"),
+            "underlying_symbol": pos.get("underlying_symbol", stock),
             "risk_reward": pos.get("risk_reward"),
             "volume_ratio": pos.get("volume_ratio"),
             "entry_time": pos["time"],
@@ -174,7 +180,7 @@ class PaperTrader:
     def close_all(self, latest_prices):
         for stock in list(self.positions.keys()):
             pos = self.positions[stock]
-            price = latest_prices.get(stock) or pos["entry"]
+            price = pos.get("current_price") or latest_prices.get(stock) or pos["entry"]
             if price <= 0:
                 price = pos["entry"]
             qty, action = pos["qty"], pos["action"]
@@ -188,7 +194,7 @@ class PaperTrader:
             try:
                 entry_time = datetime.strptime(f"{now.date()} {pos['time']}", "%Y-%m-%d %H:%M:%S")
                 if (now - entry_time).seconds / 60 >= 15:
-                    price = latest_prices.get(stock) or pos["entry"]
+                    price = pos.get("current_price") or latest_prices.get(stock) or pos["entry"]
                     if price <= 0:
                         price = pos["entry"]
                     qty, action = pos["qty"], pos["action"]
