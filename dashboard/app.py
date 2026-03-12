@@ -819,6 +819,9 @@ tr.profit td{background:rgba(16,185,129,.08);} tr.loss td{background:rgba(239,68
           <div class="card card-accent ca-green"><div class="card-title">Net P&L</div><div class="metric" id="t-pnl">₹+0.00</div></div>
         </div>
         <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center;">
+          <select id="tradeDateFilter" onchange="renderTrades()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:6px 10px;border-radius:5px;font-family:inherit;font-size:.9rem;">
+            <option value="all">All Dates</option>
+          </select>
           <select id="tradeFilter" onchange="renderTrades()" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:6px 10px;border-radius:5px;font-family:inherit;font-size:.9rem;">
             <option value="all">All Trades</option>
             <option value="wins">Wins Only</option>
@@ -1100,8 +1103,8 @@ return `<div class="${cls}">${m.symbol}<br>${m.change.toFixed(2)}%</div>`;
 function refresh(){
   fetch('/api/data',{credentials:'include'}).then(r=>r.json()).then(d=>{
     D=d; updateDashboard(); renderTrades(); updatePositions();
-renderHeatmap(d);
-if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].data.push(d.pnl||0);if(headerChart.data.labels.length>40){headerChart.data.labels.shift();headerChart.data.datasets[0].data.shift();}headerChart.update();}
+renderHeatmap(D);
+if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].data.push(d.day_pnl||0);if(headerChart.data.labels.length>40){headerChart.data.labels.shift();headerChart.data.datasets[0].data.shift();}headerChart.update();}
     const pv=d.portfolio_value||10000;
     const pct=Math.min(100,(pv/50000)*100);
     document.getElementById('fo-prog').style.width=pct+'%';
@@ -1120,8 +1123,8 @@ if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].da
 function fmt(n){return(n>=0?'₹+':'₹')+n.toFixed(2);}
 
 function updateDashboard(){
-renderHeatmap(d);
-if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].data.push(d.pnl||0);if(headerChart.data.labels.length>40){headerChart.data.labels.shift();headerChart.data.datasets[0].data.shift();}headerChart.update();}
+renderHeatmap(D);
+if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].data.push(D.day_pnl||0);if(headerChart.data.labels.length>40){headerChart.data.labels.shift();headerChart.data.datasets[0].data.shift();}headerChart.update();}
   const p=D.day_pnl||0,t=D.total_trades||0,w=D.wins||0,l=D.losses||0,wr=D.win_rate||0;
   const pv=D.portfolio_value||10000;
   const pnlEl=document.getElementById('d-pnl');
@@ -1168,7 +1171,7 @@ if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].da
   document.getElementById('d-opencount').textContent=op.length;
   document.getElementById('d-openpos').innerHTML=op.length
     ?'<table><thead><tr><th>Stock</th><th>Side</th><th>Qty</th><th>Entry</th><th>Unrealised</th></tr></thead><tbody>'+
-      op.map(pos=>''+(t.pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+pos.stock+'</td><td><span class="tag tag-'+(pos.action.toLowerCase())+'">'+pos.action+'</span></td><td class="c-muted">'+pos.qty+'</td><td>₹'+pos.entry.toFixed(2)+'</td><td style="color:'+(pos.unrealised_pnl>=0?'var(--green)':'var(--red)')+';">'+fmt(pos.unrealised_pnl)+'</td></tr>').join('')+'</tbody></table>'
+      op.map(pos=>''+(pos.unrealised_pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+pos.stock+'</td><td><span class="tag tag-'+(pos.action.toLowerCase())+'">'+pos.action+'</span></td><td class="c-muted">'+pos.qty+'</td><td>₹'+pos.entry.toFixed(2)+'</td><td style="color:'+(pos.unrealised_pnl>=0?'var(--green)':'var(--red)')+';">'+fmt(pos.unrealised_pnl)+'</td></tr>').join('')+'</tbody></table>'
     :'<div class="empty">No open positions</div>';
   // Recent trades
   const rec=(D.trades||[]).slice(-5).reverse();
@@ -1185,7 +1188,15 @@ if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].da
 // TRADES PAGE
 function renderTrades(){
   const filter=document.getElementById('tradeFilter').value;
-  const trades=D.trades||[];
+  const dateFilter=document.getElementById('tradeDateFilter').value;
+  const allTrades=D.all_trades||D.trades||[];
+  const dates=[...new Set(allTrades.map(t=>t.date).filter(Boolean))].sort().reverse();
+  const dateSelect=document.getElementById('tradeDateFilter');
+  const selectedDate=dateSelect.value;
+  dateSelect.innerHTML='<option value="all">All Dates</option>'+dates.map(date=>'<option value="'+date+'">'+date+'</option>').join('');
+  dateSelect.value=dates.includes(selectedDate)||selectedDate==='all'?selectedDate:'all';
+  let trades=allTrades;
+  if(dateSelect.value!=='all')trades=trades.filter(t=>t.date===dateSelect.value);
   const wins=trades.filter(t=>t.pnl>0).length, losses=trades.length-wins;
   const gross=trades.reduce((s,t)=>s+t.pnl,0);
   document.getElementById('t-total').textContent=trades.length;
@@ -1215,7 +1226,7 @@ function updatePositions(){
   document.getElementById('pos-ts').textContent=D.timestamp||'--';
   if(!op.length){document.getElementById('pos-table').innerHTML='<div class="empty">No open positions</div>';return;}
   document.getElementById('pos-table').innerHTML='<table><thead><tr><th>Stock</th><th>Side</th><th>Qty</th><th>Entry</th><th>Current</th><th>SL</th><th>Target</th><th>Phase</th><th>Unrealised</th><th>Score</th><th>Time</th></tr></thead><tbody>'+
-    op.map(pos=>''+(t.pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+pos.stock+'</td><td><span class="tag tag-'+(pos.action.toLowerCase())+'">'+pos.action+'</span></td><td class="c-muted">'+pos.qty+'</td><td>₹'+pos.entry.toFixed(2)+'</td><td style="font-weight:700;">₹'+(pos.current||pos.entry).toFixed(2)+'</td><td class="c-red">₹'+pos.sl.toFixed(2)+'</td><td class="c-green">₹'+pos.target.toFixed(2)+'</td><td class="c-muted" style="font-size:.62rem;">'+(pos.sl_phase||'INITIAL')+'</td><td style="color:'+(pos.unrealised_pnl>=0?'var(--green)':'var(--red)')+';">'+fmt(pos.unrealised_pnl)+'</td><td><span class="tag tag-active">'+(pos.score||'--')+'/10</span></td><td class="c-muted">'+pos.time+'</td></tr>').join('')+
+    op.map(pos=>''+(pos.unrealised_pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+pos.stock+'</td><td><span class="tag tag-'+(pos.action.toLowerCase())+'">'+pos.action+'</span></td><td class="c-muted">'+pos.qty+'</td><td>₹'+pos.entry.toFixed(2)+'</td><td style="font-weight:700;">₹'+(pos.current||pos.entry).toFixed(2)+'</td><td class="c-red">₹'+pos.sl.toFixed(2)+'</td><td class="c-green">₹'+pos.target.toFixed(2)+'</td><td class="c-muted" style="font-size:.62rem;">'+(pos.sl_phase||'INITIAL')+'</td><td style="color:'+(pos.unrealised_pnl>=0?'var(--green)':'var(--red)')+';">'+fmt(pos.unrealised_pnl)+'</td><td><span class="tag tag-active">'+(pos.score||'--')+'/10</span></td><td class="c-muted">'+pos.time+'</td></tr>').join('')+
   '</tbody></table>';
 }
 
@@ -1268,7 +1279,7 @@ function loadPremarket(){
     function moverTable(arr){
       if(!arr||!arr.length)return'<div class="empty">No data</div>';
       return'<table><thead><tr><th>Symbol</th><th>Price</th><th>Gap%</th><th>Volume</th><th>Momentum</th></tr></thead><tbody>'+
-        arr.map(m=>''+(t.pnl>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td><td>₹'+m.price+'</td><td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td><td class="c-muted">'+m.vol_score+'</td><td><span class="tag '+(m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral')+'">'+m.momentum+'</span></td></tr>').join('')+'</tbody></table>';
+        arr.map(m=>''+(m.gap_pct>=0?'<tr class="profit">':'<tr class="loss">')+'<td style="font-weight:700;color:var(--amber);">'+m.symbol+'</td><td>₹'+m.price+'</td><td style="color:'+(m.gap_pct>=0?'var(--green)':'var(--red)')+';">'+(m.gap_pct>=0?'+':'')+m.gap_pct+'%</td><td class="c-muted">'+m.vol_score+'</td><td><span class="tag '+(m.momentum.includes('Bullish')?'tag-bullish':m.momentum.includes('Bearish')?'tag-bearish':'tag-neutral')+'">'+m.momentum+'</span></td></tr>').join('')+'</tbody></table>';
     }
     document.getElementById('pm-gapups').innerHTML=moverTable(d.gap_ups);
     document.getElementById('pm-gapdowns').innerHTML=moverTable(d.gap_downs);
@@ -1406,7 +1417,7 @@ function calcFO(){
 }
 
 function updateFOProgress(){
-  const pv=D.portfolioValue||10000;
+  const pv=D.portfolio_value||10000;
   const pct=Math.min(100,(pv/50000)*100);
   document.getElementById('fo-prog').style.width=pct+'%';
   document.getElementById('fo-pct').textContent=pct.toFixed(0)+'%';

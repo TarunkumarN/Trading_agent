@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import { LayoutDashboard, HeartPulse, ScanSearch, BrainCircuit, Target, ListOrdered, ShieldAlert, TrendingUp, Calculator, Settings, ScrollText, Activity, Menu, X, Sun, Moon, FileText } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ComposedChart } from 'recharts';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const fmt = n => (n >= 0 ? '+' : '') + Number(n || 0).toFixed(2);
@@ -68,9 +68,6 @@ function MarketPage({ market, regime, loadMarket }) {
 }
 
 function ChartPage() {
-  const hostRef = useRef(null);
-  const chartRef = useRef(null);
-  const seriesRef = useRef({});
   const [universe, setUniverse] = useState(null);
   const [symbol, setSymbol] = useState('RELIANCE');
   const [underlying, setUnderlying] = useState('NIFTY');
@@ -98,53 +95,6 @@ function ChartPage() {
     return () => clearInterval(timer);
   }, [symbol]);
 
-  useEffect(() => {
-    let cancelled = false;
-    async function mountChart() {
-      if (!hostRef.current || !chartData?.candles?.length) return;
-      const { createChart } = await import('lightweight-charts');
-      if (cancelled) return;
-      if (!chartRef.current) {
-        const chart = createChart(hostRef.current, {
-          width: hostRef.current.clientWidth,
-          height: 420,
-          layout: { background: { color: 'transparent' }, textColor: '#a1a1aa' },
-          grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
-          rightPriceScale: { borderColor: '#3f3f46' },
-          timeScale: { borderColor: '#3f3f46' },
-        });
-        const candleSeries = chart.addCandlestickSeries({
-          upColor: '#22c55e',
-          downColor: '#ef4444',
-          borderVisible: false,
-          wickUpColor: '#22c55e',
-          wickDownColor: '#ef4444',
-        });
-        const ema20Series = chart.addLineSeries({ color: '#06b6d4', lineWidth: 2 });
-        const ema50Series = chart.addLineSeries({ color: '#eab308', lineWidth: 2 });
-        const vwapSeries = chart.addLineSeries({ color: '#a855f7', lineWidth: 2 });
-        chartRef.current = chart;
-        seriesRef.current = { candleSeries, ema20Series, ema50Series, vwapSeries };
-      }
-      const { candleSeries, ema20Series, ema50Series, vwapSeries } = seriesRef.current;
-      candleSeries.setData(chartData.candles || []);
-      if (chartData.markers?.length) candleSeries.setMarkers(chartData.markers);
-      ema20Series.setData(chartData.ema20 || []);
-      ema50Series.setData(chartData.ema50 || []);
-      vwapSeries.setData(chartData.vwap || []);
-      chartRef.current.timeScale().fitContent();
-    }
-    mountChart();
-    const resize = () => {
-      if (chartRef.current && hostRef.current) chartRef.current.applyOptions({ width: hostRef.current.clientWidth });
-    };
-    window.addEventListener('resize', resize);
-    return () => {
-      cancelled = true;
-      window.removeEventListener('resize', resize);
-    };
-  }, [chartData]);
-
   const groups = [
     ['Equities', universe?.equities || []],
     ['F&O', universe?.fno || []],
@@ -157,11 +107,29 @@ function ChartPage() {
     }
   }, [underlying, optionSide]);
 
+  const chartRows = useMemo(() => {
+    const candles = chartData?.candles || [];
+    const ema20Lookup = new Map((chartData?.ema20 || []).map(row => [row.time, row.value]));
+    const ema50Lookup = new Map((chartData?.ema50 || []).map(row => [row.time, row.value]));
+    const vwapLookup = new Map((chartData?.vwap || []).map(row => [row.time, row.value]));
+    return candles.map(row => ({
+      time: row.time,
+      open: row.open,
+      high: row.high,
+      low: row.low,
+      close: row.close,
+      ema20: ema20Lookup.get(row.time),
+      ema50: ema50Lookup.get(row.time),
+      vwap: vwapLookup.get(row.time),
+      volume: row.volume || 0,
+    }));
+  }, [chartData]);
+
   const commodityBadge = chartData?.instrument_type === 'COMMODITY'
     ? (symbol.includes('GOLD') || symbol.includes('SILVER') ? 'Metal breakout / VWAP hold' : 'Crude range expansion')
     : (symbol.includes('CALL') ? 'Bullish option momentum' : symbol.includes('PUT') ? 'Bearish option momentum' : 'Trend / VWAP alignment');
 
-  return <div className="page-enter"><div className="card" style={{ marginBottom: 16 }}><div className="card-head"><span className="card-head-title">TradingView Style Chart</span><span className="tag tag-active">{chartData?.instrument_type || '--'}</span></div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>{groups.map(([label, rows]) => <select key={label} value={rows.some(row => row.symbol === symbol) ? symbol : ''} onChange={e => e.target.value && setSymbol(e.target.value)}><option value="">{label}</option>{rows.map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select>)}</div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}><select value={underlying} onChange={e => setUnderlying(e.target.value)}>{(universe?.fno || []).map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select><select value={optionSide} onChange={e => setOptionSide(e.target.value)}><option value="CALL">CALL</option><option value="PUT">PUT</option></select><button className="fo-btn" onClick={() => fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {})}>Refresh</button></div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}><span className="tag tag-ok">Candles</span><span className="tag tag-active">EMA20</span><span className="tag tag-warn">EMA50</span><span className="tag tag-paper">VWAP</span><span className="tag tag-info">{commodityBadge}</span></div><div ref={hostRef} style={{ width: '100%', minHeight: 420 }} /></div><div className="grid-3"><Stat label="Symbol" value={chartData?.symbol || symbol} /><Stat label="Instrument" value={chartData?.instrument_type || '--'} /><Stat label="Candles" value={chartData?.candles?.length || 0} /></div></div>;
+  return <div className="page-enter"><div className="card" style={{ marginBottom: 16 }}><div className="card-head"><span className="card-head-title">Live Chart</span><span className="tag tag-active">{chartData?.instrument_type || '--'}</span></div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>{groups.map(([label, rows]) => <select key={label} value={rows.some(row => row.symbol === symbol) ? symbol : ''} onChange={e => e.target.value && setSymbol(e.target.value)}><option value="">{label}</option>{rows.map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select>)}</div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}><select value={underlying} onChange={e => setUnderlying(e.target.value)}>{(universe?.fno || []).map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select><select value={optionSide} onChange={e => setOptionSide(e.target.value)}><option value="CALL">CALL</option><option value="PUT">PUT</option></select><button className="fo-btn" onClick={() => fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {})}>Refresh</button></div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}><span className="tag tag-ok">Close</span><span className="tag tag-active">EMA20</span><span className="tag tag-warn">EMA50</span><span className="tag tag-paper">VWAP</span><span className="tag tag-info">{commodityBadge}</span></div><div style={{ width: '100%', height: 420 }}>{chartRows.length ? <ResponsiveContainer width="100%" height="100%"><ComposedChart data={chartRows}><CartesianGrid strokeDasharray="3 3" stroke="var(--border)" /><XAxis dataKey="time" hide /><YAxis domain={['auto', 'auto']} /><Tooltip /><Line type="monotone" dataKey="close" stroke="#22c55e" dot={false} strokeWidth={2} name="Close" /><Line type="monotone" dataKey="ema20" stroke="#06b6d4" dot={false} strokeWidth={2} name="EMA20" /><Line type="monotone" dataKey="ema50" stroke="#eab308" dot={false} strokeWidth={2} name="EMA50" /><Line type="monotone" dataKey="vwap" stroke="#a855f7" dot={false} strokeWidth={2} name="VWAP" /></ComposedChart></ResponsiveContainer> : <div className="empty">No chart data</div>}</div></div><div className="grid-3"><Stat label="Symbol" value={chartData?.symbol || symbol} /><Stat label="Instrument" value={chartData?.instrument_type || '--'} /><Stat label="Candles" value={chartData?.candles?.length || 0} /></div><div className="card" style={{ marginTop: 16, height: 220 }}>{chartRows.length ? <ResponsiveContainer width="100%" height="100%"><BarChart data={chartRows}><CartesianGrid strokeDasharray="3 3" stroke="var(--border)" /><XAxis dataKey="time" hide /><YAxis /><Tooltip /><Bar dataKey="volume" fill="#334155" name="Volume" /></BarChart></ResponsiveContainer> : <div className="empty">No volume data</div>}</div></div>;
 }
 
 function HealthPage({ health }) {
