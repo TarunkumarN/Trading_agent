@@ -10,21 +10,11 @@ from pathlib import Path
 
 from kiteconnect import KiteConnect
 
-from config import (
-    DAILY_LOSS_LIMIT,
-    DAILY_PROFIT_STOP,
-    KITE_ACCESS_TOKEN,
-    KITE_API_KEY,
-    MAX_OPEN_POSITIONS,
-    MAX_RISK_PCT,
-    PORTFOLIO_VALUE,
-    REENTRY_COOLDOWN_MINUTES,
-)
+from config import KITE_ACCESS_TOKEN, KITE_API_KEY, MAX_OPEN_POSITIONS, REENTRY_COOLDOWN_MINUTES
 
 logger = logging.getLogger(__name__)
 TRADES_FILE = Path("logs/trades.json")
 POSITIONS_FILE = Path("logs/positions.json")
-MAX_ORDER_VAL = 75000
 
 
 def _load_json(path, default):
@@ -77,22 +67,14 @@ class LiveTrader:
             return False, f"Cooldown active for {max(wait_left, 1)} more min"
         return True, "OK"
 
-    def _position_size(self, entry, stop_loss):
-        risk = abs(entry - stop_loss)
-        if risk <= 0:
-            return 0
-        qty = int((PORTFOLIO_VALUE * MAX_RISK_PCT / 100) / risk)
-        if qty * entry > MAX_ORDER_VAL:
-            qty = int(MAX_ORDER_VAL / entry)
-        return max(qty, 1)
-
-    def enter(self, stock, action, qty, entry, sl, target, score):
+    def enter(self, stock, action, qty, entry, sl, target, score, metadata=None):
         if qty <= 0:
             return
         can_trade, reason = self.guard.can_trade(score)
         if not can_trade:
             logger.warning(f"[LIVE] Blocked {stock}: {reason}")
             return
+        metadata = metadata or {}
         try:
             txn = self.kite.TRANSACTION_TYPE_BUY if action == "BUY" else self.kite.TRANSACTION_TYPE_SELL
             order_id = self.kite.place_order(
@@ -117,6 +99,7 @@ class LiveTrader:
                 "peak_pnl": 0.0,
                 "sl_phase": "INITIAL",
                 "time": datetime.now().strftime("%H:%M:%S"),
+                **metadata,
             }
             self.brokerage += 20
             _save_json(POSITIONS_FILE, self.positions)
@@ -173,6 +156,15 @@ class LiveTrader:
             "pnl": net_pnl,
             "reason": reason,
             "score": pos.get("score", 0),
+            "strategy": pos.get("strategy", "unknown"),
+            "strategy_confidence": pos.get("strategy_confidence"),
+            "trade_score": pos.get("trade_score"),
+            "ai_confidence": pos.get("ai_confidence"),
+            "ai_summary": pos.get("ai_summary"),
+            "market_regime": pos.get("market_regime"),
+            "instrument_type": pos.get("instrument_type", "EQUITY"),
+            "risk_reward": pos.get("risk_reward"),
+            "volume_ratio": pos.get("volume_ratio"),
             "entry_time": pos["time"],
             "exit_time": exit_now.strftime("%H:%M:%S"),
             "date": date.today().isoformat(),

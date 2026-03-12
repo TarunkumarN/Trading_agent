@@ -64,9 +64,10 @@ class PaperTrader:
             return False, f"Cooldown active for {max(wait_left, 1)} more min"
         return True, "OK"
 
-    def enter(self, stock, action, qty, entry, sl, target, score):
+    def enter(self, stock, action, qty, entry, sl, target, score, metadata=None):
         if stock in self.positions or qty <= 0 or entry <= 0:
             return
+        metadata = metadata or {}
         self.positions[stock] = {
             "stock": stock,
             "action": action,
@@ -79,6 +80,7 @@ class PaperTrader:
             "score": score,
             "time": datetime.now().strftime("%H:%M:%S"),
             "current_price": entry,
+            **metadata,
         }
         self.brokerage += 20
         _save_positions(self.positions)
@@ -149,9 +151,19 @@ class PaperTrader:
             "pnl": net_pnl,
             "reason": reason,
             "score": pos.get("score", 0),
+            "strategy": pos.get("strategy", "unknown"),
+            "strategy_confidence": pos.get("strategy_confidence"),
+            "trade_score": pos.get("trade_score"),
+            "ai_confidence": pos.get("ai_confidence"),
+            "ai_summary": pos.get("ai_summary"),
+            "market_regime": pos.get("market_regime"),
+            "instrument_type": pos.get("instrument_type", "EQUITY"),
+            "risk_reward": pos.get("risk_reward"),
+            "volume_ratio": pos.get("volume_ratio"),
             "entry_time": pos["time"],
             "exit_time": exit_now.strftime("%H:%M:%S"),
             "date": exit_now.strftime("%Y-%m-%d"),
+            "mode": "PAPER",
         }
         self.trade_log.append(trade)
         _save_trades(self.trade_log)

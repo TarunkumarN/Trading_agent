@@ -1600,3 +1600,279 @@ async def get_live_market():
     except Exception as e:
         logger.error(f"Live market error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+def _trade_symbol(trade):
+    return trade.get("symbol") or trade.get("stock") or "UNKNOWN"
+
+
+def _trade_id(trade):
+    symbol = _trade_symbol(trade)
+    date = trade.get("date", "")
+    entry_time = (trade.get("entry_time") or "").replace(":", "")
+    return f"{symbol}_{date}_{entry_time}"
+
+
+def _normalize_trade(trade):
+    symbol = _trade_symbol(trade)
+    entry = float(trade.get("entry", trade.get("entry_price", 0)) or 0)
+    exit_price = trade.get("exit")
+    if exit_price is None:
+        exit_price = trade.get("exit_price", 0)
+    exit_price = float(exit_price or 0)
+    qty = int(trade.get("qty", trade.get("quantity", 0)) or 0)
+    return {
+        "id": _trade_id(trade),
+        "symbol": symbol,
+        "stock": symbol,
+        "action": trade.get("action", "BUY"),
+        "qty": qty,
+        "quantity": qty,
+        "entry": entry,
+        "entry_price": entry,
+        "exit": exit_price,
+        "exit_price": exit_price,
+        "pnl": round(float(trade.get("pnl", 0) or 0), 2),
+        "reason": trade.get("reason", ""),
+        "score": trade.get("score", trade.get("trade_score", 0)),
+        "trade_score": trade.get("trade_score", trade.get("score", 0)),
+        "strategy": trade.get("strategy", "Unknown"),
+        "strategy_confidence": trade.get("strategy_confidence"),
+        "ai_confidence": trade.get("ai_confidence"),
+        "ai_summary": trade.get("ai_summary"),
+        "market_regime": trade.get("market_regime"),
+        "instrument_type": trade.get("instrument_type", "EQUITY"),
+        "risk_reward": trade.get("risk_reward"),
+        "volume_ratio": trade.get("volume_ratio"),
+        "entry_time": trade.get("entry_time", ""),
+        "exit_time": trade.get("exit_time", ""),
+        "date": trade.get("date", ""),
+        "mode": trade.get("mode", TRADING_MODE.upper()),
+    }
+
+
+
+def _normalize_position(pos):
+    symbol = pos.get("symbol") or pos.get("stock") or "UNKNOWN"
+    qty = int(pos.get("quantity", pos.get("qty", 0)) or 0)
+    entry = float(pos.get("entry_price", pos.get("entry", 0)) or 0)
+    current = float(pos.get("current_price", entry) or entry)
+    stop_loss = float(pos.get("stop_loss", pos.get("sl", 0)) or 0)
+    target = float(pos.get("target", 0) or 0)
+    action = pos.get("action", "BUY")
+    unreal = (current - entry) * qty if action == "BUY" else (entry - current) * qty
+    return {
+        "symbol": symbol,
+        "stock": symbol,
+        "strategy": pos.get("strategy", "Unknown"),
+        "action": action,
+        "qty": qty,
+        "quantity": qty,
+        "entry": entry,
+        "entry_price": entry,
+        "current_price": current,
+        "sl": stop_loss,
+        "stop_loss": stop_loss,
+        "target": target,
+        "trade_score": pos.get("trade_score", pos.get("score", 0)),
+        "score": pos.get("score", pos.get("trade_score", 0)),
+        "ai_confidence": pos.get("ai_confidence"),
+        "market_regime": pos.get("market_regime"),
+        "instrument_type": pos.get("instrument_type", "EQUITY"),
+        "unrealised_pnl": round(unreal, 2),
+        "entry_time": pos.get("entry_time") or pos.get("time", ""),
+    }
+
+
+@app.get("/api/open-positions")
+async def get_open_positions():
+    try:
+        positions = list(col_positions.find({}, {"_id": 0}))
+        normalized = [_normalize_position(pos) for pos in positions]
+        return {
+            "positions": normalized,
+            "count": len(normalized),
+            "timestamp": get_ist_now().strftime("%H:%M:%S"),
+        }
+    except Exception as e:
+        logger.error(f"Open positions error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/trades")
+async def get_trades(date: str = None, outcome: str = "all", limit: int = 300):
+    try:
+        query = {}
+        if date:
+            query["date"] = date
+        trades = list(col_trades.find(query, {"_id": 0}).sort([("date", -1), ("exit_time", -1)]).limit(limit))
+        normalized = [_normalize_trade(trade) for trade in trades]
+        if outcome == "wins":
+            normalized = [trade for trade in normalized if trade["pnl"] > 0]
+        elif outcome == "loss":
+            normalized = [trade for trade in normalized if trade["pnl"] <= 0]
+        available_dates = sorted({trade.get("date", "") for trade in col_trades.find({}, {"date": 1, "_id": 0}) if trade.get("date")}, reverse=True)
+        return {
+            "trades": normalized,
+            "available_dates": available_dates,
+            "selected_date": date,
+            "timestamp": get_ist_now().strftime("%H:%M:%S"),
+        }
+    except Exception as e:
+        logger.error(f"Trades API error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/trades/{trade_id}")
+async def get_trade_detail(trade_id: str):
+    try:
+        trades = list(col_trades.find({}, {"_id": 0}))
+        for trade in trades:
+            if _trade_id(trade) == trade_id:
+                normalized = _normalize_trade(trade)
+                return {
+                    **normalized,
+                    "ai_validation": {
+                        "ai_confidence": normalized.get("ai_confidence"),
+                        "risk_reward": normalized.get("risk_reward"),
+                        "instrument_type": normalized.get("instrument_type"),
+                    },
+                    "liquidity_signal": trade.get("volume_ratio"),
+                    "prediction_probability": normalized.get("ai_confidence"),
+                    "entry_reason": normalized.get("reason"),
+                }
+        raise HTTPException(status_code=404, detail="Trade not found")
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Trade detail error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/portfolio")
+async def get_portfolio():
+    try:
+        trades = [_normalize_trade(trade) for trade in col_trades.find({}, {"_id": 0})]
+        positions = [_normalize_position(pos) for pos in col_positions.find({}, {"_id": 0})]
+        total_pnl = round(sum(trade["pnl"] for trade in trades), 2)
+        today = get_ist_now().strftime("%Y-%m-%d")
+        day_pnl = round(sum(trade["pnl"] for trade in trades if trade.get("date") == today), 2)
+        wins = [trade for trade in trades if trade["pnl"] > 0]
+        losses = [trade for trade in trades if trade["pnl"] <= 0]
+        current_equity = round(PORTFOLIO_VALUE + total_pnl + sum(pos["unrealised_pnl"] for pos in positions), 2)
+
+        equity_curve = []
+        running = PORTFOLIO_VALUE
+        daily_pnl = {}
+        peak = PORTFOLIO_VALUE
+        max_drawdown = 0.0
+        for trade in sorted(trades, key=lambda item: (item.get("date", ""), item.get("exit_time", ""))):
+            running += trade["pnl"]
+            peak = max(peak, running)
+            max_drawdown = max(max_drawdown, peak - running)
+            equity_curve.append({"date": f"{trade.get('date', '')} {trade.get('exit_time', '')}".strip(), "equity": round(running, 2)})
+            daily_pnl.setdefault(trade.get("date", today), 0.0)
+            daily_pnl[trade.get("date", today)] += trade["pnl"]
+
+        daily_pnl_chart = [{"date": date_key, "pnl": round(value, 2)} for date_key, value in sorted(daily_pnl.items())]
+        gross_profit = sum(trade["pnl"] for trade in wins)
+        gross_loss = abs(sum(trade["pnl"] for trade in losses))
+        return {
+            "initial_capital": PORTFOLIO_VALUE,
+            "current_equity": current_equity,
+            "total_pnl": total_pnl,
+            "day_pnl": day_pnl,
+            "unrealised_pnl": round(sum(pos["unrealised_pnl"] for pos in positions), 2),
+            "open_positions": len(positions),
+            "total_trades": len(trades),
+            "wins": len(wins),
+            "losses": len(losses),
+            "win_rate": round((len(wins) / len(trades)) * 100, 1) if trades else 0.0,
+            "avg_profit": round(gross_profit / len(wins), 2) if wins else 0.0,
+            "avg_loss": round(sum(trade["pnl"] for trade in losses) / len(losses), 2) if losses else 0.0,
+            "profit_factor": round(gross_profit / gross_loss, 2) if gross_loss else 0.0,
+            "max_drawdown": round(max_drawdown, 2),
+            "equity_curve": equity_curve,
+            "daily_pnl_chart": daily_pnl_chart,
+        }
+    except Exception as e:
+        logger.error(f"Portfolio API error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/strategies/performance")
+async def get_strategy_performance():
+    try:
+        trades = [_normalize_trade(trade) for trade in col_trades.find({}, {"_id": 0})]
+        grouped = {}
+        for trade in trades:
+            key = trade.get("strategy") or "Unknown"
+            grouped.setdefault(key, [])
+            grouped[key].append(trade)
+
+        strategies = []
+        for name, strategy_trades in grouped.items():
+            wins = [trade for trade in strategy_trades if trade["pnl"] > 0]
+            running = 0.0
+            peak = 0.0
+            max_drawdown = 0.0
+            pnl_history = []
+            for trade in sorted(strategy_trades, key=lambda item: (item.get("date", ""), item.get("exit_time", ""))):
+                running += trade["pnl"]
+                peak = max(peak, running)
+                max_drawdown = max(max_drawdown, peak - running)
+                pnl_history.append({"date": trade.get("date"), "pnl": round(running, 2)})
+            strategies.append({
+                "name": name,
+                "type": strategy_trades[-1].get("instrument_type", "EQUITY"),
+                "status": "ACTIVE" if risk_manager.status() != "HALTED" else "PAUSED",
+                "metrics": {
+                    "total_trades": len(strategy_trades),
+                    "win_rate": round((len(wins) / len(strategy_trades)) * 100, 1) if strategy_trades else 0.0,
+                    "total_pnl": round(sum(trade["pnl"] for trade in strategy_trades), 2),
+                    "max_drawdown": round(max_drawdown, 2),
+                },
+                "pnl_history": pnl_history[-30:],
+            })
+        strategies.sort(key=lambda item: item["metrics"]["total_pnl"], reverse=True)
+        return {"strategies": strategies, "timestamp": get_ist_now().strftime("%H:%M:%S")}
+    except Exception as e:
+        logger.error(f"Strategy performance error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ai-decisions")
+async def get_ai_decisions():
+    try:
+        trades = [_normalize_trade(trade) for trade in col_trades.find({}, {"_id": 0}).sort("date", -1).limit(100)]
+        decisions = []
+        correct = 0
+        for trade in trades:
+            outcome = "WIN" if trade["pnl"] > 0 else "LOSS"
+            if trade.get("ai_confidence") is not None:
+                if (trade["ai_confidence"] >= 70 and trade["pnl"] > 0) or (trade["ai_confidence"] < 70 and trade["pnl"] <= 0):
+                    correct += 1
+            decisions.append({
+                "symbol": trade["symbol"],
+                "action": trade["action"],
+                "date": trade["date"],
+                "pnl": trade["pnl"],
+                "confidence": trade.get("ai_confidence") or 0,
+                "outcome": outcome,
+                "reasoning": {
+                    "step_1_strategy": trade.get("strategy"),
+                    "step_2_regime": (trade.get("market_regime") or {}).get("regime") if isinstance(trade.get("market_regime"), dict) else trade.get("market_regime"),
+                    "step_3_ai": trade.get("ai_summary") or "No AI summary",
+                },
+            })
+        total = len(decisions)
+        return {
+            "ai_accuracy": round((correct / total) * 100, 1) if total else 0.0,
+            "correct_decisions": correct,
+            "total_decisions": total,
+            "decisions": decisions,
+        }
+    except Exception as e:
+        logger.error(f"AI decisions error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+

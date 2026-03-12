@@ -1,5 +1,5 @@
 """
-main.py - MiniMax Scalping Agent Entry Point
+main.py - MiniMax institutional trading agent entry point
 """
 
 import json
@@ -11,6 +11,7 @@ from pathlib import Path
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from agent.pre_market import run_end_of_day_review, run_pre_market
+from analytics.performance_metrics import calculate_performance_metrics
 from config import MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE, MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE, TRADING_MODE
 from data.candle_builder import CandleBuilder
 from data.kite_stream import start_stream
@@ -18,8 +19,8 @@ from data.token_lookup import get_tokens
 from execution import create_trader
 from notifications.telegram_alerts import alert_daily_summary, alert_startup, send_heartbeat, send_telegram
 from risk.daily_guard import DailyGuard
-from risk.position_sizer import calculate_quantity, calculate_stop_and_target
-from strategies.signal_scorer import calculate_signals, reset_opening_ranges, set_nifty_bias, update_opening_range
+from risk.position_sizer import calculate_position_plan
+from trading import TradeExecutor
 
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(
@@ -31,10 +32,12 @@ logger = logging.getLogger("main")
 
 WATCHLIST_FILE = Path("logs/watchlist.json")
 MARKET_BIAS_FILE = Path("logs/market_bias.json")
+PERFORMANCE_FILE = Path("logs/performance_metrics.json")
 
 guard = DailyGuard()
 candle_builder = CandleBuilder()
 trader = create_trader(guard)
+trade_executor = TradeExecutor()
 day_started = False
 stream = None
 market_bias_pct = 0.0
@@ -79,6 +82,8 @@ def save_market_bias(value: float):
 
 def save_trade_log():
     Path("logs/trades.json").write_text(json.dumps(trader.trade_log, indent=2))
+    metrics = calculate_performance_metrics(trader.trade_log)
+    PERFORMANCE_FILE.write_text(json.dumps(metrics, indent=2))
 
 
 def _market_bias_to_pct(bias: str) -> float:
@@ -122,7 +127,6 @@ def pre_market_job():
     save_watchlist(watchlist)
 
     market_bias_pct = _market_bias_to_pct(result.get("market_bias", "NEUTRAL"))
-    set_nifty_bias(market_bias_pct)
     save_market_bias(market_bias_pct)
     logger.info(f"Watchlist: {watchlist} | Market bias pct: {market_bias_pct:+.2f}")
 
@@ -138,6 +142,94 @@ def pre_market_job():
     except Exception as exc:
         logger.error(f"Stream start error: {exc}")
         send_telegram(f"Stream error: {exc} - using simulated prices")
+
+
+def _update_open_positions(latest_prices):
+    for stock in list(trader.positions.keys()):
+        ltp = latest_prices.get(stock) or candle_builder.get_latest_price(stock)
+        if ltp and ltp > 0:
+            trader.update_price(stock, ltp)
+
+
+def _evaluate_new_trades():
+    latest_prices = candle_builder.get_latest_prices()
+    for stock in watchlist:
+        prices = candle_builder.price_history.get(stock, [])
+        volumes = candle_builder.volume_history.get(stock, [])
+        highs = candle_builder.high_history.get(stock, [])
+        lows = candle_builder.low_history.get(stock, [])
+        vwap = candle_builder.vwap.get(stock, 0)
+
+        if len(prices) < 50:
+            logger.info(f"{stock}: {len(prices)} candles built")
+            continue
+
+        decision = trade_executor.evaluate_symbol(
+            symbol=stock,
+            prices=prices,
+            highs=highs,
+            lows=lows,
+            volumes=volumes,
+            vwap=vwap,
+            market_bias_pct=market_bias_pct,
+        )
+
+        if not decision.get("allowed"):
+            logger.info(f"{stock}: blocked - {decision.get('reason') or decision.get('rejection_reason', 'No trade')}")
+            continue
+
+        guard_allowed, guard_reason = guard.can_trade(int(round(decision["trade_score"])))
+        if not guard_allowed:
+            logger.info(f"{stock}: guard blocked - {guard_reason}")
+            continue
+
+        can_open, open_reason = trader.can_open(stock)
+        if not can_open:
+            logger.info(f"{stock}: entry skipped - {open_reason}")
+            continue
+
+        sizing = calculate_position_plan(
+            entry_price=decision["entry"],
+            stop_price=decision["stop_loss"],
+            ai_confidence=decision["ai_confidence"],
+            trade_score=decision["trade_score"],
+        )
+        if not sizing["allowed"]:
+            logger.info(f"{stock}: sizing blocked - {sizing['reason']}")
+            continue
+
+        metadata = {
+            "strategy": decision["strategy"],
+            "strategy_confidence": decision.get("strategy_confidence"),
+            "trade_score": decision["trade_score"],
+            "trade_score_components": decision.get("trade_score_components"),
+            "ai_confidence": decision["ai_confidence"],
+            "ai_summary": decision.get("ai_summary"),
+            "ai_source": decision.get("ai_source"),
+            "market_regime": decision.get("market_regime"),
+            "instrument_type": decision.get("instrument_type", "EQUITY"),
+            "option_side": decision.get("option_side"),
+            "risk_reward": decision.get("risk_reward"),
+            "volume_ratio": decision.get("volume_ratio"),
+            "liquidity": decision.get("liquidity"),
+            "setup_reason": decision.get("reason"),
+        }
+
+        trader.enter(
+            stock=stock,
+            action=decision["action"],
+            qty=sizing["qty"],
+            entry=decision["entry"],
+            sl=decision["stop_loss"],
+            target=decision["target"],
+            score=int(round(decision["trade_score"])),
+            metadata=metadata,
+        )
+        logger.info(
+            f"{stock}: entered {decision['action']} via {decision['strategy']} | "
+            f"trade_score={decision['trade_score']} ai={decision['ai_confidence']} qty={sizing['qty']}"
+        )
+        save_trade_log()
 
 
 def candle_close_job():
@@ -157,7 +249,6 @@ def candle_close_job():
 
     if not day_started:
         day_started = True
-        reset_opening_ranges()
         logger.info(f"Market open - scanning started | bias {market_bias_pct:+.2f}%")
 
     if not watchlist:
@@ -167,50 +258,11 @@ def candle_close_job():
     for stock in watchlist:
         candle_builder.close_candle(stock)
 
-    trader.check_time_stops(candle_builder.get_latest_prices())
-
-    if now.hour == 9 and now.minute <= 34:
-        for stock in watchlist:
-            latest_highs = candle_builder.high_history.get(stock, [])
-            latest_lows = candle_builder.low_history.get(stock, [])
-            if latest_highs and latest_lows:
-                update_opening_range(stock, latest_highs[-1], latest_lows[-1], now.minute)
-
-    for stock in watchlist:
-        prices = candle_builder.price_history.get(stock, [])
-        volumes = candle_builder.volume_history.get(stock, [])
-        highs = candle_builder.high_history.get(stock, [])
-        lows = candle_builder.low_history.get(stock, [])
-        vwap = candle_builder.vwap.get(stock, 0)
-
-        if len(prices) < 30:
-            logger.info(f"{stock}: {len(prices)} candles built")
-            continue
-
-        signal = calculate_signals(prices, volumes, vwap, highs=highs, lows=lows, symbol=stock)
-        allowed, reason = guard.can_trade(signal["score"])
-        logger.info(
-            f"{stock} | score={signal['score']} | action={signal['action']} | "
-            f"quality={signal.get('setup_quality')} | allowed={allowed} ({reason})"
-        )
-
-        if signal["action"] in ("BUY", "SELL") and allowed:
-            current_price = prices[-1]
-            stop_loss, target = calculate_stop_and_target(current_price, signal["action"], signal.get("atr"))
-            sizing = calculate_quantity(current_price, stop_loss)
-            can_open, open_reason = trader.can_open(stock)
-
-            if sizing["qty"] > 0 and can_open:
-                trader.enter(stock, signal["action"], sizing["qty"], current_price, stop_loss, target, signal["score"])
-                save_trade_log()
-            elif sizing["qty"] > 0 and not can_open:
-                logger.info(f"{stock}: entry skipped - {open_reason}")
-
-        if stock in trader.positions:
-            ltp = candle_builder.get_latest_prices().get(stock) or (prices[-1] if prices else 0)
-            if ltp > 0:
-                trader.update_price(stock, ltp)
-            save_trade_log()
+    latest_prices = candle_builder.get_latest_prices()
+    trader.check_time_stops(latest_prices)
+    _update_open_positions(latest_prices)
+    _evaluate_new_trades()
+    save_trade_log()
 
 
 def heartbeat_job():
@@ -218,7 +270,9 @@ def heartbeat_job():
 
 
 def end_of_day_job():
+    save_trade_log()
     summary = guard.summary()
+    metrics = calculate_performance_metrics(trader.trade_log)
     alert_daily_summary(
         trades=summary["trades"],
         wins=summary["wins"],
@@ -230,6 +284,13 @@ def end_of_day_job():
     review = run_end_of_day_review(trader.trade_log, guard.realised_pnl)
     if review:
         send_telegram(f"AI Review\n{review}")
+    send_telegram(
+        "Performance Snapshot\n"
+        f"Win rate: {metrics['win_rate']}%\n"
+        f"Profit factor: {metrics['profit_factor']}\n"
+        f"Max drawdown: Rs {metrics['max_drawdown']}\n"
+        f"Trades: {metrics['total_trades']}"
+    )
     if WATCHLIST_FILE.exists():
         WATCHLIST_FILE.unlink()
         logger.info("Watchlist file cleared for tomorrow.")
@@ -239,7 +300,6 @@ def end_of_day_job():
 
 watchlist = load_watchlist()
 market_bias_pct = load_market_bias()
-set_nifty_bias(market_bias_pct)
 _prime_existing_stream(watchlist)
 
 
@@ -276,4 +336,3 @@ if __name__ == "__main__":
         else:
             send_telegram("Agent stopped manually.")
         logger.info("Agent stopped.")
-
