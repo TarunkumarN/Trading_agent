@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { LayoutDashboard, HeartPulse, ScanSearch, BrainCircuit, Target, ListOrdered, ShieldAlert, TrendingUp, Calculator, Settings, ScrollText, Activity, Menu, X, Sun, Moon, FileText } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -60,6 +60,112 @@ function TradesPage({ tradesData }) {
   return <div className="page-enter"><div className="grid-3"><Stat label="Total" value={trades.length} /><Stat label="Wins / Losses" value={`${trades.filter(t => t.pnl > 0).length} / ${trades.filter(t => t.pnl <= 0).length}`} /><Stat label="Net P&L" value={`Rs ${fmt(trades.reduce((s, t) => s + (t.pnl || 0), 0))}`} /></div><div style={{ marginTop: 16, marginBottom: 12, display: 'flex', gap: 10, flexWrap: 'wrap' }}><select value={outcome} onChange={e => setOutcome(e.target.value)}><option value="all">All</option><option value="wins">Wins</option><option value="loss">Losses</option></select><select value={date} onChange={e => setDate(e.target.value)}><option value="all">All Dates</option>{(tradesData.available_dates || []).map(d => <option key={d} value={d}>{d}</option>)}</select></div><div className="card">{trades.length ? <div className="tbl-wrap"><table><thead><tr><th>Date</th><th>Stock</th><th>Strategy</th><th>Side</th><th>Qty</th><th>Entry</th><th>Exit</th><th>P&L</th><th>Reason</th><th>Score</th></tr></thead><tbody>{trades.map((t, i) => <tr key={t.id || i}><td>{t.date}</td><td>{t.symbol}</td><td>{t.strategy || '--'}</td><td>{t.action}</td><td>{t.qty}</td><td>{Number(t.entry || 0).toFixed(2)}</td><td>{Number(t.exit || 0).toFixed(2)}</td><td style={{ color: t.pnl >= 0 ? 'var(--green)' : 'var(--red)' }}>Rs {fmt(t.pnl)}</td><td>{t.reason}</td><td>{t.score}</td></tr>)}</tbody></table></div> : <div className="empty">No trades</div>}</div></div>;
 }
 
+function MarketPage({ market, regime, loadMarket }) {
+  if (!market) return <div className="empty">Loading...</div>;
+  const rows = market.all_stocks || market.gainers || [];
+  return <div className="page-enter"><div className="grid-3"><Stat label="Advances" value={market.summary?.advances || 0} /><Stat label="Declines" value={market.summary?.declines || 0} /><Stat label="Regime" value={regime?.regime || '--'} /></div><div className="card" style={{ marginBottom: 16 }}><button className="fo-btn" onClick={loadMarket}>Refresh Market</button></div><div className="card">{rows.length ? <div className="tbl-wrap"><table><thead><tr><th>Symbol</th><th>Price</th><th>Change%</th><th>Volume</th></tr></thead><tbody>{rows.slice(0, 25).map(row => <tr key={row.symbol}><td>{row.symbol}</td><td>{row.price}</td><td style={{ color: row.change_pct >= 0 ? 'var(--green)' : 'var(--red)' }}>{row.change_pct}</td><td>{fmtINR(row.volume || 0)}</td></tr>)}</tbody></table></div> : <div className="empty">No data</div>}</div></div>;
+}
+
+function ChartPage() {
+  const hostRef = useRef(null);
+  const chartRef = useRef(null);
+  const seriesRef = useRef({});
+  const [universe, setUniverse] = useState(null);
+  const [symbol, setSymbol] = useState('RELIANCE');
+  const [chartData, setChartData] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API}/api/market/universe`).then(r => r.json()).then(data => {
+      setUniverse(data);
+      if (data?.equities?.[0]?.symbol) setSymbol(data.equities[0].symbol);
+    }).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!symbol) return;
+    fetch(`${API}/api/chart/data?symbol=${encodeURIComponent(symbol)}`).then(r => r.json()).then(setChartData).catch(() => {});
+  }, [symbol]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function mountChart() {
+      if (!hostRef.current || !chartData?.candles?.length) return;
+      const { createChart } = await import('lightweight-charts');
+      if (cancelled) return;
+      if (!chartRef.current) {
+        const chart = createChart(hostRef.current, {
+          width: hostRef.current.clientWidth,
+          height: 420,
+          layout: { background: { color: 'transparent' }, textColor: '#a1a1aa' },
+          grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
+          rightPriceScale: { borderColor: '#3f3f46' },
+          timeScale: { borderColor: '#3f3f46' },
+        });
+        const candleSeries = chart.addCandlestickSeries({
+          upColor: '#22c55e',
+          downColor: '#ef4444',
+          borderVisible: false,
+          wickUpColor: '#22c55e',
+          wickDownColor: '#ef4444',
+        });
+        const ema20Series = chart.addLineSeries({ color: '#06b6d4', lineWidth: 2 });
+        const ema50Series = chart.addLineSeries({ color: '#eab308', lineWidth: 2 });
+        const vwapSeries = chart.addLineSeries({ color: '#a855f7', lineWidth: 2 });
+        chartRef.current = chart;
+        seriesRef.current = { candleSeries, ema20Series, ema50Series, vwapSeries };
+      }
+      const { candleSeries, ema20Series, ema50Series, vwapSeries } = seriesRef.current;
+      candleSeries.setData(chartData.candles || []);
+      if (chartData.markers?.length) candleSeries.setMarkers(chartData.markers);
+      ema20Series.setData(chartData.ema20 || []);
+      ema50Series.setData(chartData.ema50 || []);
+      vwapSeries.setData(chartData.vwap || []);
+      chartRef.current.timeScale().fitContent();
+    }
+    mountChart();
+    const resize = () => {
+      if (chartRef.current && hostRef.current) chartRef.current.applyOptions({ width: hostRef.current.clientWidth });
+    };
+    window.addEventListener('resize', resize);
+    return () => {
+      cancelled = true;
+      window.removeEventListener('resize', resize);
+    };
+  }, [chartData]);
+
+  const groups = [
+    ['Equities', universe?.equities || []],
+    ['F&O', universe?.fno || []],
+    ['Commodities', universe?.commodities || []],
+  ];
+
+  return <div className="page-enter"><div className="card" style={{ marginBottom: 16 }}><div className="card-head"><span className="card-head-title">TradingView Style Chart</span><span className="tag tag-active">{chartData?.instrument_type || '--'}</span></div><div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 12 }}>{groups.map(([label, rows]) => <select key={label} value={rows.some(row => row.symbol === symbol) ? symbol : ''} onChange={e => e.target.value && setSymbol(e.target.value)}><option value="">{label}</option>{rows.map(row => <option key={row.symbol} value={row.symbol}>{row.symbol}</option>)}</select>)}</div><div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}><span className="tag tag-ok">Candles</span><span className="tag tag-active">EMA20</span><span className="tag tag-warn">EMA50</span><span className="tag tag-paper">VWAP</span></div><div ref={hostRef} style={{ width: '100%', minHeight: 420 }} /></div><div className="grid-3"><Stat label="Symbol" value={chartData?.symbol || symbol} /><Stat label="Instrument" value={chartData?.instrument_type || '--'} /><Stat label="Candles" value={chartData?.candles?.length || 0} /></div></div>;
+}
+
+function HealthPage({ health }) {
+  if (!health) return <div className="empty">Loading...</div>;
+  return <div className="page-enter"><div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(health, null, 2)}</pre></div></div>;
+}
+
+function StrategiesPage({ stratPerf }) {
+  if (!stratPerf) return <div className="empty">Loading...</div>;
+  return <div className="page-enter"><div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(stratPerf, null, 2)}</pre></div></div>;
+}
+
+function RiskPage({ risk }) {
+  if (!risk) return <div className="empty">Loading...</div>;
+  return <div className="page-enter"><div className="grid-3"><Stat label="Loss Used" value={`Rs ${risk.loss_used || 0}`} /><Stat label="Open Risk" value={`Rs ${risk.open_risk || 0}`} /><Stat label="State" value={risk.agent_state || '--'} /></div></div>;
+}
+
+function AuditPage({ logs, audit }) {
+  return <div className="page-enter"><div className="grid-2"><div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(audit, null, 2)}</pre></div><div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(logs, null, 2)}</pre></div></div></div>;
+}
+
+function SettingsPage({ config }) {
+  if (!config) return <div className="empty">Loading...</div>;
+  return <div className="page-enter"><div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(config, null, 2)}</pre></div></div>;
+}
+
 function SimpleJsonPage({ data }) {
   if (!data) return <div className="empty">Loading...</div>;
   return <div className="card"><pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(data, null, 2)}</pre></div>;
@@ -67,12 +173,12 @@ function SimpleJsonPage({ data }) {
 
 const NAV = [
   { group: 'Monitor', items: [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard }, { id: 'portfolio', label: 'Portfolio', icon: TrendingUp }, { id: 'report', label: 'Daily Report', icon: FileText }, { id: 'health', label: 'System Health', icon: HeartPulse }] },
-  { group: 'Market', items: [{ id: 'market', label: 'Market Analysis', icon: ScanSearch }, { id: 'ai', label: 'AI Brain', icon: BrainCircuit }, { id: 'strategies', label: 'Strategies', icon: Activity }] },
+  { group: 'Market', items: [{ id: 'market', label: 'Market Analysis', icon: ScanSearch }, { id: 'chart', label: 'Live Charts', icon: Activity }, { id: 'ai', label: 'AI Brain', icon: BrainCircuit }, { id: 'strategies', label: 'Strategies', icon: Activity }] },
   { group: 'Trading', items: [{ id: 'positions', label: 'Positions', icon: Target }, { id: 'trades', label: 'Trade History', icon: ListOrdered }, { id: 'risk', label: 'Risk', icon: ShieldAlert }] },
   { group: 'Tools', items: [{ id: 'fo', label: 'F&O Calculator', icon: Calculator }, { id: 'audit', label: 'Audit & Logs', icon: ScrollText }, { id: 'settings', label: 'Settings', icon: Settings }] },
 ];
 
-const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', ai: 'AI Brain', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
+const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', chart: 'Live Charts', ai: 'AI Brain', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
 
 function App() {
   const [authed, setAuthed] = useState(() => localStorage.getItem('mm_authed') === 'true');
@@ -109,6 +215,7 @@ function App() {
     if (id === 'portfolio') f('/api/portfolio', setPortfolio);
     if (id === 'report') f('/api/report/daily', setReport);
     if (id === 'market') f('/api/market/live', setMarket);
+    if (id === 'chart') f('/api/market/universe', () => {});
     if (id === 'ai') f('/api/ai-decisions', setAiData);
     if (id === 'strategies') f('/api/strategies/performance', setStratPerf);
     if (id === 'positions') f('/api/open-positions', setPositions);
@@ -135,6 +242,7 @@ function App() {
           {page === 'report' && <ReportPage report={report} />}
           {page === 'health' && <HealthPage health={health} />}
           {page === 'market' && <MarketPage market={market} regime={regime} loadMarket={() => f('/api/market/live', setMarket)} />}
+          {page === 'chart' && <ChartPage />}
           {page === 'ai' && <SimpleJsonPage data={aiData} />}
           {page === 'strategies' && <StrategiesPage stratPerf={stratPerf} />}
           {page === 'positions' && <PositionsPage positions={positions} />}

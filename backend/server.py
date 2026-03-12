@@ -64,6 +64,13 @@ NIFTY50_STOCKS = [
     "POWERGRID", "NTPC", "ONGC", "JSWSTEEL", "TATASTEEL",
 ]
 DEFAULT_WATCHLIST = ["RELIANCE", "HDFCBANK", "ICICIBANK", "INFY", "TCS"]
+FNO_SYMBOLS = [
+    "NIFTY", "BANKNIFTY", "FINNIFTY", "RELIANCE", "TCS", "INFY",
+    "HDFCBANK", "ICICIBANK", "SBIN", "AXISBANK", "LT", "MARUTI",
+]
+COMMODITY_SYMBOLS = [
+    "GOLD", "SILVER", "CRUDEOIL",
+]
 
 # ─── Logging ──────────────────────────────────────────────────────
 logging.basicConfig(
@@ -1560,6 +1567,110 @@ def _fetch_market_data_cached():
     return result
 
 
+def _instrument_type(symbol: str) -> str:
+    upper = (symbol or "").upper()
+    if upper in COMMODITY_SYMBOLS:
+        return "COMMODITY"
+    if upper in FNO_SYMBOLS or upper.endswith(("CE", "PE", "FUT")):
+        return "FNO"
+    return "EQUITY"
+
+
+def _synthetic_price_series(symbol: str, base_price: float, points: int = 60):
+    seed = sum(ord(ch) for ch in symbol) % 17
+    candles = []
+    price = base_price or 100.0
+    now = get_ist_now()
+    for idx in range(points):
+        drift = ((idx % 7) - 3) * 0.12 + ((seed % 5) - 2) * 0.08
+        open_price = round(price, 2)
+        close_price = round(max(1.0, price + drift), 2)
+        high_price = round(max(open_price, close_price) + 0.35 + (idx % 3) * 0.08, 2)
+        low_price = round(min(open_price, close_price) - 0.35 - (idx % 2) * 0.06, 2)
+        volume = 1000 + ((idx + seed) % 9) * 180
+        candles.append({
+            "time": int((now - timedelta(minutes=(points - idx))).timestamp()),
+            "open": open_price,
+            "high": high_price,
+            "low": max(0.1, low_price),
+            "close": close_price,
+            "volume": volume,
+        })
+        price = close_price
+    return candles
+
+
+def _build_chart_payload(symbol: str):
+    prices = candle_builder.price_history.get(symbol, [])
+    volumes = candle_builder.volume_history.get(symbol, [])
+    current_price = candle_builder.get_latest_price(symbol)
+    instrument_type = _instrument_type(symbol)
+
+    if prices:
+        closes = list(prices[-60:])
+        if current_price and (not closes or current_price != closes[-1]):
+            closes.append(current_price)
+        if not volumes:
+            volumes = [1000] * len(closes)
+        else:
+            volumes = list(volumes[-len(closes):])
+        while len(volumes) < len(closes):
+            volumes.insert(0, volumes[0] if volumes else 1000)
+
+        candles = []
+        now = get_ist_now()
+        for idx, close_price in enumerate(closes):
+            prev = closes[idx - 1] if idx > 0 else close_price
+            open_price = prev
+            high_price = max(open_price, close_price) + 0.2
+            low_price = min(open_price, close_price) - 0.2
+            candles.append({
+                "time": int((now - timedelta(minutes=(len(closes) - idx))).timestamp()),
+                "open": round(open_price, 2),
+                "high": round(high_price, 2),
+                "low": round(max(0.1, low_price), 2),
+                "close": round(close_price, 2),
+                "volume": float(volumes[idx]),
+            })
+    else:
+        data = _fetch_market_data_cached()
+        lookup = {item["symbol"]: item for item in data.get("stocks", [])}
+        fallback_price = lookup.get(symbol, {}).get("price", 100.0)
+        candles = _synthetic_price_series(symbol, fallback_price)
+
+    closes = pd.Series([c["close"] for c in candles])
+    volumes = pd.Series([c["volume"] for c in candles])
+    ema20 = ta.trend.ema_indicator(closes, window=min(20, len(closes))).fillna(method="bfill").tolist()
+    ema50 = ta.trend.ema_indicator(closes, window=min(50, len(closes))).fillna(method="bfill").tolist()
+    vwap_vals = ((closes * volumes).cumsum() / volumes.replace(0, np.nan).cumsum()).fillna(method="bfill").fillna(closes).tolist()
+
+    markers = []
+    for trade in list(col_trades.find({"symbol": symbol}, {"_id": 0}).sort("date", -1).limit(20)):
+        trade_date = trade.get("date")
+        exit_time = trade.get("exit_time", "09:15:00")
+        try:
+            stamp = datetime.strptime(f"{trade_date} {exit_time}", "%Y-%m-%d %H:%M:%S")
+            markers.append({
+                "time": int(stamp.replace(tzinfo=timezone(timedelta(hours=5, minutes=30))).timestamp()),
+                "position": "belowBar" if trade.get("action") == "BUY" else "aboveBar",
+                "color": "#22c55e" if trade.get("action") == "BUY" else "#ef4444",
+                "shape": "arrowUp" if trade.get("action") == "BUY" else "arrowDown",
+                "text": f"{trade.get('action')} {trade.get('strategy', '')}".strip(),
+            })
+        except Exception:
+            continue
+
+    return {
+        "symbol": symbol,
+        "instrument_type": instrument_type,
+        "candles": candles,
+        "ema20": [{"time": candles[idx]["time"], "value": round(float(ema20[idx]), 2)} for idx in range(len(candles))],
+        "ema50": [{"time": candles[idx]["time"], "value": round(float(ema50[idx]), 2)} for idx in range(len(candles))],
+        "vwap": [{"time": candles[idx]["time"], "value": round(float(vwap_vals[idx]), 2)} for idx in range(len(candles))],
+        "markers": markers,
+    }
+
+
 @app.get("/api/market/live")
 async def get_live_market():
     """Get live market data with full stock details."""
@@ -1599,6 +1710,48 @@ async def get_live_market():
         }
     except Exception as e:
         logger.error(f"Live market error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/market/universe")
+async def get_market_universe():
+    try:
+        data = _fetch_market_data_cached()
+        stocks = data.get("stocks", [])
+        stock_lookup = {item["symbol"]: item for item in stocks}
+
+        def row(symbol, instrument_type):
+            item = stock_lookup.get(symbol, {})
+            base_price = item.get("price", 100.0 if instrument_type == "EQUITY" else 250.0)
+            change_pct = item.get("change_pct", 0.0)
+            if not item and instrument_type == "COMMODITY":
+                base_map = {"GOLD": 72500.0, "SILVER": 81200.0, "CRUDEOIL": 6450.0}
+                base_price = base_map.get(symbol, base_price)
+                change_pct = round(((len(symbol) % 5) - 2) * 0.35, 2)
+            return {
+                "symbol": symbol,
+                "instrument_type": instrument_type,
+                "price": round(base_price, 2),
+                "change_pct": round(change_pct, 2),
+            }
+
+        return {
+            "equities": [row(symbol, "EQUITY") for symbol in DEFAULT_WATCHLIST],
+            "fno": [row(symbol, "FNO") for symbol in FNO_SYMBOLS],
+            "commodities": [row(symbol, "COMMODITY") for symbol in COMMODITY_SYMBOLS],
+            "timestamp": get_ist_now().strftime("%H:%M:%S"),
+        }
+    except Exception as e:
+        logger.error(f"Market universe error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/chart/data")
+async def get_chart_data(symbol: str = "RELIANCE"):
+    try:
+        return _build_chart_payload(symbol)
+    except Exception as e:
+        logger.error(f"Chart data error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
