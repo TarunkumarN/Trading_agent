@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-import { LayoutDashboard, HeartPulse, ScanSearch, BrainCircuit, Target, ListOrdered, ShieldAlert, TrendingUp, Calculator, Settings, ScrollText, Activity, Menu, X, RefreshCw, ChevronRight, Zap, Sun, Moon, FileText } from 'lucide-react';
+import { LayoutDashboard, HeartPulse, ScanSearch, BrainCircuit, Target, ListOrdered, ShieldAlert, TrendingUp, Calculator, Settings, ScrollText, Activity, Menu, X, RefreshCw, ChevronRight, Zap, Sun, Moon, FileText, Crosshair, GitBranch } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -144,14 +144,125 @@ function AuditPage({ logs, audit }) { const tc = { BOT_START: 'var(--green)', SI
 
 function SettingsPage({ config }) { if (!config) return <div className="empty">Loading...</div>; return (<div className="page-enter" data-testid="settings-page"><div className="grid-2"><div className="card"><div className="card-head"><span className="card-head-title">Trading</span></div><table><tbody>{[['Portfolio', `₹${fmtINR(config.portfolio_value)}`], ['Max Risk/Trade', `₹${(config.portfolio_value * config.max_risk_pct / 100).toFixed(0)} (${config.max_risk_pct}%)`], ['Daily Loss Limit', `₹${config.daily_loss_limit?.toFixed(0)} (5%)`], ['Max Drawdown', `${config.max_drawdown_pct}%`], ['Selective', `₹${config.daily_profit_selective}`], ['Stop All', `₹${config.daily_profit_stop}`], ['Min Score', `${config.min_signal_score}/10`], ['Retries', `${config.order_max_retries}x`], ['RR', `1:${config.risk_reward_ratio}`], ['EMA', `${config.ema_fast}/${config.ema_slow}`]].map(([k, v]) => <tr key={k}><td className="c-dim">{k}</td><td>{v}</td></tr>)}</tbody></table></div><div className="card"><div className="card-head"><span className="card-head-title">System</span></div><table><tbody><tr><td className="c-dim">Mode</td><td><span className={`tag ${config.trading_mode === 'live' ? 'tag-ok' : 'tag-paper'}`}>{config.trading_mode?.toUpperCase()}</span></td></tr><tr><td className="c-dim">Broker</td><td><span className={`tag ${config.kite_configured ? 'tag-ok' : 'tag-fail'}`}>Zerodha {config.kite_configured ? '(OK)' : '(No Token)'}</span></td></tr><tr><td className="c-dim">Telegram</td><td><span className={`tag ${config.telegram_configured ? 'tag-ok' : 'tag-fail'}`}>{config.telegram_configured ? 'Connected' : 'Not Set'}</span></td></tr><tr><td className="c-dim">Hours</td><td>{config.market_open} - {config.market_close}</td></tr><tr><td className="c-dim">Leverage</td><td>{config.max_leverage}x</td></tr></tbody></table></div></div></div>); }
 
+function QuantPage({ quantData, quantPipeline, quantSymbol, setQuantSymbol, loadQuantPipeline }) {
+  const [pipelineSym, setPipelineSym] = useState('RELIANCE');
+  if (!quantData) return <div className="empty">Loading quant intelligence...</div>;
+  const p = quantData.portfolio || {};
+  const fc = quantData.frequency_control || {};
+  const hedge = quantData.hedge_analysis || {};
+  const wi = quantData.watchlist_intelligence || [];
+  const sp = quantData.strategy_performance || [];
+  const eq = p.equity_curve || [];
+
+  const runPipeline = () => { if (pipelineSym) { setQuantSymbol(pipelineSym); loadQuantPipeline(pipelineSym); } };
+
+  return (
+    <div className="page-enter" data-testid="quant-page">
+      <div className="grid-4">
+        <Stat label="Portfolio" value={`₹${fmtINR(p.value || 0)}`} sub={`P&L: ₹${fmt(p.total_pnl || 0)}`} color={p.total_pnl >= 0 ? 'var(--green)' : 'var(--red)'} accent="ca-green" />
+        <Stat label="Win Rate" value={`${p.win_rate || 0}%`} sub={`${p.total_trades || 0} trades`} color={(p.win_rate || 0) >= 50 ? 'var(--green)' : 'var(--red)'} accent="ca-cyan" />
+        <Stat label="Max Drawdown" value={`${p.max_drawdown || 0}%`} sub="Portfolio peak-to-trough" color="var(--red)" accent="ca-red" />
+        <Stat label="Day P&L" value={`₹${fmt(p.day_pnl || 0)}`} sub={`${fc.trades_today || 0}/${fc.max_per_day || 4} trades`} color={(p.day_pnl || 0) >= 0 ? 'var(--green)' : 'var(--red)'} accent="ca-amber" />
+      </div>
+
+      <div className="grid-2" style={{ marginBottom: 16 }}>
+        <div className="card">
+          <div className="card-head"><span className="card-head-title">Frequency Control</span><span className={`tag ${fc.allowed ? 'tag-ok' : 'tag-fail'}`}>{fc.allowed ? 'TRADING OK' : 'BLOCKED'}</span></div>
+          {[
+            ['Trades Today', `${fc.trades_today || 0} / ${fc.max_per_day || 4}`],
+            ['Consec Losses', `${fc.consecutive_losses || 0} / ${fc.max_consec_losses || 3}`],
+            ['Drawdown', `${fc.drawdown_pct || 0}% / ${fc.drawdown_limit || 4}%`],
+            ['Trading Window', quantData.trading_window || '09:30-14:45 IST'],
+            ['Min R:R', quantData.min_rr_ratio || '1:2'],
+            ['Min Rank Score', `${quantData.min_rank_score || 85}/100`],
+          ].map(([k, v]) => <div key={k} className="fo-row"><span className="c-dim">{k}</span><span style={{ fontWeight: 600 }}>{v}</span></div>)}
+          {!fc.allowed && <div style={{ marginTop: 12, padding: '8px 12px', borderRadius: 6, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: 'var(--red)', fontSize: '0.82rem' }}>{fc.reason}</div>}
+        </div>
+        <div className="card">
+          <div className="card-head"><span className="card-head-title">Hedge Analysis</span><span className={`tag ${hedge.hedge_needed ? 'tag-warn' : 'tag-ok'}`}>{hedge.hedge_needed ? 'HEDGE NEEDED' : 'BALANCED'}</span></div>
+          {[
+            ['Net Exposure', hedge.net_exposure || 'FLAT'],
+            ['Bullish', `${hedge.bullish_pct || 0}%`],
+            ['Bearish', `${hedge.bearish_pct || 0}%`],
+          ].map(([k, v]) => <div key={k} className="fo-row"><span className="c-dim">{k}</span><span style={{ fontWeight: 600, color: k === 'Bullish' ? 'var(--green)' : k === 'Bearish' ? 'var(--red)' : 'var(--text)' }}>{v}</span></div>)}
+          {hedge.recommendation && <div style={{ marginTop: 12, padding: '8px 12px', borderRadius: 6, background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.2)', fontSize: '0.82rem' }}>
+            <div style={{ fontWeight: 700, color: 'var(--amber)', marginBottom: 4 }}>Hedge: {hedge.recommendation.action} {hedge.recommendation.instrument}</div>
+            <div className="c-dim">{hedge.recommendation.reason}</div>
+          </div>}
+        </div>
+      </div>
+
+      {eq.length > 0 && <div className="card" style={{ marginBottom: 16 }}>
+        <div className="card-head"><span className="card-head-title">Equity Curve</span></div>
+        <div style={{ height: 180 }}><ResponsiveContainer width="100%" height="100%"><LineChart data={eq}><CartesianGrid strokeDasharray="3 3" stroke="var(--border)" /><XAxis dataKey="date" tick={{ fill: 'var(--text-dim)', fontSize: 10 }} /><YAxis tick={{ fill: 'var(--text-dim)', fontSize: 10 }} domain={['dataMin-200', 'dataMax+200']} /><Tooltip contentStyle={{ background: 'var(--card)', border: '1px solid var(--border)' }} /><Line type="monotone" dataKey="equity" stroke="var(--green)" strokeWidth={2} dot={{ r: 3 }} /></LineChart></ResponsiveContainer></div>
+      </div>}
+
+      <div className="card" style={{ marginBottom: 16 }}>
+        <div className="card-head"><span className="card-head-title">Watchlist Intelligence</span></div>
+        {wi.length > 0 ? <div className="tbl-wrap"><table><thead><tr><th>Symbol</th><th>Price</th><th>Signal</th><th>Score</th><th>Options Flow</th><th>AI Direction</th><th>AI Conf</th><th>RSI</th></tr></thead><tbody>
+          {wi.map(w => <tr key={w.symbol}><td style={{ fontWeight: 700, color: 'var(--amber)' }}>{w.symbol}</td><td>₹{w.price?.toFixed(2)}</td>
+            <td><span className={`tag tag-${w.signal_action?.toLowerCase()}`}>{w.signal_action}</span></td>
+            <td style={{ color: 'var(--cyan)' }}>{w.signal_score}</td>
+            <td><span className={`tag ${w.options_flow === 'bullish_flow' ? 'tag-ok' : w.options_flow === 'bearish_flow' ? 'tag-fail' : 'tag-info'}`}>{w.options_flow?.replace('_', ' ')}</span></td>
+            <td style={{ color: w.ai_direction === 'bullish' ? 'var(--green)' : w.ai_direction === 'bearish' ? 'var(--red)' : 'var(--amber)' }}>{w.ai_direction?.toUpperCase()}</td>
+            <td><span style={{ color: w.ai_confidence >= 65 ? 'var(--green)' : 'var(--amber)' }}>{w.ai_confidence}%</span></td>
+            <td className="c-dim">{w.rsi?.toFixed(0)}</td></tr>)}
+        </tbody></table></div> : <div className="empty">No data</div>}
+      </div>
+
+      <div className="card" style={{ marginBottom: 16, padding: 20 }}>
+        <div className="card-head"><span className="card-head-title">Pipeline Analysis</span></div>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
+          <input data-testid="quant-pipeline-input" value={pipelineSym} onChange={e => setPipelineSym(e.target.value.toUpperCase())} placeholder="Symbol" style={{ padding: '8px 14px', borderRadius: 6, border: '1px solid var(--border)', background: 'var(--bg)', color: 'var(--text)', fontWeight: 700, width: 140 }} />
+          <button data-testid="quant-pipeline-run" onClick={runPipeline} style={{ padding: '8px 18px', borderRadius: 6, background: 'var(--cyan)', color: '#000', fontWeight: 700, border: 'none', cursor: 'pointer' }}>RUN PIPELINE</button>
+        </div>
+        {quantPipeline && <div>
+          <div style={{ marginBottom: 12, display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <span className={`tag ${quantPipeline.pipeline_result === 'PASS' ? 'tag-ok' : quantPipeline.pipeline_result === 'FAIL' ? 'tag-fail' : 'tag-info'}`} style={{ fontSize: '0.9rem', padding: '4px 14px' }}>{quantPipeline.pipeline_result}</span>
+            <span style={{ fontWeight: 700, color: 'var(--amber)' }}>{quantPipeline.symbol}</span>
+            {quantPipeline.action && quantPipeline.action !== 'HOLD' && <span className={`tag tag-${quantPipeline.action?.toLowerCase()}`}>{quantPipeline.action}</span>}
+            <span className="c-dim">Steps: {quantPipeline.steps_passed}/{quantPipeline.steps_total} | Score: {quantPipeline.trade_score}/100</span>
+          </div>
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-dim)', marginBottom: 16 }}>{quantPipeline.reason}</div>
+          {(quantPipeline.steps || []).map((s, i) => <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+            <span style={{ color: s.passed ? 'var(--green)' : 'var(--red)', fontWeight: 800, minWidth: 22 }}>{s.passed ? '+' : 'x'}</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{s.step}. {s.name}</div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>{s.details}</div>
+            </div>
+          </div>)}
+          {quantPipeline.trade_rank && <div style={{ marginTop: 14 }}>
+            <div className="card-label">Trade Rank Breakdown</div>
+            <div className="grid-3" style={{ marginTop: 8 }}>
+              {Object.entries(quantPipeline.trade_rank.components || {}).map(([k, v]) => <div key={k} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.4rem', fontWeight: 900, color: v >= 10 ? 'var(--green)' : v >= 5 ? 'var(--amber)' : 'var(--red)' }}>{v}</div>
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)', textTransform: 'capitalize' }}>{k.replace(/_/g, ' ')}</div>
+              </div>)}
+            </div>
+          </div>}
+        </div>}
+      </div>
+
+      {sp.length > 0 && <div className="card">
+        <div className="card-head"><span className="card-head-title">Strategy Performance</span></div>
+        <div className="tbl-wrap"><table><thead><tr><th>Strategy</th><th>Trades</th><th>Wins</th><th>Win Rate</th><th>P&L</th></tr></thead><tbody>
+          {sp.map((s, i) => <tr key={i}><td style={{ fontWeight: 700 }}>{s.name}</td><td>{s.trades}</td><td>{s.wins}</td>
+            <td style={{ color: s.win_rate >= 50 ? 'var(--green)' : 'var(--red)' }}>{s.win_rate}%</td>
+            <td style={{ color: s.pnl >= 0 ? 'var(--green)' : 'var(--red)', fontWeight: 700 }}>₹{fmt(s.pnl)}</td></tr>)}
+        </tbody></table></div>
+      </div>}
+    </div>
+  );
+}
+
 /* ═══ MAIN ═══ */
 const NAV = [
   { group: 'Monitor', items: [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard }, { id: 'portfolio', label: 'Portfolio', icon: TrendingUp }, { id: 'report', label: 'Daily Report', icon: FileText }, { id: 'health', label: 'System Health', icon: HeartPulse }] },
-  { group: 'Market', items: [{ id: 'market', label: 'Market Analysis', icon: ScanSearch }, { id: 'ai', label: 'AI Brain', icon: BrainCircuit }, { id: 'strategies', label: 'Strategies', icon: Activity }] },
+  { group: 'Market', items: [{ id: 'market', label: 'Market Analysis', icon: ScanSearch }, { id: 'ai', label: 'AI Brain', icon: BrainCircuit }, { id: 'quant', label: 'Quant Intelligence', icon: Crosshair }, { id: 'strategies', label: 'Strategies', icon: Activity }] },
   { group: 'Trading', items: [{ id: 'positions', label: 'Positions', icon: Target }, { id: 'trades', label: 'Trade History', icon: ListOrdered }, { id: 'risk', label: 'Risk', icon: ShieldAlert }] },
   { group: 'Tools', items: [{ id: 'fo', label: 'F&O Calculator', icon: Calculator }, { id: 'audit', label: 'Audit & Logs', icon: ScrollText }, { id: 'settings', label: 'Settings', icon: Settings }] },
 ];
-const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', ai: 'AI Brain', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
+const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', ai: 'AI Brain', quant: 'Quant Intelligence', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
 
 function App() {
   const [authed, setAuthed] = useState(false);
@@ -176,6 +287,9 @@ function App() {
   const [logs, setLogs] = useState([]);
   const [audit, setAudit] = useState(null);
   const [config, setConfig] = useState(null);
+  const [quantData, setQuantData] = useState(null);
+  const [quantPipeline, setQuantPipeline] = useState(null);
+  const [quantSymbol, setQuantSymbol] = useState('');
 
   const toggleTheme = () => { const t = theme === 'dark' ? 'light' : 'dark'; setTheme(t); localStorage.setItem('theme', t); };
   useEffect(() => { document.documentElement.setAttribute('data-theme', theme); }, [theme]);
@@ -189,6 +303,7 @@ function App() {
   const loadConfig = useCallback(() => f('/api/config', setConfig), [f]);
   const loadAudit = useCallback(() => f('/api/audit', setAudit), [f]);
   const loadMode = useCallback(() => f('/api/mode', d => setMode(d.mode || 'PAPER')), [f]);
+  const loadQuantPipeline = useCallback((sym) => f(`/api/quant/pipeline/${sym}`, setQuantPipeline), [f]);
 
   useEffect(() => { if (!authed) return; loadDash(); loadHealth(); loadRisk(); loadConfig(); loadAudit(); loadRegime(); loadMode(); const t1 = setInterval(loadDash, 15000); const t2 = setInterval(() => { loadHealth(); loadRegime(); }, 30000); const t3 = setInterval(loadRisk, 20000); return () => { clearInterval(t1); clearInterval(t2); clearInterval(t3); }; }, [authed, loadDash, loadHealth, loadRisk, loadConfig, loadAudit, loadRegime, loadMode]);
 
@@ -199,7 +314,7 @@ function App() {
     try { const r = await fetch(`${API}/api/mode/switch`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: newMode.toLowerCase() }) }); const d = await r.json(); if (d.ok) setMode(d.mode); else alert(d.error || 'Failed'); } catch { alert('Connection error'); }
   };
 
-  const nav = id => { setPage(id); setSidebarOpen(false); if (id === 'portfolio') f('/api/portfolio', setPortfolio); if (id === 'report') f('/api/report/daily', setReport); if (id === 'market') { loadMarket(); loadRegime(); } if (id === 'ai') f('/api/ai-decisions', setAiData); if (id === 'strategies') f('/api/strategies/performance', setStratPerf); if (id === 'positions') f('/api/open-positions', setPositions); if (id === 'trades') f('/api/trades', setTradesData); if (id === 'audit') { f('/api/logs?limit=100', d => setLogs(d.logs || [])); loadAudit(); } if (id === 'settings') loadConfig(); };
+  const nav = id => { setPage(id); setSidebarOpen(false); if (id === 'portfolio') f('/api/portfolio', setPortfolio); if (id === 'report') f('/api/report/daily', setReport); if (id === 'market') { loadMarket(); loadRegime(); } if (id === 'ai') f('/api/ai-decisions', setAiData); if (id === 'quant') f('/api/quant/dashboard', setQuantData); if (id === 'strategies') f('/api/strategies/performance', setStratPerf); if (id === 'positions') f('/api/open-positions', setPositions); if (id === 'trades') f('/api/trades', setTradesData); if (id === 'audit') { f('/api/logs?limit=100', d => setLogs(d.logs || [])); loadAudit(); } if (id === 'settings') loadConfig(); };
 
   if (!authed) return <LoginPage onLogin={() => setAuthed(true)} theme={theme} toggleTheme={toggleTheme} />;
   const p = data.day_pnl || 0;
@@ -235,6 +350,7 @@ function App() {
           {page === 'health' && <HealthPage health={health} />}
           {page === 'market' && <MarketPage market={market} regime={regime} loadMarket={loadMarket} />}
           {page === 'ai' && <AIBrainPage aiData={aiData} />}
+          {page === 'quant' && <QuantPage quantData={quantData} quantPipeline={quantPipeline} quantSymbol={quantSymbol} setQuantSymbol={setQuantSymbol} loadQuantPipeline={loadQuantPipeline} />}
           {page === 'strategies' && <StrategiesPage stratPerf={stratPerf} />}
           {page === 'positions' && <PositionsPage positions={positions} />}
           {page === 'trades' && <TradesPage tradesData={tradesData} />}

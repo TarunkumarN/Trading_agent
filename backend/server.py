@@ -47,7 +47,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 DASHBOARD_USER = os.getenv("DASHBOARD_USER", "admin")
 DASHBOARD_PASS = os.getenv("DASHBOARD_PASS", "minimax123")
 MAX_DRAWDOWN_PCT = float(os.getenv("MAX_DRAWDOWN_PCT", "10"))
-RISK_REWARD_RATIO = 1.5
+RISK_REWARD_RATIO = 2.0
 MAX_LEVERAGE = 3
 EMA_FAST = 9
 EMA_SLOW = 21
@@ -132,12 +132,12 @@ def is_market_open():
 
 
 def is_trading_hours():
-    """Check if within active trading window (9:20-15:15)."""
+    """Check if within active trading window (9:30-14:45)."""
     now = get_ist_now()
     if now.weekday() >= 5:
         return False
-    start = now.replace(hour=9, minute=20, second=0, microsecond=0)
-    end = now.replace(hour=15, minute=15, second=0, microsecond=0)
+    start = now.replace(hour=9, minute=30, second=0, microsecond=0)
+    end = now.replace(hour=14, minute=45, second=0, microsecond=0)
     return start <= now <= end
 
 
