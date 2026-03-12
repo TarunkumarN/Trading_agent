@@ -364,7 +364,12 @@ def api_data():
     open_pos    = load_json(POSITIONS_FILE, [])
     today       = datetime.now().strftime("%Y-%m-%d")
     closed      = [t for t in all_trades if t.get("exit", 0) > 0 and t.get("pnl") is not None]
+    available_dates = sorted({t.get("date") for t in closed if t.get("date")})
+    active_date = today
     today_closed= [t for t in closed if t.get("date", today) == today]
+    if not today_closed and available_dates:
+        active_date = available_dates[-1]
+        today_closed = [t for t in closed if t.get("date") == active_date]
     day_pnl     = round(sum(t["pnl"] for t in today_closed), 2)
     wins        = [t for t in today_closed if t["pnl"] > 0]
     losses      = [t for t in today_closed if t["pnl"] <= 0]
@@ -397,6 +402,8 @@ def api_data():
         "wins":           len(wins),
         "losses":         len(losses),
         "win_rate":       win_rate,
+        "active_date":    active_date,
+        "is_latest_session": active_date != today,
         "open_count":     len(open_data),
         "open_positions": open_data,
         "trades":         today_closed,
@@ -1131,7 +1138,7 @@ if(headerChart){headerChart.data.labels.push('');headerChart.data.datasets[0].da
   pnlEl.textContent=fmt(p); pnlEl.style.color=p>=0?'var(--green)':'var(--red)';
   document.getElementById('d-pnlpct').textContent=(p>=0?'▲ ':'▼ ')+Math.abs((p/10000)*100).toFixed(2)+'% of portfolio';
   document.getElementById('d-trades').textContent=t;
-  document.getElementById('d-open').textContent=(D.open_count||0)+' open position'+(D.open_count===1?'':'s');
+  document.getElementById('d-open').textContent=(D.open_count||0)+' open position'+(D.open_count===1?'':'s')+(D.active_date?' | Session '+D.active_date:'');
   const wrEl=document.getElementById('d-wr'); wrEl.textContent=wr+'%'; wrEl.style.color=wr>=50?'var(--green)':'var(--red)';
   document.getElementById('d-wl').textContent=w+'W / '+l+'L';
   document.getElementById('d-portval').textContent='₹'+Math.round(pv).toLocaleString('en-IN');
