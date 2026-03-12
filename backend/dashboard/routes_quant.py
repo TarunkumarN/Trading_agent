@@ -15,6 +15,7 @@ from market.correlation_filter import check_correlation
 from ai.market_predictor import predict_market_direction
 from ai.trade_ranker import rank_trade
 from risk.hedging_engine import analyze_portfolio_exposure
+from data.contract_resolver import resolve_contract, resolve_hedge_contract
 from quant.pipeline import (
     run_pipeline, is_quant_trading_hours, check_frequency_limits,
     MAX_TRADES_PER_DAY, MAX_CONSECUTIVE_LOSSES, DAILY_DRAWDOWN_LIMIT_PCT,
@@ -481,3 +482,330 @@ def _compute_signal(prices, volumes, vwap):
         "atr": round(float(atr), 2),
         "reasons": reasons,
     }
+
+
+@router.get("/quant/contract/{symbol}")
+async def get_contract_resolution(symbol: str, action: str = "BUY"):
+    """Resolve F&O contract for a symbol and direction."""
+    symbol = symbol.upper()
+    action = action.upper()
+
+    # Get proper price for indices and stocks
+    index_prices = {"NIFTY": 23650, "BANKNIFTY": 55100, "FINNIFTY": 21500, "MIDCPNIFTY": 10200}
+    price = index_prices.get(symbol, 0)
+
+    if price == 0:
+        market_dict, raw = _get_market_data_dict()
+        stock_data = market_dict.get(symbol, {})
+        price = stock_data.get("price", 0)
+
+    if price == 0:
+        prices, _, _ = _generate_sample_prices(symbol, 5)
+        price = prices[-1]
+
+    # Try to get live index prices from market data
+    try:
+        from server import _fetch_market_data_cached
+        data = _fetch_market_data_cached()
+        indices = data.get("indices", {})
+        idx_map = {"NIFTY": "NIFTY 50", "BANKNIFTY": "NIFTY BANK"}
+        if symbol in idx_map and idx_map[symbol] in indices:
+            idx_data = indices[idx_map[symbol]]
+            if idx_data.get("value", 0) > 0:
+                price = idx_data["value"]
+            elif idx_data.get("previous", 0) > 0:
+                price = idx_data["previous"]
+    except Exception:
+        pass
+
+    options_contract = resolve_contract(symbol, action, price, "options")
+    futures_contract = resolve_contract(symbol, action, price, "futures")
+
+    return {
+        "symbol": symbol,
+        "action": action,
+        "current_price": round(price, 2),
+        "options": options_contract,
+        "futures": futures_contract,
+        "recommendation": f"{'BUY CE' if action == 'BUY' else 'BUY PE'} — {options_contract['trading_symbol']}",
+        "timestamp": _ist_now().isoformat(),
+    }
+
+
+@router.get("/quant/pipeline-full/{symbol}")
+async def get_full_pipeline_with_contract(symbol: str):
+    """Run full quant pipeline + contract resolution for a symbol."""
+    symbol = symbol.upper()
+    # Run the regular pipeline
+    market_dict, raw_data = _get_market_data_dict()
+    prices, volumes, vwap = _generate_sample_prices(symbol)
+
+    try:
+        from server import _fetch_market_data_cached
+        data = _fetch_market_data_cached()
+        indices = data.get("indices", {})
+        stocks = data.get("stocks", [])
+        nifty = indices.get("NIFTY 50", {})
+        nifty_chg = nifty.get("change_pct", 0)
+        bullish = len([s for s in stocks if s.get("change_pct", 0) > 0])
+        total = max(1, len(stocks))
+        breadth = bullish / total * 100
+        if nifty_chg > 0.3 and breadth > 55:
+            regime = "BULLISH"
+        elif nifty_chg < -0.3 and breadth < 45:
+            regime = "BEARISH"
+        else:
+            regime = "NEUTRAL"
+    except Exception:
+        regime = "NEUTRAL"
+
+    signal_data = _compute_signal(prices, volumes, vwap)
+    action = signal_data.get("action", "HOLD")
+    today = _ist_now().strftime("%Y-%m-%d")
+    today_trades = list(db["trades"].find({"date": today}, {"_id": 0}))
+    open_positions = list(db["open_positions"].find({}, {"_id": 0}))
+    daily_pnl = sum(t.get("pnl", 0) for t in today_trades)
+
+    recent_trades = list(db["trades"].find({}, {"_id": 0}).sort("created_at", -1).limit(10))
+    consec_losses = 0
+    for t in recent_trades:
+        if t.get("pnl", 0) < 0:
+            consec_losses += 1
+        else:
+            break
+
+    entry = prices[-1]
+    atr = signal_data.get("atr", entry * 0.01)
+    if action == "BUY":
+        sl = round(entry - atr, 2)
+        target = round(entry + atr * MIN_RR_RATIO, 2)
+    elif action == "SELL":
+        sl = round(entry + atr, 2)
+        target = round(entry - atr * MIN_RR_RATIO, 2)
+    else:
+        sl = entry
+        target = entry
+
+    pipeline_result = run_pipeline(
+        symbol=symbol, prices=prices, volumes=volumes, vwap=vwap,
+        signal_data=signal_data, market_regime=regime,
+        market_data_dict=market_dict, open_positions=open_positions,
+        trades_today_count=len(today_trades), consecutive_losses=consec_losses,
+        daily_pnl=daily_pnl, portfolio_value=PORTFOLIO_VALUE,
+        entry_price=entry, stop_loss=sl, target_price=target,
+    )
+
+    # Contract Resolution
+    contract = None
+    if action != "HOLD":
+        contract = resolve_contract(symbol, action, entry, "options")
+
+    pipeline_result["symbol"] = symbol
+    pipeline_result["entry"] = entry
+    pipeline_result["stop_loss"] = sl
+    pipeline_result["target"] = target
+    pipeline_result["action"] = action
+    pipeline_result["contract"] = contract
+    pipeline_result["risk_reward_ratio"] = round((abs(target - entry) / abs(entry - sl)), 2) if abs(entry - sl) > 0 else 0
+
+    return pipeline_result
+
+
+@router.get("/market/chart/{symbol}")
+async def get_market_chart(symbol: str, period: str = "intraday"):
+    """Get chart data for a symbol (OHLC candles or intraday line)."""
+    symbol = symbol.upper()
+
+    # Generate realistic intraday data
+    np.random.seed(hash(symbol + _ist_now().strftime("%Y%m%d")) % (2**31))
+    base_prices = {
+        "NIFTY": 23650, "BANKNIFTY": 55100, "NIFTY 50": 23650, "NIFTY BANK": 55100,
+        "RELIANCE": 2485, "TCS": 3840, "HDFCBANK": 1635, "INFY": 1585,
+        "ICICIBANK": 1092, "SBIN": 785, "BAJFINANCE": 6870, "ITC": 468,
+        "KOTAKBANK": 1825, "LT": 3440, "AXISBANK": 1128, "MARUTI": 12320,
+        "SUNPHARMA": 1685, "WIPRO": 455, "TITAN": 3595, "HINDUNILVR": 2380,
+    }
+    base = base_prices.get(symbol, 1000)
+
+    # Also try fetching from market data cache
+    try:
+        from server import _fetch_market_data_cached
+        data = _fetch_market_data_cached()
+        for s in data.get("stocks", []):
+            if s["symbol"] == symbol:
+                base = s.get("previous_close", base)
+                break
+        indices = data.get("indices", {})
+        for name, vals in indices.items():
+            if name.replace(" ", "") == symbol.replace(" ", ""):
+                base = vals.get("previous", base)
+                break
+    except Exception:
+        pass
+
+    candles = []
+    price = base
+    now = _ist_now()
+    start_hour = 9
+    start_min = 15
+
+    if period == "intraday":
+        # Generate 5-minute candles for a full trading day (9:15 to 15:30)
+        # Always show full day data for consistent charts
+        minute = start_hour * 60 + start_min
+        end_minute = 15 * 60 + 30  # Always generate till 15:30
+
+        while minute <= end_minute:
+            h = minute // 60
+            m = minute % 60
+            time_label = f"{h:02d}:{m:02d}"
+
+            # Simulate realistic price movement
+            volatility = 0.001 + np.random.uniform(0, 0.002)
+            drift = np.random.normal(0, volatility)
+            open_p = round(price, 2)
+            close_p = round(price * (1 + drift), 2)
+            high_p = round(max(open_p, close_p) * (1 + np.random.uniform(0, 0.001)), 2)
+            low_p = round(min(open_p, close_p) * (1 - np.random.uniform(0, 0.001)), 2)
+            vol = int(np.random.uniform(50000, 500000))
+
+            candles.append({
+                "time": time_label,
+                "open": open_p,
+                "high": high_p,
+                "low": low_p,
+                "close": close_p,
+                "volume": vol,
+            })
+            price = close_p
+            minute += 5  # 5-minute candles
+    else:
+        # Daily candles for last 30 days
+        for i in range(30, 0, -1):
+            day = (now - timedelta(days=i))
+            if day.weekday() >= 5:
+                continue
+            date_str = day.strftime("%Y-%m-%d")
+            volatility = 0.008
+            drift = np.random.normal(0.0002, volatility)
+            open_p = round(price, 2)
+            close_p = round(price * (1 + drift), 2)
+            high_p = round(max(open_p, close_p) * (1 + np.random.uniform(0, 0.005)), 2)
+            low_p = round(min(open_p, close_p) * (1 - np.random.uniform(0, 0.005)), 2)
+            vol = int(np.random.uniform(1000000, 10000000))
+
+            candles.append({
+                "time": date_str,
+                "open": open_p,
+                "high": high_p,
+                "low": low_p,
+                "close": close_p,
+                "volume": vol,
+            })
+            price = close_p
+
+    return {
+        "symbol": symbol,
+        "period": period,
+        "candles": candles,
+        "current_price": round(price, 2) if candles else base,
+        "open_price": candles[0]["open"] if candles else base,
+        "day_high": round(max(c["high"] for c in candles), 2) if candles else base,
+        "day_low": round(min(c["low"] for c in candles), 2) if candles else base,
+        "change": round(price - base, 2) if candles else 0,
+        "change_pct": round((price - base) / base * 100, 2) if candles and base > 0 else 0,
+        "candle_count": len(candles),
+        "timestamp": _ist_now().isoformat(),
+    }
+
+
+@router.get("/market/charts-summary")
+async def get_market_charts_summary():
+    """Get chart data for NIFTY, BANKNIFTY and top 5 stocks for the market page."""
+    charts = {}
+
+    # Index charts
+    for idx in ["NIFTY", "BANKNIFTY"]:
+        np.random.seed(hash(idx + _ist_now().strftime("%Y%m%d")) % (2**31))
+        base_map = {"NIFTY": 23650, "BANKNIFTY": 55100}
+        base = base_map.get(idx, 20000)
+
+        try:
+            from server import _fetch_market_data_cached
+            data = _fetch_market_data_cached()
+            indices = data.get("indices", {})
+            key = "NIFTY 50" if idx == "NIFTY" else "NIFTY BANK"
+            if key in indices:
+                base = indices[key].get("previous", base)
+        except Exception:
+            pass
+
+        price = base
+        points = []
+        minute = 9 * 60 + 15
+        end_min = 15 * 60 + 30  # Always full day
+
+        while minute <= end_min:
+            h = minute // 60
+            m = minute % 60
+            drift = np.random.normal(0, 0.0008)
+            price = round(price * (1 + drift), 2)
+            points.append({"time": f"{h:02d}:{m:02d}", "price": price})
+            minute += 5
+
+        change = round(price - base, 2) if points else 0
+        change_pct = round(change / base * 100, 2) if base > 0 else 0
+        charts[idx.lower()] = {
+            "symbol": idx,
+            "points": points,
+            "current": price if points else base,
+            "previous": base,
+            "change": change,
+            "change_pct": change_pct,
+        }
+
+    # Top stock sparklines
+    stock_sparklines = []
+    watchlist = ["RELIANCE", "HDFCBANK", "ICICIBANK", "INFY", "TCS", "SBIN", "ITC", "BAJFINANCE"]
+    stock_base = {
+        "RELIANCE": 2485, "HDFCBANK": 1635, "ICICIBANK": 1092, "INFY": 1585,
+        "TCS": 3840, "SBIN": 785, "ITC": 468, "BAJFINANCE": 6870,
+    }
+
+    try:
+        from server import _fetch_market_data_cached
+        mdata = _fetch_market_data_cached()
+        for s in mdata.get("stocks", []):
+            if s["symbol"] in stock_base:
+                stock_base[s["symbol"]] = s.get("previous_close", stock_base[s["symbol"]])
+    except Exception:
+        pass
+
+    for sym in watchlist:
+        np.random.seed(hash(sym + _ist_now().strftime("%Y%m%d")) % (2**31))
+        base = stock_base.get(sym, 1000)
+        price = base
+        points = []
+        minute = 9 * 60 + 15
+        end_min = 15 * 60 + 30  # Always full day
+
+        while minute <= end_min:
+            drift = np.random.normal(0, 0.0012)
+            price = round(price * (1 + drift), 2)
+            points.append(price)
+            minute += 15  # 15-min points for sparkline
+
+        change_pct = round((price - base) / base * 100, 2) if base > 0 else 0
+        stock_sparklines.append({
+            "symbol": sym,
+            "points": points,
+            "current": price if points else base,
+            "change_pct": change_pct,
+        })
+
+    return {
+        "indices": charts,
+        "stocks": stock_sparklines,
+        "timestamp": _ist_now().isoformat(),
+    }
+

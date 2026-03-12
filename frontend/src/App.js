@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { LayoutDashboard, HeartPulse, ScanSearch, BrainCircuit, Target, ListOrdered, ShieldAlert, TrendingUp, Calculator, Settings, ScrollText, Activity, Menu, X, RefreshCw, ChevronRight, Zap, Sun, Moon, FileText, Crosshair, GitBranch } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 const API = process.env.REACT_APP_BACKEND_URL;
 const fmt = n => (n >= 0 ? '+' : '') + Number(n).toFixed(2);
@@ -113,14 +113,81 @@ function ReportPage({ report }) {
   </div>);
 }
 
-function MarketPage({ market, regime, loadMarket }) {
+function MarketPage({ market, regime, loadMarket, chartsSummary }) {
   if (!market) return <div className="empty">Loading market data...</div>;
   const StockTable = ({ stocks }) => stocks?.length ? <div className="tbl-wrap"><table><thead><tr><th>Symbol</th><th>Price</th><th>Change</th><th>Volume</th><th>High</th><th>Low</th></tr></thead><tbody>{stocks.map(s => <tr key={s.symbol}><td style={{ fontWeight: 700, color: 'var(--amber)' }}>{s.symbol}</td><td>₹{s.price}</td><td style={{ color: s.change_pct >= 0 ? 'var(--green)' : 'var(--red)' }}>{s.change_pct >= 0 ? '+' : ''}{s.change_pct}%</td><td className="c-muted">{fmtINR(s.volume || 0)}</td><td>₹{s.high}</td><td>₹{s.low}</td></tr>)}</tbody></table></div> : <div className="empty">No data</div>;
   const idx = market.indices || {};
+  const charts = chartsSummary?.indices || {};
+  const stockSpark = chartsSummary?.stocks || [];
+
+  const IndexChart = ({ data, label }) => {
+    if (!data || !data.points || data.points.length === 0) return null;
+    const isUp = data.change_pct >= 0;
+    const color = isUp ? 'var(--green)' : 'var(--red)';
+    const pts = data.points.filter((_, i) => i % 3 === 0 || i === data.points.length - 1);
+    return (
+      <div className="card" data-testid={`chart-${label.toLowerCase()}`}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+          <div>
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', letterSpacing: 1, textTransform: 'uppercase' }}>{label}</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>{fmtINR(data.current || 0)}</div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 800, color }}>{data.change_pct >= 0 ? '+' : ''}{data.change_pct}%</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{data.change >= 0 ? '+' : ''}{data.change?.toFixed(2)} pts</div>
+          </div>
+        </div>
+        <div style={{ height: 160 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={pts}>
+              <defs><linearGradient id={`grad-${label}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={color} stopOpacity={0.3} /><stop offset="100%" stopColor={color} stopOpacity={0} /></linearGradient></defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="time" tick={{ fill: 'var(--text-dim)', fontSize: 9 }} interval={Math.floor(pts.length / 6)} />
+              <YAxis tick={{ fill: 'var(--text-dim)', fontSize: 9 }} domain={['dataMin-20', 'dataMax+20']} />
+              <Tooltip contentStyle={{ background: 'var(--card)', border: '1px solid var(--border)', fontSize: '0.8rem' }} formatter={v => [`₹${fmtINR(v)}`, label]} />
+              <Area type="monotone" dataKey="price" stroke={color} strokeWidth={2} fill={`url(#grad-${label})`} dot={false} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  };
+
   return (<div className="page-enter" data-testid="market-page">
     {regime && <div className={`regime-banner ${regime.regime?.includes('BULL') ? 'bullish' : regime.regime?.includes('BEAR') ? 'bearish' : 'neutral'}`}><div><div style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>AI REGIME</div><div style={{ fontSize: '1.1rem', fontWeight: 900, color: regime.regime?.includes('BULL') ? 'var(--green)' : regime.regime?.includes('BEAR') ? 'var(--red)' : 'var(--amber)' }}>{regime.regime}</div></div><div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}><div><div className="strat-meta-label">VIX</div><div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{regime.volatility?.vix}</div></div><div><div className="strat-meta-label">Breadth</div><div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{regime.breadth?.ratio}</div></div><div><div className="strat-meta-label">Liquidity</div><div style={{ fontWeight: 700, fontSize: '0.9rem', color: regime.liquidity?.status === 'HIGH' ? 'var(--green)' : 'var(--amber)' }}>{regime.liquidity?.status}</div></div><div><div className="strat-meta-label">Action</div><div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--cyan)' }}>{regime.recommendation}</div></div></div></div>}
     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}><span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Source: {market.source} | {market.data_valid ? 'Validated' : 'Fallback'} | {market.timestamp}</span><button data-testid="market-refresh" onClick={loadMarket} style={{ padding: '6px 14px', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 6, color: 'var(--green)', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: 6 }}><RefreshCw size={13} /> Refresh</button></div>
+
+    {(charts.nifty || charts.banknifty) && <div className="grid-2" style={{ marginBottom: 16 }}>
+      {charts.nifty && <IndexChart data={charts.nifty} label="NIFTY 50" />}
+      {charts.banknifty && <IndexChart data={charts.banknifty} label="BANK NIFTY" />}
+    </div>}
+
     <div className="grid-4">{Object.entries(idx).map(([k, v]) => <div key={k} className="card idx-card"><div className="idx-name">{k.replace(/_/g, ' ').toUpperCase()}</div><div className="idx-val">{fmtINR(v.price || 0)}</div><div className="idx-chg" style={{ color: (v.change_pct || 0) >= 0 ? 'var(--green)' : 'var(--red)' }}>{v.change_pct >= 0 ? '+' : ''}{v.change_pct}%</div></div>)}</div>
+
+    {stockSpark.length > 0 && <div className="card" style={{ marginBottom: 16 }}>
+      <div className="card-head"><span className="card-head-title">Stock Intraday Sparklines</span></div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
+        {stockSpark.map(s => {
+          const pts = (s.points || []).map((p, i) => ({ i, p }));
+          const isUp = s.change_pct >= 0;
+          return (
+            <div key={s.symbol} style={{ padding: '10px 14px', borderRadius: 8, border: '1px solid var(--border)', background: 'var(--bg)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                <span style={{ fontWeight: 800, fontSize: '0.85rem', color: 'var(--amber)' }}>{s.symbol}</span>
+                <span style={{ fontWeight: 700, fontSize: '0.8rem', color: isUp ? 'var(--green)' : 'var(--red)' }}>{isUp ? '+' : ''}{s.change_pct}%</span>
+              </div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: 6 }}>₹{s.current?.toLocaleString('en-IN')}</div>
+              {pts.length > 1 && <div style={{ height: 40 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={pts}><Line type="monotone" dataKey="p" stroke={isUp ? 'var(--green)' : 'var(--red)'} strokeWidth={1.5} dot={false} /></LineChart>
+                </ResponsiveContainer>
+              </div>}
+            </div>
+          );
+        })}
+      </div>
+    </div>}
+
     <div className="grid-2"><div className="card"><div className="card-head"><span className="card-head-title" style={{ color: 'var(--green)' }}>Top Gainers</span><span className="tag tag-ok">{(market.gainers || []).length}</span></div><StockTable stocks={market.gainers} /></div><div className="card"><div className="card-head"><span className="card-head-title" style={{ color: 'var(--red)' }}>Top Losers</span><span className="tag tag-fail">{(market.losers || []).length}</span></div><StockTable stocks={market.losers} /></div></div>
     <div className="card"><div className="card-head"><span className="card-head-title">Most Active</span><span className="c-dim" style={{ fontSize: '0.75rem' }}>Adv: {market.summary?.advances} | Dec: {market.summary?.declines}</span></div><StockTable stocks={market.most_active} /></div>
   </div>);
@@ -240,6 +307,23 @@ function QuantPage({ quantData, quantPipeline, quantSymbol, setQuantSymbol, load
               </div>)}
             </div>
           </div>}
+          {quantPipeline.contract && <div style={{ marginTop: 16, padding: '14px 18px', borderRadius: 8, background: 'rgba(34,211,238,0.06)', border: '1px solid rgba(34,211,238,0.2)' }} data-testid="pipeline-contract">
+            <div style={{ fontWeight: 800, fontSize: '0.9rem', marginBottom: 10, color: 'var(--cyan)' }}>F&O Contract Resolution</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 8 }}>
+              {[
+                ['Trading Symbol', quantPipeline.contract.trading_symbol],
+                ['Option Type', quantPipeline.contract.option_type],
+                ['Strike', `₹${fmtINR(quantPipeline.contract.strike_price || 0)}`],
+                ['Exchange', quantPipeline.contract.exchange],
+                ['Lot Size', quantPipeline.contract.lot_size],
+                ['Expiry', quantPipeline.contract.expiry],
+                ['Premium', `₹${quantPipeline.contract.estimated_premium?.toFixed(2) || 'N/A'}`],
+                ['Capital Req', `₹${fmtINR(quantPipeline.contract.capital_required || 0)}`],
+                ['Direction', quantPipeline.contract.direction],
+                ['Action', quantPipeline.contract.action],
+              ].map(([k, v]) => <div key={k}><div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: 0.5 }}>{k}</div><div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{v}</div></div>)}
+            </div>
+          </div>}
         </div>}
       </div>
 
@@ -290,6 +374,7 @@ function App() {
   const [quantData, setQuantData] = useState(null);
   const [quantPipeline, setQuantPipeline] = useState(null);
   const [quantSymbol, setQuantSymbol] = useState('');
+  const [chartsSummary, setChartsSummary] = useState(null);
 
   const toggleTheme = () => { const t = theme === 'dark' ? 'light' : 'dark'; setTheme(t); localStorage.setItem('theme', t); };
   useEffect(() => { document.documentElement.setAttribute('data-theme', theme); }, [theme]);
@@ -303,7 +388,7 @@ function App() {
   const loadConfig = useCallback(() => f('/api/config', setConfig), [f]);
   const loadAudit = useCallback(() => f('/api/audit', setAudit), [f]);
   const loadMode = useCallback(() => f('/api/mode', d => setMode(d.mode || 'PAPER')), [f]);
-  const loadQuantPipeline = useCallback((sym) => f(`/api/quant/pipeline/${sym}`, setQuantPipeline), [f]);
+  const loadQuantPipeline = useCallback((sym) => f(`/api/quant/pipeline-full/${sym}`, setQuantPipeline), [f]);
 
   useEffect(() => { if (!authed) return; loadDash(); loadHealth(); loadRisk(); loadConfig(); loadAudit(); loadRegime(); loadMode(); const t1 = setInterval(loadDash, 15000); const t2 = setInterval(() => { loadHealth(); loadRegime(); }, 30000); const t3 = setInterval(loadRisk, 20000); return () => { clearInterval(t1); clearInterval(t2); clearInterval(t3); }; }, [authed, loadDash, loadHealth, loadRisk, loadConfig, loadAudit, loadRegime, loadMode]);
 
@@ -314,7 +399,7 @@ function App() {
     try { const r = await fetch(`${API}/api/mode/switch`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: newMode.toLowerCase() }) }); const d = await r.json(); if (d.ok) setMode(d.mode); else alert(d.error || 'Failed'); } catch { alert('Connection error'); }
   };
 
-  const nav = id => { setPage(id); setSidebarOpen(false); if (id === 'portfolio') f('/api/portfolio', setPortfolio); if (id === 'report') f('/api/report/daily', setReport); if (id === 'market') { loadMarket(); loadRegime(); } if (id === 'ai') f('/api/ai-decisions', setAiData); if (id === 'quant') f('/api/quant/dashboard', setQuantData); if (id === 'strategies') f('/api/strategies/performance', setStratPerf); if (id === 'positions') f('/api/open-positions', setPositions); if (id === 'trades') f('/api/trades', setTradesData); if (id === 'audit') { f('/api/logs?limit=100', d => setLogs(d.logs || [])); loadAudit(); } if (id === 'settings') loadConfig(); };
+  const nav = id => { setPage(id); setSidebarOpen(false); if (id === 'portfolio') f('/api/portfolio', setPortfolio); if (id === 'report') f('/api/report/daily', setReport); if (id === 'market') { loadMarket(); loadRegime(); f('/api/market/charts-summary', setChartsSummary); } if (id === 'ai') f('/api/ai-decisions', setAiData); if (id === 'quant') f('/api/quant/dashboard', setQuantData); if (id === 'strategies') f('/api/strategies/performance', setStratPerf); if (id === 'positions') f('/api/open-positions', setPositions); if (id === 'trades') f('/api/trades', setTradesData); if (id === 'audit') { f('/api/logs?limit=100', d => setLogs(d.logs || [])); loadAudit(); } if (id === 'settings') loadConfig(); };
 
   if (!authed) return <LoginPage onLogin={() => setAuthed(true)} theme={theme} toggleTheme={toggleTheme} />;
   const p = data.day_pnl || 0;
@@ -348,7 +433,7 @@ function App() {
           {page === 'portfolio' && <PortfolioPage portfolio={portfolio} />}
           {page === 'report' && <ReportPage report={report} />}
           {page === 'health' && <HealthPage health={health} />}
-          {page === 'market' && <MarketPage market={market} regime={regime} loadMarket={loadMarket} />}
+          {page === 'market' && <MarketPage market={market} regime={regime} loadMarket={loadMarket} chartsSummary={chartsSummary} />}
           {page === 'ai' && <AIBrainPage aiData={aiData} />}
           {page === 'quant' && <QuantPage quantData={quantData} quantPipeline={quantPipeline} quantSymbol={quantSymbol} setQuantSymbol={setQuantSymbol} loadQuantPipeline={loadQuantPipeline} />}
           {page === 'strategies' && <StrategiesPage stratPerf={stratPerf} />}

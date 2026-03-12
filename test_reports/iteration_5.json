@@ -1,0 +1,100 @@
+{
+  "summary": "Tested new F&O contract resolution and market charts features. All 24 new backend tests passed (100%). All 22 existing API tests passed (100%). Frontend Market Analysis page shows NIFTY 50 and BANK NIFTY intraday area charts plus 8 stock sparklines. Quant Intelligence page pipeline works with F&O Contract Resolution section appearing for BUY/SELL signals.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": {
+    "contract_resolution": [
+      "GET /api/quant/contract/NIFTY?action=BUY returns CE contract with NIFTY price ~23000+",
+      "GET /api/quant/contract/NIFTY?action=SELL returns PE contract",
+      "GET /api/quant/contract/BANKNIFTY?action=SELL returns PE with lot_size 15",
+      "GET /api/quant/contract/BANKNIFTY?action=BUY returns CE contract",
+      "GET /api/quant/contract/RELIANCE?action=BUY returns CE with lot_size 250",
+      "GET /api/quant/contract/RELIANCE?action=SELL returns PE contract",
+      "Equity lot sizes verified: HDFCBANK(550), TCS(150), INFY(300), ICICIBANK(700), SBIN(1500)",
+      "Contract has proper expiry date format (YYYY-MM-DD)",
+      "Trading symbol format includes symbol, expiry code, strike, and option type",
+      "Capital required = premium * lot_size calculation verified"
+    ],
+    "pipeline_full": [
+      "GET /api/quant/pipeline-full/RELIANCE returns pipeline with contract field (null when HOLD)",
+      "GET /api/quant/pipeline-full/NIFTY returns pipeline for index"
+    ],
+    "market_charts": [
+      "GET /api/market/chart/NIFTY returns intraday candles with OHLCV data",
+      "GET /api/market/chart/RELIANCE?period=daily returns 30 daily candles",
+      "GET /api/market/chart/BANKNIFTY returns chart data",
+      "OHLC validation: high >= low, high >= open/close, low <= open/close"
+    ],
+    "charts_summary": [
+      "GET /api/market/charts-summary returns NIFTY and BANKNIFTY with points arrays",
+      "Charts summary includes current, previous, change, change_pct for indices",
+      "Stock sparklines for all 8 watchlist stocks: RELIANCE, HDFCBANK, ICICIBANK, INFY, TCS, SBIN, ITC, BAJFINANCE"
+    ],
+    "regression_existing_quant_apis": [
+      "GET /api/quant/options-flow/RELIANCE still works",
+      "GET /api/quant/dark-pool/RELIANCE still works",
+      "GET /api/quant/ai-prediction/HDFCBANK still works",
+      "GET /api/quant/trade-rank/TCS still works",
+      "GET /api/quant/hedge-analysis still works",
+      "GET /api/quant/frequency-status still works",
+      "GET /api/quant/dashboard still works"
+    ],
+    "regression_existing_apis": [
+      "All 22 existing API tests passed (auth, data, portfolio, report, health, market, strategies, positions, trades, risk, fo, audit, config, mode)"
+    ],
+    "frontend": [
+      "Market Analysis page: NIFTY 50 intraday area chart visible with +% change display",
+      "Market Analysis page: BANK NIFTY intraday area chart visible",
+      "Market Analysis page: Stock Intraday Sparklines section shows 8 stocks",
+      "Market Analysis page: All stock sparklines have price and change_pct displayed",
+      "Quant Intelligence page: Pipeline Analysis section works with symbol input",
+      "Quant Intelligence page: F&O Contract Resolution section appears for BUY/SELL signals (hidden for HOLD)",
+      "Dashboard page still works",
+      "Portfolio page still works",
+      "Settings page still works"
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_contract_resolution_charts.py",
+    "/app/backend/tests/test_quant_intelligence.py",
+    "/app/backend/tests/test_minimax_apis.py",
+    "/app/test_reports/pytest/contract_charts_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Contract resolver correctly maps BUY->CE (bullish) and SELL->PE (bearish)",
+    "All NSE lot sizes are correctly configured in contract_resolver.py",
+    "Market chart data generates full-day data (09:15-15:30) for consistent charts regardless of current time",
+    "NIFTY price correctly retrieved from market data (~23000+) not sample prices",
+    "Pipeline returns contract=null when action is HOLD (expected behavior)"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_contract_resolution_charts.py"
+  ],
+  "success_rate": {
+    "backend_new_features": "100% (24/24 tests passed)",
+    "backend_existing": "100% (22/22 tests passed)",
+    "frontend": "100% (all Market Analysis and Quant Intelligence features functional)"
+  },
+  "test_credentials": "username: admin, password: minimax123",
+  "seed_data_creation": "No new seed data created. Market/chart data is generated/simulated per PRD.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 5 added F&O contract resolution (BUY->CE, SELL->PE) and market charts. All 4 new endpoints working: /api/quant/contract/{symbol}, /api/quant/pipeline-full/{symbol}, /api/market/chart/{symbol}, /api/market/charts-summary. Contract resolution displays in Quant Intelligence page only when pipeline returns BUY or SELL action (not for HOLD). Market Analysis page now shows NIFTY/BANKNIFTY intraday area charts and 8 stock sparklines.",
+  "mocked_apis": {
+    "has_mocked_apis": true,
+    "mocked_apis_list": [
+      "/api/market/chart/* - generates simulated OHLCV candle data",
+      "/api/market/charts-summary - generates simulated intraday line data",
+      "Contract premium estimation is simplified (not real Black-Scholes)",
+      "/api/quant/* endpoints use generated price data for demo (deterministic per symbol per day)"
+    ]
+  }
+}
