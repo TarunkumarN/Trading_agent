@@ -8,14 +8,16 @@ Audit and harden a trading bot from a public GitHub repository, then build a pro
 /app
 ├── backend/
 │   ├── ai/                          # AI Intelligence Modules
-│   │   ├── market_predictor.py      # Short-term market direction prediction
-│   │   └── trade_ranker.py          # 0-100 AI trade ranking engine
+│   │   ├── market_predictor.py      # Short-term market direction prediction (7 factors)
+│   │   └── trade_ranker.py          # 0-100 AI trade ranking (6 components, min 85)
 │   ├── market/                      # Market Analysis Modules
 │   │   ├── options_flow.py          # Unusual options activity detection
 │   │   ├── dark_pool_detector.py    # Institutional accumulation/distribution zones
 │   │   └── correlation_filter.py    # Multi-asset correlation confirmation
 │   ├── risk/                        # Risk Management
 │   │   └── hedging_engine.py        # Portfolio hedging with exposure analysis
+│   ├── data/                        # Data Modules
+│   │   └── contract_resolver.py     # F&O contract resolution (CE/PE, strikes, expiry, lot sizes)
 │   ├── quant/                       # Quant Pipeline
 │   │   └── pipeline.py              # 10-step trade intelligence pipeline orchestrator
 │   ├── dashboard/                   # API Routes
@@ -23,17 +25,18 @@ Audit and harden a trading bot from a public GitHub repository, then build a pro
 │   │   ├── routes_analytics.py      # Strategy & AI endpoints
 │   │   ├── routes_market.py         # Market data endpoints
 │   │   ├── routes_portfolio.py      # Portfolio endpoints
-│   │   ├── routes_quant.py          # Quant intelligence endpoints (8 new)
+│   │   ├── routes_quant.py          # Quant intelligence endpoints (12 total)
 │   │   └── routes_trades.py         # Trade history endpoints
 │   ├── strategies/                  # (Reserved for strategy modules)
 │   ├── tests/                       # Test suite
-│   │   ├── test_minimax_apis.py     # Core API tests
-│   │   └── test_quant_intelligence.py  # Quant module tests
+│   │   ├── test_minimax_apis.py
+│   │   ├── test_quant_intelligence.py
+│   │   └── test_contract_resolution_charts.py
 │   ├── server.py                    # Main FastAPI app + trading engine
 │   └── requirements.txt
 ├── frontend/
 │   └── src/
-│       ├── App.js                   # React SPA (14 pages including Quant Intelligence)
+│       ├── App.js                   # React SPA (15 pages including Quant Intelligence)
 │       └── App.css                  # Theme styles (light/dark)
 └── memory/
     └── PRD.md
@@ -43,21 +46,37 @@ Audit and harden a trading bot from a public GitHub repository, then build a pro
 
 ### Core Platform
 - [x] Full-stack React + FastAPI + MongoDB trading platform
-- [x] 14-page dashboard: Dashboard, Portfolio, Daily Report, System Health, Market Analysis, AI Brain, Quant Intelligence, Strategies, Positions, Trade History, Risk, F&O Calculator, Audit & Logs, Settings
-- [x] Login authentication
+- [x] 15-page dashboard (Dashboard, Portfolio, Daily Report, System Health, Market Analysis, AI Brain, Quant Intelligence, Strategies, Positions, Trade History, Risk, F&O Calculator, Audit & Logs, Settings)
+- [x] Login authentication (admin/minimax123)
 - [x] Light/Dark mode toggle
 - [x] SIM/LIVE mode switch
 - [x] ₹50,000 initial capital
-- [x] Mobile responsive UI
 
-### Quant Intelligence Modules (NEW - Mar 2026)
-- [x] **Options Flow Analysis** (`market/options_flow.py`): Detects unusual call/put buying, block trades, volume-price divergences
-- [x] **Dark Pool Detection** (`market/dark_pool_detector.py`): Simulated institutional accumulation/distribution zones via volume clusters, VWAP deviations, absorption candles
-- [x] **AI Market Predictor** (`ai/market_predictor.py`): 7-factor prediction model (EMA trend, RSI, VWAP, volume, momentum, BB, regime). Trade allowed only if confidence >= 65
-- [x] **AI Trade Ranker** (`ai/trade_ranker.py`): 0-100 scoring across 6 components. Trade allowed only if score >= 85
-- [x] **Correlation Filter** (`market/correlation_filter.py`): Multi-asset confirmation (NIFTY-BANKNIFTY, sector correlations, inverse correlations)
-- [x] **Portfolio Hedging Engine** (`risk/hedging_engine.py`): Exposure analysis, hedge recommendations when bullish > 60%
-- [x] **Trade Intelligence Pipeline** (`quant/pipeline.py`): 10-step sequential validation (time filter -> frequency -> regime -> dark pool -> options flow -> correlation -> AI prediction -> R:R check -> rank -> hedge)
+### Quant Intelligence Modules
+- [x] Options Flow Analysis
+- [x] Dark Pool Detection (simulated)
+- [x] AI Market Predictor (7-factor, confidence >= 65 required)
+- [x] AI Trade Ranker (0-100, min 85 required)
+- [x] Multi-Asset Correlation Filter
+- [x] Portfolio Hedging Engine
+- [x] 10-step Trade Intelligence Pipeline
+
+### F&O Contract Resolution (NEW)
+- [x] BUY signal → CE (Call), SELL signal → PE (Put)
+- [x] NSE equity lot sizes (RELIANCE:250, TCS:150, HDFCBANK:550, etc.)
+- [x] Index lot sizes (NIFTY:25, BANKNIFTY:15)
+- [x] Commodity specs (GOLD, SILVER, CRUDEOIL)
+- [x] ATM strike calculation with proper intervals
+- [x] Weekly/Monthly expiry resolution
+- [x] Premium estimation and capital requirements
+- [x] Pipeline integration: contract appears after pipeline pass
+
+### Market Charts (NEW)
+- [x] NIFTY 50 intraday area chart (5-min candles, 09:15-15:30)
+- [x] BANK NIFTY intraday area chart
+- [x] Stock sparklines for 8 watchlist stocks
+- [x] Individual stock OHLCV chart endpoint (intraday + daily)
+- [x] Full-day data generation for consistent charts
 
 ### Trading Rules
 - [x] Trading window: 09:30 - 14:45 IST
@@ -67,9 +86,10 @@ Audit and harden a trading bot from a public GitHub repository, then build a pro
 - [x] Minimum risk-reward: 1:2
 - [x] Minimum trade rank score: 85/100
 
-### API Endpoints (29 total)
+### API Endpoints (33 total)
 Core: /api/data, /api/portfolio, /api/report/daily, /api/health, /api/risk, /api/config, /api/mode, /api/mode/switch, /api/auth/login, /api/market/live, /api/ai/regime, /api/ai-decisions, /api/strategies/performance, /api/open-positions, /api/trades, /api/fo/calculate, /api/audit, /api/logs
-Quant: /api/quant/dashboard, /api/quant/pipeline/{symbol}, /api/quant/options-flow/{symbol}, /api/quant/dark-pool/{symbol}, /api/quant/ai-prediction/{symbol}, /api/quant/correlation/{symbol}, /api/quant/trade-rank/{symbol}, /api/quant/hedge-analysis, /api/quant/frequency-status
+Quant: /api/quant/dashboard, /api/quant/pipeline/{symbol}, /api/quant/pipeline-full/{symbol}, /api/quant/options-flow/{symbol}, /api/quant/dark-pool/{symbol}, /api/quant/ai-prediction/{symbol}, /api/quant/correlation/{symbol}, /api/quant/trade-rank/{symbol}, /api/quant/contract/{symbol}, /api/quant/hedge-analysis, /api/quant/frequency-status
+Charts: /api/market/chart/{symbol}, /api/market/charts-summary
 
 ## Remaining / Backlog
 
@@ -78,7 +98,7 @@ Quant: /api/quant/dashboard, /api/quant/pipeline/{symbol}, /api/quant/options-fl
 - [ ] Live Market Data Feed (real-time NSE data instead of fallback/seeded)
 
 ### P1
-- [ ] Commodity strategies (Gold, Silver, Crude Oil) implementation
+- [ ] Commodity strategies (Gold, Silver, Crude Oil) - VWAP, liquidity sweeps, range breakouts
 - [ ] Telegram bot commands (/status, /positions, /halt)
 - [ ] Backtesting module with historical data
 
