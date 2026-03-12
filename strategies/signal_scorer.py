@@ -36,8 +36,9 @@ def reset_opening_ranges():
 
 
 def _hold_response(reason: str, latest=None, atr: float = 0.0, vwap: float = 0.0, orb=None):
-    latest = latest or {}
-    orb = orb or {}
+    if latest is None or (hasattr(latest, "empty") and latest.empty): latest = {}
+    elif hasattr(latest, "to_dict"): latest = latest.to_dict()
+    if orb is None: orb = {}
     return {
         "score": 0,
         "action": "HOLD",
@@ -185,11 +186,11 @@ def calculate_signals(prices: list, volumes: list, vwap: float,
             score -= 1
             reasons.append("ORB bearish confirmation -1")
 
-    if atr_pct < 0.22:
+    if atr_pct < 0.10:
         return _hold_response(f"ATR too low for scalping ({atr_pct:.2f}%)", latest, atr, vwap, orb)
-    if adx < 16:
+    if adx < 10:
         return _hold_response(f"Trend too weak (ADX {adx:.1f})", latest, atr, vwap, orb)
-    if vol_ratio < 0.9:
+    if vol_ratio < 0.5:
         return _hold_response(f"Volume too weak ({vol_ratio:.2f}x)", latest, atr, vwap, orb)
 
     allow_long = bull_trend and current_price > vwap and latest["ema_fast"] > latest["ema_slow"]
