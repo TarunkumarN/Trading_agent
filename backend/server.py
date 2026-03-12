@@ -868,20 +868,27 @@ async def login(request: Request):
 async def get_dashboard_data():
     try:
         today = get_ist_now().strftime("%Y-%m-%d")
-        all_trades = list(col_trades.find({}, {"_id": 0}).sort("created_at", -1))
+        all_trades = list(col_trades.find({}, {"_id": 0}).sort([("date", -1), ("exit_time", -1)]))
         open_positions = list(col_positions.find({}, {"_id": 0}))
-
+        available_dates = sorted({t.get("date") for t in all_trades if t.get("date")}, reverse=True)
+        active_date = today
         today_trades = [t for t in all_trades if t.get("date") == today]
-        day_pnl = round(sum(t.get("pnl", 0) for t in today_trades), 2)
+        if not today_trades and available_dates:
+            active_date = available_dates[0]
+            today_trades = [t for t in all_trades if t.get("date") == active_date]
+
+        normalized_today_trades = [_normalize_trade(t) for t in today_trades]
+        normalized_all_trades = [_normalize_trade(t) for t in all_trades[:200]]
+        day_pnl = round(sum(t.get("pnl", 0) for t in normalized_today_trades), 2)
         total_pnl = round(sum(t.get("pnl", 0) for t in all_trades), 2)
-        wins = [t for t in today_trades if t.get("pnl", 0) > 0]
-        losses = [t for t in today_trades if t.get("pnl", 0) <= 0]
-        win_rate = round(len(wins) / len(today_trades) * 100) if today_trades else 0
+        wins = [t for t in normalized_today_trades if t.get("pnl", 0) > 0]
+        losses = [t for t in normalized_today_trades if t.get("pnl", 0) <= 0]
+        win_rate = round(len(wins) / len(normalized_today_trades) * 100, 1) if normalized_today_trades else 0.0
 
         # P&L curve
         pnl_curve = [{"time": "09:15", "pnl": 0}]
         running = 0
-        for t in sorted(today_trades, key=lambda x: x.get("exit_time", "")):
+        for t in sorted(normalized_today_trades, key=lambda x: x.get("exit_time", "")):
             running += t.get("pnl", 0)
             pnl_curve.append({"time": t.get("exit_time", "")[:5], "pnl": round(running, 2)})
 
@@ -914,14 +921,17 @@ async def get_dashboard_data():
 
         return {
             "day_pnl": day_pnl,
-            "total_trades": len(today_trades),
+            "total_trades": len(normalized_today_trades),
             "wins": len(wins),
             "losses": len(losses),
             "win_rate": win_rate,
+            "active_date": active_date,
+            "is_latest_session": active_date != today,
+            "available_dates": available_dates,
             "open_count": len(open_data),
             "open_positions": open_data,
-            "trades": today_trades,
-            "all_trades": all_trades[:200],
+            "trades": normalized_today_trades,
+            "all_trades": normalized_all_trades,
             "watchlist": watchlist,
             "pnl_curve": pnl_curve,
             "daily_pnl": sorted(daily_map.values(), key=lambda x: x["date"]),

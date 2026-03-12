@@ -1,0 +1,39 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'build'
+1 verbose cli ]
+2 info using npm@6.14.13
+3 info using node@v14.17.3
+4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+5 info lifecycle minimax-trading-terminal@1.0.0~prebuild: minimax-trading-terminal@1.0.0
+6 info lifecycle minimax-trading-terminal@1.0.0~build: minimax-trading-terminal@1.0.0
+7 verbose lifecycle minimax-trading-terminal@1.0.0~build: unsafe-perm in lifecycle true
+8 verbose lifecycle minimax-trading-terminal@1.0.0~build: PATH: C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;D:\trading-agent\frontend\node_modules\.bin;C:\Users\ntaru\.codex\tmp\arg0\codex-arg0AUEy6m;C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Users\Jeevitha\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\ntaru\AppData\Local\Microsoft\WindowsApps;C:\Users\ntaru\.dotnet\tools;C:\Users\ntaru\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ntaru\AppData\Local\Programs\Ollama;C:\Users\ntaru\AppData\Local\OpenAI\Codex\bin;C:\Program Files\WindowsApps\OpenAI.Codex_26.309.3504.0_x64__2p2nqsd0c76g0\app\resources
+9 verbose lifecycle minimax-trading-terminal@1.0.0~build: CWD: D:\trading-agent\frontend
+10 silly lifecycle minimax-trading-terminal@1.0.0~build: Args: [ '/d /s /c', 'react-scripts build' ]
+11 silly lifecycle minimax-trading-terminal@1.0.0~build: Returned: code: 1  signal: null
+12 info lifecycle minimax-trading-terminal@1.0.0~build: Failed to exec build script
+13 verbose stack Error: minimax-trading-terminal@1.0.0 build: `react-scripts build`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\index.js:332:16)
+13 verbose stack     at EventEmitter.emit (events.js:375:28)
+13 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\lib\spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:375:28)
+13 verbose stack     at maybeClose (internal/child_process.js:1055:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)
+14 verbose pkgid minimax-trading-terminal@1.0.0
+15 verbose cwd D:\trading-agent\frontend
+16 verbose Windows_NT 10.0.19045
+17 verbose argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "build"
+18 verbose node v14.17.3
+19 verbose npm  v6.14.13
+20 error code ELIFECYCLE
+21 error errno 1
+22 error minimax-trading-terminal@1.0.0 build: `react-scripts build`
+22 error Exit status 1
+23 error Failed at the minimax-trading-terminal@1.0.0 build script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]
