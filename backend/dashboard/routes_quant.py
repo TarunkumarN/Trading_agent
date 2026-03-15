@@ -743,7 +743,9 @@ async def get_market_charts_summary():
         price = base
         points = []
         minute = 9 * 60 + 15
-        end_min = 15 * 60 + 30  # Always full day
+        # Only generate up to current IST time
+        now_m = _ist_now().hour * 60 + _ist_now().minute
+        end_min = min(15 * 60 + 30, now_m)
 
         while minute <= end_min:
             h = minute // 60
@@ -787,7 +789,8 @@ async def get_market_charts_summary():
         price = base
         points = []
         minute = 9 * 60 + 15
-        end_min = 15 * 60 + 30  # Always full day
+        now_m = _ist_now().hour * 60 + _ist_now().minute
+        end_min = min(15 * 60 + 30, now_m)
 
         while minute <= end_min:
             drift = np.random.normal(0, 0.0012)

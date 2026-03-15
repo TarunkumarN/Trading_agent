@@ -28,6 +28,10 @@ async def get_trades(date: str = None, symbol: str = None, limit: int = 200):
         query["symbol"] = symbol.upper()
 
     trades = list(db["trades"].find(query, {"_id": 0}).sort("created_at", -1).limit(limit))
+    # Normalize stock→symbol field
+    for t in trades:
+        if "stock" in t and "symbol" not in t:
+            t["symbol"] = t["stock"]
 
     # Group by date
     by_date = {}
@@ -35,6 +39,8 @@ async def get_trades(date: str = None, symbol: str = None, limit: int = 200):
         d = t.get("date", "unknown")
         if d not in by_date:
             by_date[d] = {"date": d, "trades": [], "total_pnl": 0, "count": 0}
+        # normalize stock→symbol
+        if "stock" in t and "symbol" not in t: t["symbol"] = t.pop("stock")
         by_date[d]["trades"].append(t)
         by_date[d]["total_pnl"] = round(by_date[d]["total_pnl"] + t.get("pnl", 0), 2)
         by_date[d]["count"] += 1

@@ -349,7 +349,7 @@ const NAV = [
 const TITLES = { dashboard: 'Dashboard', portfolio: 'Portfolio', report: 'Daily Report', health: 'System Health', market: 'Market Analysis', ai: 'AI Brain', quant: 'Quant Intelligence', strategies: 'Strategies', positions: 'Positions', trades: 'Trade History', risk: 'Risk', fo: 'F&O Calculator', audit: 'Audit & Logs', settings: 'Settings' };
 
 function App() {
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState(() => localStorage.getItem("mmauth") === "1");
   const [page, setPage] = useState('dashboard');
   const [clock, setClock] = useState('');
   const [mktOpen, setMktOpen] = useState(false);
@@ -401,7 +401,7 @@ function App() {
 
   const nav = id => { setPage(id); setSidebarOpen(false); if (id === 'portfolio') f('/api/portfolio', setPortfolio); if (id === 'report') f('/api/report/daily', setReport); if (id === 'market') { loadMarket(); loadRegime(); f('/api/market/charts-summary', setChartsSummary); } if (id === 'ai') f('/api/ai-decisions', setAiData); if (id === 'quant') f('/api/quant/dashboard', setQuantData); if (id === 'strategies') f('/api/strategies/performance', setStratPerf); if (id === 'positions') f('/api/open-positions', setPositions); if (id === 'trades') f('/api/trades', setTradesData); if (id === 'audit') { f('/api/logs?limit=100', d => setLogs(d.logs || [])); loadAudit(); } if (id === 'settings') loadConfig(); };
 
-  if (!authed) return <LoginPage onLogin={() => setAuthed(true)} theme={theme} toggleTheme={toggleTheme} />;
+  if (!authed) return <LoginPage onLogin={() => { setAuthed(true); localStorage.setItem("mmauth","1"); }} theme={theme} toggleTheme={toggleTheme} />;
   const p = data.day_pnl || 0;
   const sc = { NORMAL: 'var(--green)', SELECTIVE: 'var(--amber)', HALTED: 'var(--red)', PROTECTED: 'var(--blue)' };
 

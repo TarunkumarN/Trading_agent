@@ -382,7 +382,13 @@ class OrderManager:
                 return None
 
             if not exit_price or exit_price <= 0:
-                exit_price = pos["entry"]
+                # Try to get last known price from candle history
+                try:
+                    from data.candle_builder import CandleBuilder
+                    prices = candle_builder.price_history.get(symbol, [])
+                    exit_price = prices[-1] if prices else pos["entry"]
+                except Exception:
+                    exit_price = pos["entry"]
 
             qty = pos["qty"]
             action = pos["action"]
@@ -486,6 +492,22 @@ class OrderManager:
                 return entry, "BREAKEVEN"
         return None, pos.get("sl_phase", "INITIAL")
 
+    def _get_ltp(self, symbol, fallback):
+        """Fetch live LTP from Kite. Falls back to candle history or entry."""
+        try:
+            if KITE_ACCESS_TOKEN and KITE_API_KEY:
+                from kiteconnect import KiteConnect
+                kite = KiteConnect(api_key=KITE_API_KEY)
+                kite.set_access_token(KITE_ACCESS_TOKEN)
+                exchange = "NSE"
+                ltp_data = kite.ltp([f"{exchange}:{symbol}"])
+                ltp = ltp_data.get(f"{exchange}:{symbol}", {}).get("last_price", 0)
+                if ltp and ltp > 0:
+                    return ltp
+        except Exception as e:
+            logger.warning(f"LTP fetch failed for {symbol}: {e}")
+        return fallback
+
     def check_time_stops(self, latest_prices):
         """Close positions that have been open > 15 minutes."""
         now_ist = get_ist_now()
@@ -500,7 +522,10 @@ class OrderManager:
                 ).replace(tzinfo=timezone(timedelta(hours=5, minutes=30)))
                 elapsed_min = (now_ist - entry_dt).total_seconds() / 60
                 if elapsed_min >= 15:
-                    price = latest_prices.get(pos["symbol"], pos["entry"])
+                    # Try latest_prices first, then Kite LTP, then entry
+                    price = latest_prices.get(pos["symbol"], 0)
+                    if not price or price <= 0:
+                        price = self._get_ltp(pos["symbol"], pos["entry"])
                     self.close_position(pos["symbol"], price, "TIME STOP (15 min)")
             except Exception as e:
                 logger.error(f"Time stop error for {pos.get('symbol')}: {e}")
