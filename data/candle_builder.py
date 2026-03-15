@@ -76,6 +76,10 @@ class CandleBuilder:
 
     def get_latest_price(self, stock: str) -> float:
         candle = self._candle.get(stock, {})
+        # Fallback to last closed candle price if current candle empty
+        if not candle:
+            hist = self.price_history.get(stock, [])
+            return hist[-1] if hist else 0.0
         return candle.get("close", 0.0)
 
     def get_all_prices(self) -> dict:

@@ -92,10 +92,10 @@ class PaperTrader:
         if not pos:
             return
         if not exit_price or exit_price <= 0:
-            exit_price = pos["entry"]
+            exit_price = pos.get("current_price") or pos["entry"]
             qty, action = pos["qty"], pos["action"]
             pnl = (exit_price - pos["entry"]) * qty if action == "BUY" else (pos["entry"] - exit_price) * qty
-            print(f"[PAPER] WARNING: Zero price for {stock} - using entry")
+            print(f"[PAPER] WARNING: Zero price for {stock} - using current_price")
         self.positions.pop(stock)
         self.brokerage += 20
         net_pnl = round(pnl - 40, 2)
@@ -116,8 +116,8 @@ class PaperTrader:
     def close_all(self, latest_prices):
         for stock in list(self.positions.keys()):
             pos = self.positions[stock]
-            price = latest_prices.get(stock) or pos["entry"]
-            if price <= 0: price = pos["entry"]
+            price = latest_prices.get(stock) or pos.get("current_price") or pos["entry"]
+            if price <= 0: price = pos.get("current_price") or pos["entry"]
             qty, action = pos["qty"], pos["action"]
             pnl = (price - pos["entry"]) * qty if action == "BUY" else (pos["entry"] - price) * qty
             self._close(stock, price, pnl, "END OF DAY CLOSE")
@@ -129,8 +129,8 @@ class PaperTrader:
             try:
                 entry_time = datetime.strptime(f"{now.date()} {pos['time']}", "%Y-%m-%d %H:%M:%S")
                 if (now - entry_time).seconds / 60 >= 15:
-                    price = latest_prices.get(stock) or pos["entry"]
-                    if price <= 0: price = pos["entry"]
+                    price = latest_prices.get(stock) or pos.get("current_price") or pos["entry"]
+                    if price <= 0: price = pos.get("current_price") or pos["entry"]
                     qty, action = pos["qty"], pos["action"]
                     pnl = (price - pos["entry"]) * qty if action == "BUY" else (pos["entry"] - price) * qty
                     self._close(stock, price, pnl, "TIME STOP (15 min)")
